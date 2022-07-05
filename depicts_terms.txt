@@ -1,0 +1,2257 @@
+Landscapes (Representations), 554
+Cityscapes, 64
+Windmills, 37
+Churches, 73
+Trees, 543
+Clouds, 182
+Hills, 192
+Forests, 48
+Trails & paths, 31
+Horses, 144
+People, 585
+Waterfalls, 19
+Rapids, 8
+Rocks, 80
+Buildings, 212
+Animals, 289
+Donkeys, 39
+Goats, 47
+Stone walls, 8
+Children, 107
+Peasants, 117
+Shepherdesses, 3
+Sheep, 69
+Streams, 46
+Mountains, 166
+Kaikōura, 3
+Sailboats, 26
+Harbours, 75
+Auckland, 11
+philosophers, 1
+Angels, 47
+Trumpets, 2
+Gods, 31
+Parnassus, 1
+mothers, 14
+infants, 30
+people, 280
+women, 279
+children, 55
+Crowds, 20
+refugees, 5
+Heads (Anatomy), 8
+Cigarettes, 1
+Flowers, 487
+Vases, 17
+Ships, 34
+Bodies of water, 52
+Cliffs, 28
+Dogs, 97
+Bears, 19
+Masonry, 8
+Birds, 79
+Land, 16
+Plants, 53
+Men, 563
+Artists, 36
+painters, 16
+Collars, 13
+Clothing & dress, 102
+Rivers, 272
+bathers, 4
+Boats, 206
+Temples, 9
+Varanasi, 3
+Forts & fortifications, 21
+Plains, 2
+Jodhpur, 1
+Castles & palaces, 44
+Ferries, 7
+Rowboats, 34
+Cattle, 67
+Country life, 22
+Dwellings, 18
+Roads, 94
+Skyscrapers, 1
+Reflections, 25
+Cities & towns, 70
+Smoke, 23
+Manhattan, 1
+Lakes & ponds, 98
+Towers, 34
+Arches, 29
+Monsters, 6
+Hell, 6
+Gates, 28
+Interiors, 81
+Stables, 5
+Agricultural facilities, 24
+Doors & doorways, 37
+Animal feeding, 4
+Sailing ships, 70
+Dunedin, 12
+Boys, 12
+Shepherds, 9
+Villages, 50
+Marken, 109
+Oxen, 2
+Sunrises & sunsets, 24
+men, 220
+Stone bridges, 18
+Farming, 5
+Ruins, 53
+Beggars, 20
+Clergy, 21
+Rome, 17
+hunters, 11
+Mothers, 34
+Hunting dogs, 19
+Rocca di Mezzo, 1
+Women, 264
+Lawns, 4
+Jumping, 1
+Oceans, 46
+Chimneys, 6
+Streets, 37
+Vines, 4
+Paris, 20
+Archery, 1
+Bows (Archery), 8
+Arrows, 9
+Targets (Sports), 1
+Leisure, 7
+Houses, 82
+Candlesticks, 1
+Tables, 46
+saints, 6
+Demons, 3
+Crucifixes, 2
+hermits, 2
+Beef cattle, 4
+Cows, 48
+Southampton, 2
+United Kingdom, 65
+Endemic plants, 74
+Valleys, 24
+Carts & wagons, 44
+Nudes, 67
+Playing cards, 7
+Card games, 2
+Entertainment, 2
+Barrels, 30
+Endemic trees, 47
+Nelson, 13
+Soldiers, 40
+Campaigns & battles, 8
+War, 3
+Arms & armament, 15
+Daggers & swords, 33
+Firearms, 8
+Ain, 2
+France, 23
+Agricultural laborers, 18
+Rest periods, 2
+Catholic churches, 4
+Columns, 18
+Altars, 2
+Sculpture, 14
+Hurunui, 6
+Hokitika, 7
+Croplands, 6
+Portraits, 127
+Windows, 32
+Draperies, 28
+Chairs, 56
+Collingwood, 3
+Aorere, 2
+Greymouth, 8
+Westland National Park, 4
+Self-portraits, 13
+Hats, 103
+Beards, 35
+Palettes, 1
+Pedestrians, 5
+London, 17
+Chalices, 4
+Drinking vessels, 17
+Religious articles, 1
+Swine, 16
+Fences, 49
+Huts, 22
+Pig houses, 2
+Headgear, 5
+Feathers, 13
+Capes (Clothing), 10
+Peacocks, 6
+Cats, 14
+Surgery, 1
+Physicians, 2
+Nurses, 1
+Necklaces, 2
+Taverns (Inns), 17
+Bay windows, 1
+Architecture, 55
+Episcopal churches, 1
+Bell towers, 6
+Boston, 1
+Lincolnshire, 1
+Shipping, 3
+loads, 1
+Ladders, 15
+Jetties, 4
+Knights, 5
+Fish, 163
+Pitchers, 22
+Waiau, 4
+Musicians, 9
+Street musicians, 2
+Oreti, 1
+Southland, 4
+Shrines, 6
+Prayer, 7
+Christianity, 9
+Fishing industry, 1
+Wakatipu, Lake, 10
+Bridges, 69
+Pedestrian bridges, 12
+Roofs, 5
+Seas, 65
+Beaches, 33
+Raking (Sweeping), 1
+Marine algae, 2
+Gardens, 21
+Akaroa, 12
+Grasses, 7
+Geese, 1
+Ducks, 5
+Blacksmithing, 1
+Barns, 6
+Yards, 1
+Hay, 3
+dentists, 2
+patients, 2
+Dental equipment & supplies, 1
+brothers, 1
+Biblical events, 64
+Homicides, 3
+Violence, 6
+Christchurch, 3
+Canterbury, 13
+Sewing, 3
+Horseback riding, 3
+Older people, 6
+Abused women, 2
+Striptease, 1
+Mirrors, 8
+Fishing boats, 4
+Gulls, 3
+weather, 5
+Group portraits, 7
+Dandies, 2
+Rich people, 1
+Top hats, 3
+evening dress, 1
+Wanaka, 4
+Heroes, 4
+Lions, 28
+Bats, 3
+Animal fighting, 3
+Southeast Asia, 1
+Dead persons, 17
+Saints, 39
+Princesses, 12
+Pitchforks, 3
+herdsmen, 33
+Subiaco, 1
+Moon, 10
+Haystacks, 6
+Chickens, 12
+equestrians, 25
+Southern Alps, 5
+ice skaters, 1
+night, 5
+Bags, 8
+Litters, 3
+Canals, 30
+Venice, 12
+India, 16
+Steeples, 5
+Ashwell, 1
+Hertfordshire, 1
+monks, 3
+families, 19
+Furniture, 39
+Stools, 7
+Pots & pans, 1
+Dolls, 1
+Toys, 3
+Panoramic views, 1
+Romsey, 1
+Test, 1
+Title pages, 6
+Cartouches, 3
+Insects, 28
+Butterflies, 12
+Dragonflies, 2
+Moths, 62
+Inscriptions, 8
+Meadows, 49
+Spires, 4
+Carriages & coaches, 21
+Rain, 6
+Neckties, 3
+Taupō, Lake, 4
+Water, 27
+Plazas, 10
+Fountains, 7
+Sun, 2
+Cranes (Birds), 2
+Upper Hutt, 17
+Reeds (Plants), 11
+Girls, 24
+Harvesting, 5
+Grapes, 8
+Nelson Lakes National Park, 5
+Rotoroa, Lake, 1
+Turkeys, 1
+Poultry houses, 2
+Bones (Body parts), 4
+Parks, 2
+Windsor Castle, 2
+Tidal waves, 1
+Headdresses, 16
+Caricatures, 13
+Seascapes, 22
+Piers & wharves, 31
+Wellington, 61
+Tombs & sepulchral monuments, 7
+Coronations, 2
+Madonnas, 1
+Infants, 15
+Crosses, 16
+Storms, 7
+Otira, 12
+snow, 8
+Switzerland, 2
+Bex, 1
+Keys (Hardware), 4
+Tauranga, 4
+Baskets, 25
+Fighting, 7
+Rifles, 3
+Military uniforms, 6
+Uniforms, 8
+Belgium, 1
+Whips, 1
+Working dogs, 14
+rental housing, 1
+Asia, 2
+Canyons, 3
+Utah, 1
+People associated with politics & government, 1
+Charity, 1
+farmers, 4
+Cattle herding, 1
+Rowing, 3
+martyrs, 26
+Executions, 8
+Venezia, 7
+Riots, 1
+Cathedrals, 23
+Amiens, 3
+Wooden buildings, 10
+Writing, 1
+Farmers, 12
+Kettles, 3
+Kings, 12
+Philosophers, 3
+Poor persons, 15
+Lifting & carrying, 3
+Signs (Notices), 5
+Dunes, 5
+printmakers, 15
+Springs, 6
+Canoes, 23
+Waikanae, 3
+violence, 1
+Herding, 3
+Taieri, 8
+outline, 3
+transmitted light, 1
+Pines, 4
+Witches, 1
+Staffs (Sticks), 36
+People with disabilities, 4
+Bathing suits, 3
+youth, 6
+Pipes (Smoking), 2
+Canal boats, 9
+Boulders, 19
+Rabbits, 7
+Dead animals, 5
+Musical instruments, 22
+Pipes (Musical instruments), 4
+Thames, 12
+Walls, 17
+Coach drivers, 1
+Wairarapa, Lake, 2
+elderly, 38
+theologians, 7
+etchers, 2
+Firenze, 1
+Italy, 25
+old age, 1
+Eating & drinking, 19
+Sleeping, 20
+Beds, 14
+Pillows, 1
+Farms, 24
+Barnyards, 2
+Tractors, 2
+Sailors, 18
+Tigers, 2
+Stairways, 15
+Balconies, 6
+Turakina, 2
+Wells, 11
+Plows, 2
+Swimmers, 1
+Lamps, 7
+Meat, 3
+Military officers, 2
+Bullies, 1
+Organ grinders, 2
+Queenstown, 2
+priests, 5
+Markets, 9
+Awnings, 4
+Fruit, 88
+Vegetables, 6
+Naples, 3
+Outdoor cookery, 2
+Ship equipment & rigging, 25
+Shawls, 1
+Hand railings, 1
+Paekākāriki, 3
+Deer, 17
+scholars, 1
+Supernatural beings, 5
+Books, 38
+Cages, 3
+Rats, 5
+Rodents, 2
+Poisons, 3
+Otago, 10
+City & town life, 6
+Noah's ark, 1
+street vendors, 2
+Idols, 1
+Tibet, 1
+Wanaka, Lake, 5
+Privies, 1
+Swans, 1
+Estates, 2
+Bays (Bodies of water), 39
+Volcanoes, 5
+Tropical forests, 1
+Malay Archipelago, 1
+Trousers, 1
+Chandeliers, 2
+Kent, 1
+Travel, 3
+Mills, 8
+Waterwheels, 7
+Rio de Janeiro, 1
+Government facilities, 4
+Ely, 17
+Marine paintings, 2
+Aqueducts, 2
+Fishing, 21
+Laundry, 3
+Landscape paintings, 11
+Discovery & exploration, 17
+Indigenous peoples, 27
+Marlborough, 2
+Māori, 22
+Automobiles, 3
+Monuments & memorials, 4
+Te Anau, Lake, 5
+Frenchman's Bay, 1
+Abel Tasman National Park, 1
+Food storage buildings, 1
+Buller, 9
+Greenwich, 1
+Rooms & spaces, 5
+Fireplaces, 11
+Mosques, 3
+People associated with religion, 17
+Lower Hutt, 3
+Lindis Pass, 2
+Cardinals, 5
+Coats of arms, 13
+Abbeys, 2
+Abandoned buildings, 1
+Troyes, 1
+Stone buildings, 5
+Railroads, 3
+Fire, 8
+girls, 11
+Couches, 6
+Saddles, 6
+Spears, 4
+Horseshoes, 1
+Yokes, 1
+Nihonbashi, 1
+Driveways, 1
+Palms, 11
+Initials, 1
+Religious processions, 3
+Chichester, 1
+Coastlines, 9
+Taranaki, Mount, 9
+Pleading (Begging), 1
+Fox hunting, 4
+Foxes, 28
+artists, 8
+Capes (Coasts), 7
+Finistère, 2
+Horns (Animal), 4
+Families, 9
+Scaffolding, 2
+Pumping stations, 2
+Faces, 2
+Politicians, 2
+Lighthouses, 4
+Songs & music, 1
+Apartment houses, 2
+Pails, 4
+Edinburgh, 9
+Rangitikei, 8
+spheres, 5
+Cupids, 5
+Bathing, 7
+Goddesses, 15
+Portrait paintings, 3
+Designers, 1
+Hair, 1
+Orchards, 2
+Moats, 1
+City walls, 6
+Augsburg, 1
+Residential streets, 1
+Manea, 1
+reflections, 3
+Ferns, 5
+Pools, 2
+Bath and Northeast Somerset, 1
+Half-timbered buildings, 5
+husbands, 3
+wives, 4
+Mataura, 3
+Thatched roofs, 5
+Chapels, 4
+Bells, 4
+Jewellery, 8
+Newspapers, 2
+Daffodils, 1
+Baby animals, 1
+Light, 2
+Sleepwear, 2
+Spinning, 3
+Wairoa, 2
+Hawke's Bay, 2
+New Zealand, 12
+Doves, 8
+allegory, 4
+Sick persons, 4
+Mentally ill persons, 1
+New Brighton, 2
+Moustaches, 13
+Cupboards, 1
+Stores & shops, 5
+Shoes, 5
+cobblers, 2
+Shoemakers, 1
+clients, 1
+Senlis, 1
+Plums, 1
+Bowls (Tableware), 10
+Victims of crimes, 1
+Feilding, 5
+Breast feeding, 13
+Saint Andrews, 2
+Calais, 1
+Drawing, 3
+Cemeteries, 4
+Norfolk, 3
+Snettisham, 1
+sportsmen, 1
+Te Anau, 3
+bishops, 1
+beggars, 1
+sawyers, 1
+gardeners, 2
+Wheelbarrows, 2
+King's Lynn, 6
+Fur garments, 15
+Painting, 3
+Artists' models, 2
+Decorations, 3
+Beer, 2
+Dieppe, 4
+Fontainebleau, 2
+Zoos, 1
+Elephants, 2
+Aorangi (Mount Cook), 9
+South Island, 6
+Dresses, 13
+Umbrellas, 11
+shade, 1
+Logs, 11
+Benches, 10
+England, 8
+Leaves, 485
+Architectural decorations & ornaments, 1
+Fishing nets, 5
+fishermen, 5
+Dikes (Engineering), 4
+Spouses, 2
+Criminals, 2
+Lawyers, 2
+courts, 1
+Law & legal affairs, 2
+Street lights, 3
+Shutters, 7
+Saverne, 1
+Bonnets, 3
+Rhine, 3
+Tottenham, 1
+Colville, Cape, 1
+Morgues & mortuaries, 1
+mourners, 3
+Genre prints, 4
+Sand, 4
+Pas-de-Calais, 1
+Fuelwood, 1
+draftsmen, 1
+engravers, 2
+Chertsey, 1
+Queens, 2
+royalty, 9
+Hawea, Lake, 1
+dwarfs, 2
+Smoking, 6
+Agricultural machinery & implements, 7
+Mules, 5
+Chariots, 3
+Printing presses, 1
+Saint Ives, 1
+Race horses, 2
+jockeys, 3
+Horse racing, 2
+Bulls, 8
+Hunting, 6
+Bullfighting, 1
+Food, 7
+Night, 9
+Ngātapa, 2
+Plenty, Bay of, 1
+sons, 2
+Capuchin, 1
+Barges, 17
+Strasbourg, 2
+Channels, 2
+Ganges, River, 2
+Dirt roads, 1
+divine light, 1
+Treasure chests, 2
+Milton, 1
+West Coast, 1
+City of London, 3
+Dovecotes, 1
+Bicycles & tricycles, 2
+princesses, 1
+soldiers, 7
+Canopies, 3
+Brantôme, 1
+Prisoners, 2
+Beijing, 2
+Robes, 7
+fathers, 6
+Reading, 7
+Living rooms, 1
+Lace, 2
+Eagles, 14
+Wine, 3
+Caves, 9
+Manapouri, Lake, 6
+Turbans, 6
+Fur coats, 1
+Manawatū, 4
+Colosseum, The, 1
+Montreuil, 1
+Woodcutting, 2
+Taranaki, 13
+Port Chalmers, 2
+Richmond, Mount, 1
+Vats, 1
+Punishment & torture, 6
+Skulls, 8
+Half-Moon Bay, 1
+Spades, 2
+Shovels, 1
+Sketches, 9
+thieves, 2
+shepherds, 7
+Dance parties, 1
+Water mills, 2
+musicians, 8
+Bagpipes, 3
+Tugboats, 2
+Rüdesheim, 1
+Taxicabs, 2
+Taxicab drivers, 1
+Winter, 3
+Northumberland, 1
+Medals, 6
+Discussion, 1
+Sitting, 1
+pilots, 1
+Pilot boats, 1
+Brig, 1
+Île de la Cité, 1
+Milford Sound, 5
+Frogs, 6
+Amphibians, 1
+homeless persons, 1
+Tramps, 2
+Spoons, 4
+Dance, 7
+Folk dancing, 5
+Violins, 4
+Austria, 1
+Netherlands, 9
+Bear hunting, 1
+Rulers, 7
+Patea, 1
+Waistcoats, 2
+Turkish, 1
+Lancing, 1
+Glaciers, 1
+Fiordland National Park, 1
+Tutoko, Mount, 1
+Death & burial, 1
+Islands, Bay of, 7
+Religion, 6
+Saws, 1
+Capitals (Columns), 5
+Italia, 1
+Dancers, 4
+Cornucopias, 3
+Wreaths, 7
+Amsterdam, 4
+Raincoats, 1
+Snow, 6
+Waimakariri, 4
+Cider, 1
+Lyres, 3
+Martyrs, 1
+Tapestries, 2
+Convents, 3
+Monks, 5
+Golden Bay, 7
+Gondolas, 5
+wind, 3
+Surrey, 1
+Mamaku, 1
+Hands, 2
+Pencils, 1
+Still life drawings, 1
+Vltava, 2
+Prague, 2
+Towing, 3
+Cheddington, 1
+Wairarapa, 2
+Dutch, 3
+Severn, 2
+Nuremberg, 2
+Neckar, 1
+Opera singers, 1
+Stages (Platforms), 1
+Anglican churches, 1
+Laneham, 1
+Steam, 1
+Rainbows, 3
+Scales, 3
+Equipment, 9
+polyhedra, 2
+Rock formations, 1
+Lumber camps, 1
+Lumber, 1
+Tree stumps, 4
+Courtyards, 2
+Giants, 2
+Moonlight, 6
+Stars, 3
+Torches, 2
+Military camps, 3
+Candles, 6
+Pens, 3
+Kensington and Chelsea, 2
+Oaks, 1
+Helmets, 7
+Waikato, 3
+Eyes, 1
+Cabins, 1
+Lutes, 4
+Cold, 2
+Ice skating, 1
+Brooms & brushes, 2
+Leaded glass windows, 8
+Water pumps, 2
+bakers, 1
+Horns (Communication devices), 2
+Bread, 4
+Food vendors, 3
+maternity, 9
+Grandparents, 1
+Warehouses, 5
+Crowns, 12
+Porirua, 8
+Festive decorations, 1
+Minarets, 1
+Domes, 1
+Wesel, 1
+Architects, 1
+Forge shops, 2
+Forging, 2
+Blacksmiths, 2
+Play (Recreation), 2
+Swings, 1
+Playgrounds, 1
+Lyttelton, 1
+Ovens, 1
+boxers, 1
+Roman temples, 2
+Conversation, 3
+Coats, 4
+Locks (Hydraulic engineering), 2
+Egham, 1
+Flutes, 1
+Monasteries, 3
+Wind instruments, 4
+Clyde, 1
+Battlefields, 2
+Bannockburn Battlesite, 3
+Sheds, 3
+Trucks, 1
+Utility poles, 2
+Rawene, 1
+Rings, 1
+Kāpiti Island, 2
+Cook Strait, 4
+Tennyson Lake, 2
+Sunflowers, 1
+Chains, 2
+Islands, 18
+Aspiring, Mount, 3
+Akaroa Harbour, 1
+mourning, 4
+Tents, 5
+New Plymouth, 6
+Beddgelert, 1
+Snowdon, 1
+Artists' studios, 1
+Paintings, 1
+Ice, 2
+laborers, 2
+Fishermen, 9
+Hospitals, 1
+Kilts, 1
+Scottish, 1
+Pulpits, 1
+Vaulting, 1
+Crucifixions, 2
+Parma, 1
+Castel Madama, 1
+Bakeries, 1
+Prophets, 2
+dancers, 3
+Pharonic Egypt, 1
+Figure drawings, 7
+Wigs, 5
+divinity, 2
+Stuntney, 2
+farriers, 2
+Cupolas, 1
+Friezes (Entablature components), 2
+Lunettes, 1
+Arcades (Architectural components), 1
+Balustrades, 3
+Walking, 2
+Forest reserves, 3
+Stokes Valley, 1
+Warships, 2
+navies, 1
+Naval warfare, 1
+Furnaces, 1
+Fonts, 1
+Domestic life, 3
+Children's furniture, 1
+Cooking utensils, 6
+Gloves, 4
+Willows, 3
+Ladakh, 2
+Gatehouses, 1
+Lake Tekapo, 2
+Exiles, 3
+Apartments, 1
+Cobblestone streets, 3
+Nice, 1
+dukes, 3
+Ibiza, 1
+Death, 5
+Creation, 2
+Garden of Eden, 2
+Devon, 1
+Teddy bears, 1
+Zanzibar, 1
+goldsmiths, 4
+Figurines, 1
+Artificial limbs, 1
+Ruahīne Range, 1
+winter, 6
+Rotterdam, 3
+Tablecloths, 1
+Still lifes, 3
+magicians, 1
+Witchcraft, 1
+Owls, 3
+Fires, 4
+Rye, 2
+Cafes, 1
+Spain, 3
+Oamaru, 1
+Wounds & injuries, 1
+Tivoli, 1
+Grazing, 3
+Knives, 5
+Butchers, 1
+noblemen, 3
+counts, 1
+Armor, 3
+geometric abstraction, 1
+squares, 2
+Morning, 1
+Burwell, 1
+Seahouses, 1
+Artillery (Weaponry), 1
+Aircraft, 1
+World War, 1939-1945, 1
+Newhaven, 1
+Kettlestone, 1
+Wallpapers, 3
+Digging, 2
+Landscape drawings, 1
+Taramakau, 1
+Floods, 1
+Axes, 6
+nudity, 19
+Blankets, 1
+Lake Pukaki, 3
+Seine River, 2
+Preachers, 4
+Scholars, 6
+Mararoa, 4
+Rhine, The, 3
+sculptors, 4
+Normandy, 1
+Wheels, 5
+Ceilings, 1
+Banks Peninsula, 9
+Chelsea, 2
+Aquariums, 1
+Beads, 3
+sunlight, 2
+Balls (Sporting goods), 1
+Geishas, 3
+Rugs, 1
+Japan, 15
+Japanese, 39
+Watering troughs, 2
+Pilasters, 1
+Poets, 1
+Authors, 1
+Water holes, 1
+vintners, 1
+Bottles, 3
+orators, 1
+Child rearing, 1
+Merchants, 1
+Synagogues, 1
+Prime ministers, 1
+Storks, 1
+Rafts, 2
+Suits (Clothing), 1
+Lake Coleridge, 4
+Cutlery, 2
+Southwold, 2
+Gondoliers, 4
+Schoonhoven, 1
+cast shadows, 2
+Sri Lanka, 1
+Adams Peak, 1
+Butlers, 1
+Flying, 1
+Japanese gardens, 3
+Lily ponds, 2
+Pavilions, 1
+Tokyo, 7
+Roses, 9
+Violets, 1
+Still life paintings, 3
+IJsselmeer, 3
+Livestock, 2
+North Island, 3
+Interior decoration, 1
+Stewart Island, 1
+Cookery, 2
+Heidelberg, 1
+Nottinghamshire, 1
+performing artists, 1
+Vaudeville shows, 1
+actors, 5
+Kelso, 1
+Priests, 1
+Religious architectural elements, 1
+Religious dwellings, 1
+Religious facilities, 1
+transportation, 1
+Leopards, 2
+Parrots, 7
+Tree limbs, 3
+Lancaster, 1
+Cradles, 1
+Cologne, 2
+Boots, 1
+laundresses, 1
+nobles, 1
+aristocrats, 2
+workers, 2
+Boxes, 1
+Moeraki Point, 1
+lovers, 2
+Courtship, 3
+boys, 10
+Hairstyles, 4
+Avon, River, 1
+Stratford-upon-Avon, 1
+Putney, 1
+Yachts, 11
+Flags, 19
+Celebrations, 2
+Poultry, 2
+Northland, 2
+Münchenstein, 1
+Pearls, 1
+Dragons, 9
+Suffolk, 2
+Whitby, 1
+Street vendors, 1
+Lemons, 1
+Citrus fruit, 1
+Sea walls, 3
+Stonework, 2
+Polperro, 2
+Endemic birds, 45
+Heteralocha acutirostris, 7
+Fog, 3
+Mists, 1
+Salerno, 1
+Arthur's Pass, 6
+Sick children, 1
+Desks, 2
+Eyeglasses, 4
+Coromandel, 3
+Sydney, 2
+Skeletons, 6
+Grasshoppers, 3
+Deer hunting, 1
+Universities & colleges, 1
+academics, 1
+Oxford, 2
+Tilimsen, 1
+Algeria, 1
+Acorns, 1
+Buttons (Fasteners), 1
+Cairo, 1
+Fairs, 1
+Egypt, 2
+Bridles, 2
+shadows, 2
+Greater London, 1
+Fulham, 1
+Friezes (Ornamental bands), 1
+Funeral rites & ceremonies, 2
+Swimming, 1
+Rotorua, 3
+Explorers, 6
+Telescopes, 5
+Tobacco pipes, 6
+Wasps, 1
+Suspension bridges, 1
+Forth, Firth of, 1
+East Wittering, 1
+Roosters, 4
+Eggs, 4
+Buddhism, 1
+Feet, 1
+Shrubs, 6
+Blue Mountains, 1
+Katoomba, 1
+Australia, 2
+Lancers, 1
+Vaults (Architecture), 2
+Nobility, 1
+earls, 1
+Witley, 1
+Cavalry, 1
+Waitemata, 1
+Onehunga, 1
+fancy dress, 1
+Bad Schwalbach, 1
+Singers, 1
+Covered bridges, 1
+Ice floes, 1
+Antarctica, 1
+Polignac, 1
+Auvergne, 1
+Lanterns, 4
+Fear, 1
+Chests, 2
+Hokianga Harbour, 1
+Dorset, 1
+Republic of Florence, 2
+Arno River, 1
+Hairdressing, 1
+violinists, 1
+Time clocks, 1
+Saint-Malo, 1
+tropical climate, 1
+Tahiti, 5
+Papeete, 1
+rectangles, 2
+Wetlands, 2
+Cannons, 1
+Winchelsea, 1
+waka, 5
+Table settings & decorations, 1
+Obelisks, 3
+Mitre Peak, 2
+Spectators, 2
+Peninsulas, 1
+Garda, Lago di, 1
+Festivals, 3
+Vomiting, 1
+Pedestals, 2
+Flushing, 1
+Cambridgeshire, 2
+Clock towers, 3
+Gardening, 1
+Silhouettes, 1
+Bachelors, 1
+Posters, 1
+knights, 5
+Campania, 1
+Pangbourne, 1
+Botanical illustrations, 1
+Picnics, 1
+Ferrières, 1
+City & town halls, 1
+Frankfurt am Main, 1
+Littlehampton, 1
+Ravens, 1
+Pomahaka, 1
+Demolition, 1
+Climbing, 1
+Filey Bay, 1
+Medallions (Ornament areas), 1
+Miracles, 3
+Bruges, 1
+Snakes, 11
+Crèches (Nativity scenes), 3
+virgins, 2
+censors, 1
+Costumes, 1
+Cumberland, 1
+Manapouri, 1
+Theaters, 1
+Scotland, 3
+Ayr, 1
+Fathers, 1
+daughters, 1
+Braubach, 1
+Richmond, 1
+Yorkshire, 2
+Broadstairs, 1
+Fords (Stream crossings), 2
+Tambourines, 1
+Apples, 3
+Road construction, 1
+Phrenology, 1
+Anatomy, 1
+scientists, 1
+Shipwrecks, 2
+Drachenfels, 1
+Bonn, 1
+Escapes, 1
+Wales, 1
+Rebellions, 2
+Cardigan Bay, 1
+Harlech, 1
+Racks (Supporting devices), 1
+Battlements, 1
+Anchors, 2
+prisoners, 1
+traffic, 1
+Windsor, 1
+War casualties, 1
+Casualties, 1
+Sefton, Mount, 2
+Halcombe, 5
+Quacks, 1
+waitresses, 1
+Bars, 2
+Geneva, Lake of, 1
+unskilled workers, 1
+Sofas, 1
+Threshing, 1
+Threshing machines, 1
+Soham, 1
+Corinthian order, 1
+Bullfighters, 1
+Harnesses, 1
+Hotels, 1
+Bamboo, 1
+Indonesia, 1
+Rhododendrons, 1
+Borrowdale, 1
+Tarawera, 2
+Weather, 1
+rain, 3
+water transport, 1
+Railroad stations, 1
+Canoeists (Sports), 1
+Riwaka, 1
+Tākaka, 1
+Sailing, 3
+Architectural sculpture, 2
+Nomads, 1
+Nelson Bays, 2
+Scottish Highlands, 1
+Hoisting machinery, 1
+Speyer, 1
+emperors, 2
+Wool, 1
+Raukūmara Range, 1
+Herms, 1
+Waitangi, 1
+Granada, 1
+Harps, 3
+educators, 1
+reformers, 1
+Luggage, 2
+servants, 2
+abstraction, 4
+Ōhau, Lake, 1
+Fantasy, 1
+witches, 1
+Roskilde, 1
+Pilgrimages, 1
+tsars, 1
+ateliers, 1
+Saint Petersburg, 1
+Portsoy, 1
+Collective settlements, 1
+Whangaehu, 1
+Buoys, 2
+Hastings, 1
+Nottingham, 1
+Camels, 5
+Slavery, 1
+slaves, 2
+Coniston Water, 1
+Globes, 10
+Nuns, 2
+Distress, 1
+Starvation, 1
+Whanganui, 3
+War damage, 1
+Arras, 1
+Steamboats, 5
+Masks, 3
+Bordighera, 1
+Dentistry, 1
+Agathis australis (D.Don) Lindl., 1
+circles, 2
+Motueka, 2
+Great Yarmouth, 1
+Agriculture, 1
+Rabbit hunting, 1
+Cooks, 1
+Servants, 2
+Cotswold Hills, 1
+Bees, 4
+Solander Island, 1
+Shirts, 2
+Landscape architecture drawings, 1
+Whanganui River, 3
+Goblins, 1
+Fyne, Loch, 2
+Fishing & hunting gear, 5
+Railroad signals, 1
+Accordions, 1
+Balls (Parties), 1
+Caterpillars, 4
+Snails, 1
+ensembles, 1
+Refugees, 1
+Factories, 1
+Smokestacks, 1
+Watch towers, 1
+Tongariro National Park, 1
+Peckham, 1
+Lancashire, 1
+Gas street lamps, 1
+Bluff, 1
+Saint-Tropez, 1
+Telephone booths, 1
+Garigliano, 1
+Dordrecht, 1
+Hampstead Heath, 1
+Brittany, 1
+Audierne, 1
+triangles, 1
+Melons, 1
+Poverty, 2
+Vitre, 1
+Art dealers, 1
+Rotoiti, Lake, 1
+Pigeons, 3
+Executioners, 2
+Stoning, 2
+Headbands (Headgear), 1
+barristers, 1
+Westmorland, 1
+Braids (Hairdressing), 1
+Ribbons, 1
+diplomats, 1
+Couples, 2
+Love, 1
+Clarence, 1
+Travel sketches, 1
+Commercial facilities, 1
+Berwick-upon-Tweed, 1
+Castor, 1
+Northamptonshire, 1
+Graves, 1
+Pembrokeshire, 1
+Frontispieces, 1
+Dolphins, 1
+Borders (Ornament areas), 1
+Scythes, 3
+love, 1
+Music, 2
+Poppies, 3
+Views, 1
+Causeways, 1
+Aquatic animals, 1
+Walruses, 1
+Animals in human situations, 1
+Koblenz, 1
+Ehrenbreitstein, Feste, 1
+Cromwell, 1
+Ghosts, 2
+Running, 1
+Chasing, 1
+Milking, 2
+Wheat, 1
+Calvi, 1
+Corsica, 1
+Chaillé-les-Marais, 1
+Gazebos, 1
+Rhenen, 1
+religious art, 2
+Cheviot, 1
+Kerikeri, 1
+Colonists, 1
+Pioneers, 2
+Clocks & watches, 1
+Hospital ships, 1
+Auckland Islands, 1
+Tasman Bay, 3
+Bird's-eye views, 1
+Ōtaki, 1
+Portrait prints, 3
+national dress, 9
+Tahuata, 1
+French Polynesia, 1
+male, 1
+Tahitian, 5
+land settlement, 4
+Queen Charlotte Sound, 1
+Rock gardens, 1
+Water gardens, 1
+Stone lanterns, 1
+Vanuatu, 2
+Ni Vanuatu, 1
+Green Island, 1
+Paremata, 3
+Terraces (Land use), 4
+Homeless persons, 1
+Gunfights, 1
+Hawaii, 2
+Great Barrier Island, 1
+Natural phenomena, 2
+Tarawera, Lake, 2
+Pheasants, 1
+New Caledonia, 3
+Kanak, 1
+Tolaga Bay, 1
+Paparoa Range, 1
+Mining, 1
+Ashhurst, 1
+Apteryx mantelli, 1
+Apteryx owenii, 1
+Strigops habroptilus, 2
+Paper lanterns, 1
+Tea ceremonies, 2
+courtesans, 2
+Bonsai, 1
+Stringed instruments, 1
+Screens, 2
+Sicyos australis Endl., 1
+Pouteria costata (Endl.) Baehni, 1
+Colensoa physaloides (A.Cunn.) Hook.f., 1
+Mountain goat hunting, 1
+New Zealand European, 1
+Hoheria lyallii Hook.f., 1
+Brachyscome sinclairii Hook.f., 1
+Celmisia hectorii Hook.f., 1
+Te Whāiti, 1
+Funnels, 2
+Rhopalostylis sapida H.Wendl. & Drude, 1
+Pachystegia insignis (Hook.f.) Cheeseman, 1
+Peraxilla colensoi (Hook.f.) Tiegh., 1
+Olearia semidentata Decne., 1
+Olearia ilicifolia Hook.f. x O. moschata Hook.f., 1
+Freycinetia baueriana subsp. banksii (A.Cunn.) B.C.Stone, 1
+Toronia toru (A.Cunn.) L.A.S.Johnson & B.G.Briggs, 1
+Nestegis lanceolata (Hook.f.) L.A.S.Johnson, 1
+Macropiper excelsum (G.Forst.) Miq., 4
+Podocarpus totara G.Benn. ex D.Don, 1
+Ripogonum scandens J.R.Forst. & G.Forst., 1
+Luzuriaga parviflora (Hook.f.) Kunth, 1
+Pseudopanax edgerleyi (Hook.f.) K.Koch, 1
+Pseudopanax simplex (G.Forst.) K.Koch, 1
+Pseudopanax anomalus (Hook.) K.Koch, 1
+Olearia rani (A.Cunn.) Druce var. rani, 1
+Olearia hectorii Hook.f., 1
+Euphrasia cuneata G.Forst., 4
+Rhabdothamnus solandri A.Cunn., 3
+Utricularia monanthos Hook.f., 1
+Hedycarya arborea J.R.Forst. & G.Forst., 4
+Ipomoea cairica (L.) Sweet, 1
+Calystegia soldanella (L.) R.Br., 4
+Rites & ceremonies, 1
+México, 1
+Edinburgh Castle, 2
+Hyde Park, 4
+Storehouses, 1
+Wallis and Futuna Islands, 2
+Settlements, 2
+Colonies, 2
+Geysers, 1
+Fox Glacier, 2
+Franz Josef Glacier, 2
+Dusky Sound, 2
+Mount Maunganui, 2
+blacksmiths, 1
+Italian, 2
+Dinosaurs, 1
+Évreux, 1
+Prototroctes oxyrhynchus Gunther, 1870, 1
+Society Islands, 2
+Blackness, 1
+Zaan, 1
+Enkhuizen, 1
+Golf, 1
+Sports & recreation facilities, 1
+Great Ouse, 1
+Lothian, 1
+Spanish, 1
+Central America, 8
+Pineapples, 1
+Reptiles, 2
+Mermaids, 2
+Navigation, 1
+seamen, 1
+Symbols, 3
+Lepidium solandri Kirk, 1
+Celmisia prorepens Petrie, 1
+Coprosma lucida var. angustifolia Cheeseman, 1
+Plantago lanigera Hook.f., 1
+Celmisia sessiliflora Hook.f., 1
+Anisotome imbricata (Hook.f.) Cockayne, 1
+Abrotanella inconspicua Hook.f., 1
+Raoulia grandiflora Hook.f., 2
+Donatia novae-zelandiae Hook.f., 1
+Pachycladon novae-zelandiae (Hook.f.) Hook.f., 2
+Phyllachne colensoi (Hook.f.) Berggr., 1
+Phyllachne clavigera (Hook.f.) F.Muell., 1
+Colobanthus acicularis Hook.f., 2
+Hectorella caespitosa Hook.f., 2
+Forstera sedifolia G.Forst., 2
+Brachyglottis cassinioides (Hook.f.) B.Nord., 1
+Ourisia glandulosa Hook.f., 1
+Ranunculus buchananii Hook.f., 1
+Camping, 1
+Cleaning, 1
+Submarines, 1
+Clowns, 1
+comedy, 1
+Topiary work, 1
+Wahlenbergia congesta, 1
+Wahlenbergia violacea J.A.Petterson, 1
+Lobelia anceps L.f., 4
+Pratia angulata (G.Forst.) Hook.f., 1
+Selliera radicans Cav., 4
+Lobelia roughii Hook.f., 1
+Lobelia angulata G.Forst., 4
+Dracophyllum latifolium A.Cunn., 1
+Dracophyllum strictum Hook.f., 1
+Dracophyllum uniflorum Hook.f., 1
+Ixerba brexioides A.Cunn., 1
+Olearia angustifolia Hook.f., 1
+Myosotidium hortensia (Decne.) Baill., 1
+Meryta sinclairii (Hook.f.) Seem., 1
+Hebe pinguifolia (Hook.f.) Cockayne & Allan, 1
+Hebe ligustrifolia (A.Cunn.) Cockayne & Allan, 1
+Parahebe diffusa (Hook.f.) W.R.B.Oliv., 1
+Parahebe catarractae subsp. diffusa (Hook.f.) Garn.-Jones, 1
+Hebe hectorii (Hook.f.) Cockayne & Allan, 1
+Hebe cupressoides (Hook.f.) Cockayne & Allan, 1
+Coprosma repens A.Rich., 3
+Coprosma robusta Raoul, 4
+Coprosma foetidissima J.R.Forst. & G.Forst., 1
+Coprosma propinqua A.Cunn., 3
+Astelia solandri A.Cunn., 1
+Beilschmiedia tarairi (A.Cunn.) Benth. & Hook.f. ex Kirk, 1
+Beilschmiedia tawa (A.Cunn.) Kirk, 4
+Celmisia incana Hook.f., 1
+Celmisia coriacea (G.Forst.) Hook.f. x C. traversii Hook.f., 1
+Cardamine hirsuta L., 1
+Lepidium flexicaule Kirk, 4
+Notothlaspi rosulatum Hook.f., 1
+Stellaria roughii Hook.f., 1
+Stellaria gracilenta Hook.f., 1
+Spergularia rubra (L.) J.Presl & C.Presl, 1
+Neopaxia australasica (Hook.f.) Ö.Nilsson, 1
+Raoulia eximia Hook.f., 1
+Raoulia monroi Hook.f., 1
+Anaphalioides trinervis (G.Forst.) Anderb., 1
+Helichrysum filicaule Hook.f., 4
+Haastia recurva Hook.f., 1
+Brachyglottis bellidioides (Hook.f.) B.Nord. x B. haastii (Hook.f.) B.Nord., 1
+Regalecus glesne Ascarius, 1772, 1
+Dolichoglottis lyallii (Hook.f.) B.Nord., 1
+Dolichoglottis scorzoneroides (Hook.f.) B.Nord., 1
+Celmisia holosericea (G.Forst.) Hook.f., 1
+Streblus heterophyllus (Blume) Corner, 4
+Alseuosmia macrophylla A.Cunn., 1
+Alseuosmia banksii A.Cunn. var. banksii, 1
+Coprosma australis (A.Rich.) B.L.Rob., 4
+Fighter pilots, 1
+military personnel, 1
+Waiheke Island, 1
+Horowhenua, 2
+Sheep ranches, 1
+Palliser Bay, 1
+Australian Aboriginal, 3
+Papua New Guinean, 1
+Tattoos, 2
+Tikopians, 1
+Hawaiian, 1
+Malay, 1
+Ethiopian, 1
+Scrolls (Visual works), 1
+Diagrams, 10
+Documents, 1
+Boxing, 2
+Ngaruawahia, 1
+Actors, 5
+Alphabets (Writing systems), 1
+Pointing fingers, 2
+Waitara, 1
+Ruapehu, Mount, 1
+Tongariro, Mount, 1
+Tasman, Mount, 2
+Awatere, 2
+Inland Kaikōura Range, 1
+Thompson Sound, 1
+Clearing of land, 1
+Trellises, 1
+Russell, 1
+Vailima, 1
+Outrigger canoes, 3
+Tonga, 2
+Death mask, 1
+Blennodon dorsale (Clarke, 1879), 1
+Scorpaena cardinalis Solander & Richardson, 1842, 1
+Tetraodon gillbanksii Clarke, 1897, 3
+Hypoplectrodes semicinctum (Valenciennes, 1833), 1
+Pseudolabrus miles (Forster & Schneider, 1801), 1
+Polyprion oxygeneios (Bloch & Schneider, 1801), 1
+Emmelichthys nitidus Richardson, 1845, 1
+Derbyshire, 1
+Kissing, 4
+vendors, 1
+Lottery tickets, 1
+Ball dresses, 1
+Fans (Accessories), 1
+Shells (Animal), 2
+Pottery, 1
+New Zealand Wars, 1
+Ruapekapeka, 1
+Ngā Puhi, 1
+Celmisia, 1
+Hierochloe brunonis Hook.f., 1
+Spinifex sericeus R.Br., 2
+Petone, 2
+Kamakura, 1
+Epacris, 1
+Dracophyllum, 1
+Senecio, 1
+Gentiana, 1
+Bishops, 2
+Studio props, 1
+Backdrops, 1
+British and Irish, 1
+Mokau, 2
+Taupō, 1
+Manaia, 1
+Castlecliff, 1
+Fuchsia procumbens A.Cunn., 1
+Passiflora tetrandra Banks ex DC., 4
+Knightia excelsa R.Br., 4
+Vitex lucens Kirk, 4
+Myoporum insulare R.Br., 1
+Corynocarpus laevigatus J.R.Forst. & G.Forst., 5
+Prumnopitys ferruginea (D.Don) de Laub., 1
+Leptospermum scoparium J.R.Forst. & G.Forst., 1
+Metrosideros diffusa (G.Forst.) Sm., 4
+Metrosideros umbellata Cav., 4
+Pittosporum cornifolium A.Cunn., 1
+Pittosporum tenuifolium Sol. ex Gaertn., 4
+Pittosporum crassifolium var. strictum Kirk, 1
+Clianthus puniceus (G.Don) Sol. ex Lindl., 4
+Sophora tetraptera var. microphylla (W.T.Aiton) Hook.f., 4
+Dysoxylum, 1
+Aristotelia racemosa Hook.f., 1
+Entelea arborescens R.Br., 5
+Melicytus ramiflorus J.R.Forst. & G.Forst., 4
+Alectryon excelsus Gaertn., 1
+Ourisia, 1
+Senecio hectorii Buchanan, 1
+Suttonia divaricata (A.Cunn.) Hook.f., 1
+Hoheria populnea A.Cunn., 1
+Senecio latifolius Banks & Sol. ex Hook.f., 1
+Pittosporum eugenioides A.Cunn., 1
+Pennantia corymbosa J.R.Forst. & G.Forst., 1
+Alseuosmia, 1
+Brachyglottis arborescens W.R.B.Oliv., 1
+Veronica, 5
+Clematis forsteri J.F.Gmel., 4
+Acianthus sinclairii Hook.f., 1
+Libertia ixioides (G.Forst.) Spreng., 1
+Parsonsia capsularis var. rosea (Raoul) Cockayne, 1
+Cassinia retorta A.Cunn. ex DC., 1
+Cotula atrata Hook.f., 1
+Tupeia antarctica (G.Forst.) Cham. & Schltdl., 1
+Gaultheria, 1
+Cyathodes acerosa (Gaertn.) Roem. & Schult., 1
+Cyathodes robusta Hook.f., 1
+Archeria racemosa Hook.f., 1
+Plagianthus divaricatus J.R.Forst. & G.Forst., 4
+Plagianthus lyallii (Hook.f.) Hook.f., 1
+Hibiscus trionum L., 2
+Thelymitra longifolia J.R.Forst. & G.Forst., 4
+Dianella intermedia Endl., 1
+Calceolaria sinclairii Hook., 1
+Mimulus repens R.Br., 1
+Mazus pumilio R.Br., 1
+Caltha novae-zelandiae Hook.f., 1
+Drimys axillaris J.R.Forst. & G.Forst., 1
+Carmichaelia odorata Hook.f., 1
+Carmichaelia flagelliformis Benth., 1
+Carmichaelia williamsii Kirk, 1
+Notospartium carmichaeliae Hook.f., 1
+Pomaderris phylicifolia, 1
+Discaria toumatou Raoul, 4
+Geranium dissectum L., 1
+Pelargonium, 1
+Oxalis corniculata L., 1
+Oxalis magellanica G.Forst., 1
+Quintinia serrata A.Cunn., 1
+Carpodetus serratus J.R.Forst. & G.Forst., 1
+Elaeocarpus dentatus (J.R.Forst. & G.Forst.) Vahl, 4
+Melicope ternata J.R.Forst. & G.Forst., 3
+Drosera arcturi Hook., 1
+Drosera binata Labill., 1
+Earina mucronata Lindl., 4
+Earina autumnalis (G.Forst.) Hook.f., 1
+Dendrobium cunninghamii Lindl., 4
+Griselinia lucida G.Forst., 4
+Corokia buddleioides A.Cunn., 1
+Myosotis, 1
+Brachyglottis, 2
+Coprosma acerosa A.Cunn., 4
+Coprosma rhamnoides A.Cunn., 1
+Coprosma x cunninghamii Hook.f., 1
+Coprosma rigida Cheeseman, 1
+Ligusticum latifolium Hook.f., 1
+Gentiana pleurogynoides Griseb., 1
+Exocarpos bidwillii Hook.f., 1
+Euphorbia glauca G.Forst., 4
+Seeds, 134
+Apium prostratum Vent. subsp. prostratum var. prostratum, 3
+Picton, 1
+Sāmoan, 1
+Monuments, 1
+Easter Island, 1
+engineers, 1
+Plans, 1
+Deal, 1
+Walmer, 1
+Swallows, 2
+Shimada, 1
+Maisaka, 1
+Arai, 1
+Minato, 1
+Okazaki, 1
+Shinto, 1
+Nagoya, 1
+Restaurants, 1
+Barbecue grills, 1
+Pedestrian malls, 1
+Kuwana, 1
+pilgrims, 1
+Cherry trees, 5
+Yokkaichi, 2
+Offices, 1
+Suzuka, 2
+Sumida-gawa, 1
+Fuji-san, 1
+Itelmens, 1
+Porphyrio hochstetteri, 1
+Indian, 12
+Senecio wairauensis Belcher, 1
+Nematoceras trilobum Hook.f., 1
+Landscape prints, 1
+missionaries, 1
+Myths, 3
+Broussonetia papyrifera (L.) Vent., 1
+Tetragonia tetragonoides (Pall.) Kuntze, 4
+Wahlenbergia gracilis (G.Forst.) A.DC., 1
+Sophora tetraptera J.F.Mill., 4
+Celmisia spectabilis, 1
+Hebe lycopodioides (Hook.f.) Cockayne & Allan var. lycopodioides, 1
+Clematis paniculata J.F.Gmel., 1
+Hebe speciosa (A.Cunn.) Andersen, 1
+Solanum laciniatum Aiton, 1
+Lightning, 1
+Admirals, 1
+Porches, 1
+Extinct birds, 1
+pianists, 1
+Kites (Toys), 1
+Balloons (Aircraft), 1
+Games, 1
+Thames, Firth of, 1
+Foulwind, Cape, 1
+Storytelling, 1
+Outdoor religious services, 1
+blind, 1
+Blind persons, 1
+Spinning apparatus, 2
+Pancakes & waffles, 1
+Metalworking, 1
+Workshops, 2
+Street entertainers, 1
+Metalwork, 1
+merchants, 1
+Money, 1
+Preaching, 1
+Public speaking, 1
+Draftspersons, 1
+Paper, 2
+darkness, 1
+Punishment devices, 1
+Widows, 1
+Mourning clothing & dress, 1
+Cyanoramphus malherbi, 1
+Quails, 1
+heroes, 1
+Family trees, 1
+Nineveh, 1
+lawyers, 2
+Isle of Wight, 1
+Cowes, 1
+mythology, 1
+Nature, 70
+Pregnancy, 1
+Captives, 1
+Raiatea, 1
+Scientific equipment, 1
+Syngnathus foliatus Shaw, 1804, 1
+Galaxias brevipinnis Gunther, 1866, 1
+Trout, 2
+Galaxias olidus Gunther, 1866, 1
+Galaxias maculatus (Jenyns, 1842), 1
+Galaxias gracilis McDowall, 1967, 1
+Neochanna apoda Gunther, 1867, 2
+Eels, 1
+Anguilla dieffenbachii Gray, 1842, 1
+Gobiomorphus gobioides (Valenciennes, 1837), 1
+Rhombosolea retiaria Hutton, 1874, 1
+Retropinna retropinna (Richardson, 1848), 1
+Geotria australis Gray, 1851, 2
+Rhombosolea tapirina Günther, 1862, 2
+Tasmania, 1
+Rhombosolea plebeia (Richardson, 1843), 1
+Ammotretis, 1
+Rhombosolea leporina Gunther, 1862, 1
+Peltorhamphus novaezeelandiae Günther, 1862, 1
+sp., 4
+Sphyraena sp., 1
+Thyrsites atun (Euphrasen, 1791), 1
+Benthodesmus elongatus (Clarke, 1879), 1
+Hippocampus abdominalis Lesson, 1827, 1
+Scomberesox saurus (Walbaum, 1792), 1
+Hyporhamphus sp., 1
+Mustelus antarcticus Günther, 1870, 2
+Hyporhamphus ihi Phillipps, 1932, 1
+Argentina elongata (Hutton, 1879), 1
+Tinca tinca (Linnaeus, 1758), 1
+Prototroctes maraena Gunther, 1864, 1
+Carassius auratus (Linnaeus, 1758), 1
+Sardines, 1
+Sardinops neopilchardus (Steindachner, 1879), 1
+Engraulis australis (Shaw in White, 1790), 1
+Capromimus abbreviatus (Hector, 1875), 1
+Notolabrus, 1
+Notolabrus celidotus (Bloch & Schneider, 1801), 2
+Camps, 1
+World War, 1914-1918, 1
+Forsterygion varium (Forster, 1801), 1
+Gilloblennius tripennis (Forster, 1801), 1
+Helicolenus percoides (Richardson, 1842), 1
+Cristiceps sp., 1
+Cristiceps australis Valenciennes in Cuvier & Valenciennes, 1836, 1
+Heteroclinus, 1
+Bovichtus variegatus Richardson, 1846, 1
+Allomycterus pilatus Whitley, 1931, 1
+Coelorinchus australis (Richardson, 1839), 1
+Tetractenos glaber (Freminville, 1813), 1
+Maurolicus muelleri (Gmelin, 1788), 1
+Phosichthys argenteus Hutton, 1872, 1
+Argyropelecus hemigymnus Cocco, 1829, 2
+Trachipterus trachypterus (Gmelin, 1789), 1
+Himantolophus appelii (Clarke, 1878), 4
+Macroramphosus scolopax (Linnaeus, 1758), 1
+Myxus elongatus Günther, 1861, 1
+Mugil cephalus Linnaeus, 1758, 1
+Aplodactylus arctidens Richardson, 1839, 1
+Brama brama (Bonnaterre, 1788), 1
+Scomber australasicus (Cuvier & Valenciennes, 1831), 1
+Parapercis colias (Forster & Schneider, 1801), 1
+Auchenoceros punctatus (Hutton, 1873), 1
+Arripis trutta (Forster, 1801), 1
+Nestor meridionalis, 1
+Notiomystis cincta, 1
+Anthornis melanura, 1
+Falco novaeseelandiae, 3
+Apteryx australis, 1
+Mergus australis, 1
+Pachyptila turtur, 1
+Falcons, 1
+Anarhynchus frontalis, 1
+Turnagra capensis, 1
+Petroica australis longipes, 1
+Petroica macrocephala toitoi, 1
+Pachyptila vittata, 1
+Xenicus longipes, 1
+Acanthisitta chloris, 1
+Mohoua ochrocephala, 1
+Callaeas wilsoni, 1
+Cyanoramphus novaezelandiae, 1
+Cyanoramphus unicolor, 1
+Gallirallus australis australis, 1
+Prosthemadera novaeseelandiae, 1
+Rallus philippensis, 1
+Rallus dieffenbachii chathamensis, 1
+Penguins, 1
+Eudyptula minor, 1
+Nests, 2
+Pentaceropsis recurvirostris (Richardson, 1845), 1
+Latridopsis forsteri (Castelnau, 1872), 1
+Merluccius australis (Hutton, 1872), 1
+Pomatomus saltatrix (Linnaeus, 1766), 1
+Pseudophycis barbata Gunther, 1863, 1
+Leptoscopus macropygus (Richardson, 1846), 1
+Pseudocaranx dentex (Bloch & Schneider, 1801), 1
+Genypterus sp., 1
+Nannoperca australis Gunther, 1861, 1
+Latris lineata (Bloch & Schneider, 1801), 1
+Nemadactylus macropterus (Bloch & Schneider, 1801), 1
+Seriolella punctata (Bloch & Schneider, 1801), 1
+Caesioperca sp., 1
+Maccullochella macquariensis (Cuvier, 1829), 1
+Danichthys cribrosus (Kner, 1867), 1
+Gonorynchus forsteri Ogilby, 1911, 1
+Girella tricuspidata (Quoy & Gaimard, 1824), 1
+Sphyrna zygaena (Linnaeus, 1758), 3
+Notorynchus cepedianus (Peron, 1807), 2
+Squalus acanthias Linnaeus, 1758, 2
+Galeorhinus galeus (Linnaeus, 1758), 3
+Pristiophorus, 1
+Callorhinchus milii Bory de St. Vincent, 1823, 3
+Raja nasuta Muller & Henle, 1841, 2
+Sharks, 5
+Cephaloscyllium isabellum (Bonnaterre, 1788), 3
+Lamna nasus (Bonnaterre, 1788), 1
+Lagocephalus cheesemanii (Clark, 1897), 1
+Lophotus capellei Temminck & Schlegel, 1845, 1
+Pseudopanax crassifolius (Sol. ex A.Cunn.) K.Koch, 3
+Ficinia spiralis (A.Rich.) Muasya & de Lange, 3
+Desmoschoenus spiralis (A.Rich.) Hook.f., 3
+Rexea solandri (Cuvier & Valenciennes, 1832), 1
+Seriola lalandi Valenciennes, 1833, 1
+Xiphias gladius Linnaeus, 1758, 1
+Pseudopentaceros richardsoni (Smith, 1844), 1
+Acaena anserinifolia (J.R.Forst. & G.Forst.) J.B.Armstr., 3
+Aciphylla squarrosa J.R.Forst. & G.Forst., 11
+Gingidia montana (J.R.Forst. & G.Forst.) J.W.Dawson, 3
+Angelica gingidium (G.Forst.) Hook.f., 3
+Gingidium montanum J.R.Forst. & G.Forst., 3
+Scandia rosifolia (Hook.) J.W.Dawson, 3
+Apium australe Thouars, 4
+Apium prostratum subsp. prostratum var. filiforme (A.Rich.) Kirk, 3
+Aristotelia serrata (J.R.Forst. & G.Forst.) W.R.B.Oliv., 3
+Arthropodium cirratum (G.Forst.) R.Br., 3
+Polystichum neozelandicum Fée, 6
+Polystichum richardii (Hook.) J.Sm., 6
+Asplenium polyodon G.Forst., 3
+Asplenium flabellifolium Cav., 3
+Asplenium appendiculatum subsp. maritimum (Brownsey) Brownsey, 1
+Asplenium terrestre subsp. maritimum Brownsey, 1
+Asplenium appendiculatum (Labill.) C.Presl, 2
+Asplenium terrestre Brownsey subsp. terrestre, 2
+Asplenium oblongifolium Colenso, 3
+Ascarina lucida Hook.f., 2
+Collospermum hastatum (Colenso) Skottsb., 3
+roots, 71
+Schizeilema trifoliolatum (Hook.f.) Domin, 3
+prostitutes, 1
+voyeurism, 1
+Grooming, 1
+Male figure drawings, 1
+Lace making, 1
+sailmakers, 1
+Almshouses, 1
+Door knobs, 1
+Plaques, 1
+Female figure drawings, 1
+social groups, 1
+Locks (Hardware), 1
+Drawbridges, 1
+Stands (Furniture), 1
+Buttresses, 1
+Facades, 1
+Moldings, 1
+Ropes, 2
+Pulleys, 1
+Vertical lift bridges, 1
+Dining tables, 1
+Bunschoten, 2
+Cabinets (Case furniture), 2
+Fossils, 18
+Nothofagus betuloides (Mirb.) Blume, 4
+Brachyglottis repanda J.R.Forst. & G.Forst., 3
+Wahlenbergia marginata (Thunb.) A.DC., 4
+Cardamine debilis DC., 3
+Rorippa divaricata (Hook.f.) Garn.-Jones & Jonsell, 3
+Carmichaelia australis R.Br., 3
+Carmichaelia solandri G.Simpson, 2
+Carpha alpina R.Br., 4
+Ozothamnus leptophyllus (G.Forst.) Breitw. & J.M.Ward, 3
+Cassinia leptophylla (G.Forst.) R.Br., 3
+Celmisia gracilenta Hook.f., 3
+Chenopodium allanii Aellen, 3
+Einadia allanii (Aellen) Paul G.Wilson, 3
+Scientific illustrations, 1
+Colobanthus apetalus (Labill.) Druce, 3
+Calystegia sepium (L.) R.Br., 3
+Convolvulus sepium L., 3
+Convolvulus soldanella L., 3
+Calystegia tuguriorum (G.Forst.) R.Br. ex Hook.f., 6
+Convolvulus tuguriorum G.Forst., 6
+Coprosma grandifolia Hook.f., 3
+Coprosma lucida J.R.Forst. & G.Forst., 3
+Craspedia uniflora G.Forst., 3
+Kirkianella novae-zelandiae (Hook.f.) Allan, 3
+Leptecophylla juniperina (J.R.Forst. & G.Forst.) C.M.Weiller, 3
+Cyathodes juniperina (J.R.Forst. & G.Forst.) Druce, 3
+Styphelia juniperina (J.R.Forst. & G.Forst.) Willd., 3
+Nothofagus antarctica (G.Forst.) Oerst., 3
+Paesia scaberula (A.Rich.) Kuhn, 6
+Daucus glochidiatus (Labill.) Fisch. et al., 3
+Winika cunninghamii (Lindl.) M.A.Clem. et al., 3
+Dianella nigra Colenso, 3
+Dichondra repens J.R.Forst. & G.Forst., 3
+Dodonaea viscosa Jacq., 3
+Drosera peltata Thunb., 3
+Dysoxylum spectabile (G.Forst.) Hook.f., 2
+Parsonsia heterophylla A.Cunn., 6
+Elatostema rugosum A.Cunn., 3
+Epilobium billardiereanum DC., 3
+Epilobium glabellum G.Forst., 2
+Epilobium nummulariifolium A.Cunn., 2
+Epilobium pallidiflorum A.Cunn., 3
+Senecio glomeratus Poir., 3
+Senecio minimus Poir., 3
+Senecio quadridentatus Labill., 3
+Erechtites quadridentata (Labill.) DC., 3
+Senecio scaberulus (Hook.f.) D.G.Drury, 3
+Berries, 3
+Fuchsia excorticata (J.R.Forst. & G.Forst.) L.f., 3
+Galium propinquum A.Cunn., 3
+Gaultheria antipoda G.Forst., 3
+Geniostoma rupestre var. ligustrifolium (A.Cunn.) B.J.Conn, 3
+Geniostoma rupestre var. crassum (Cheeseman) B.J.Conn, 3
+Geniostoma ligustrifolium var. crassum Cheeseman, 3
+Geranium solanderi Carolin, 3
+Geranium potentilloides (DC.) L'Hér., 3
+Gleichenia dicarpa R.Br., 3
+Gratiola sexdentata R.Cunn. ex A.Cunn., 3
+Haloragis erecta (Banks ex Murray) Oken, 2
+Gonocarpus montanus (Hook.f.) Orchard, 2
+Dracophyllum sinclairii Cheeseman, 3
+Centella uniflora (Colenso) Nannf., 3
+Hydrocotyle novae-zeelandiae DC., 2
+Hypericum gramineum G.Forst., 3
+Lagenophora pumila (G.Forst.) Cheeseman, 3
+Lagenophora lanata A.Cunn., 3
+Lepidium oleraceum G.Forst. ex Sparrm., 3
+Kunzea ericoides (A.Rich.) Joy Thomps., 3
+Leptospermum ericoides A.Rich., 3
+Hakea gibbosa Cav., 4
+Banksia integrifolia L.f., 4
+Banksia serrata L.f., 4
+Leucopogon fasciculatus (G.Forst.) A.Rich., 3
+Styphelia fasciculata (G.Forst.) Sleumer, 3
+Leucopogon fraseri A.Cunn., 3
+Styphelia nesophila (DC.) Sleumer, 3
+Libertia grandiflora (R.Br.) Sweet, 3
+Litsea calicaris (Sol. ex A.Cunn.) Benth. & Hook.f. ex Kirk, 2
+Alepis flavida (Hook.f.) Tiegh., 3
+Piper excelsum G.Forst., 3
+Metrosideros albiflora Sol. ex Gaertn., 3
+Callistemon citrinus (Curtis) Skeels, 4
+Metrosideros fulgens Sol. ex Gaertn., 3
+Metrosideros perforata (J.R.Forst. & G.Forst.) A.Rich., 3
+Metrosideros excelsa Sol. ex Gaertn., 3
+Microseris scapigera (Sol. ex A.Cunn.) Sch.Bip., 3
+Microtis unifolia (G.Forst.) Rchb.f., 3
+Acacia longifolia (Andrews) Willd., 4
+Acacia terminalis (Salisb.) J.F.Macbr., 4
+Muehlenbeckia australis (G.Forst.) Meisn., 3
+Muehlenbeckia complexa (A.Cunn.) Meisn., 3
+Myoporum laetum G.Forst., 3
+Myosotis forsteri Lehm., 3
+Myrsine australis (A.Rich.) Allan, 2
+Lophomyrtus bullata (Sol. ex A.Cunn.) Burret, 3
+Rorippa palustris (L.) Besser, 3
+Nertera depressa Banks & Sol. ex Gaertn., 2
+Vittadinia australis A.Rich., 3
+Lastreopsis velutina (A.Rich.) Tindale, 3
+Lastreopsis glabella (A.Cunn.) Tindale, 3
+Cheilanthes distans (R.Br.) Mett., 3
+Olearia furfuracea (A.Rich.) Hook.f., 3
+Nestegis apetala (M.Vahl) L.A.S.Johnson, 2
+Olearia paniculata (J.R.Forst. & G.Forst.) Druce, 2
+Orthoceras novae-zeelandiae (A.Rich.) M.A.Clem. et al., 3
+Orthoceras strictum R.Br., 3
+Notogrammitis heterophylla (Labill.) Parris, 3
+Ctenopteris heterophylla (Labill.) Tindale, 3
+Arthropteris tenella (G.Forst.) J.Sm. ex Hook.f., 3
+Pneumatopteris pennigera (G.Forst.) Holttum, 3
+Hypolepis rufobarbata (Colenso) N.A.Wakef., 3
+Hypolepis lactea Brownsey & Chinnock, 3
+Microsorum scandens (G.Forst.) Tindale, 3
+Phymatosorus scandens (G.Forst.) Pic.Serm., 3
+Pteridium esculentum (G.Forst.) Cockayne, 2
+Pteris macilenta A.Rich., 3
+Pteris tremula R.Br., 3
+Pseudopanax arboreus (Murray) Philipson, 3
+Pelargonium inodorum Willd., 3
+Peperomia urvilleana A.Rich., 3
+Pseudopanax lessonii (DC.) K.Koch, 2
+Pimelea villosa Sol. ex Sm., 3
+Pimelea villosa subsp. arenaria (A.Cunn.) C.J.Burrows, 3
+Pimelea arenaria A.Cunn., 3
+Pimelea longifolia Sol. ex Wikstr., 3
+Pimelea prostrata (J.R.Forst. & G.Forst.) Willd., 3
+Pimelea tomentosa (J.R.Forst. & G.Forst.) Druce, 3
+Pittosporum ralphii Kirk, 2
+Plantago raoulii Decne., 6
+Plantago dasyphylla Colenso, 6
+Pine cones, 4
+Dacrycarpus dacrydioides (A.Rich.) de Laub., 2
+Podocarpus dacrydioides A.Rich., 2
+Prumnopitys taxifolia (D.Don) de Laub., 2
+Podocarpus spicatus R.Br. ex Mirb., 2
+Pomaderris phylicifolia Lodd. ex Link, 3
+Ranunculus acaulis Banks & Sol. ex DC., 3
+Ranunculus reflexus Garn.-Jones, 3
+Ranunculus hirtus Banks & Sol. ex DC., 3
+Ranunculus amphitrichus Colenso, 3
+Ranunculus rivularis Banks & Sol. ex DC., 3
+Rubus australis G.Forst., 3
+Rumex flexuosus Sol. ex G.Forst., 3
+Sarcocornia quinqueflora (Bunge ex Ung.-Sternb.) A.J.Scott, 3
+Samolus repens (J.R.Forst. & G.Forst.) Pers., 3
+Schefflera digitata J.R.Forst. & G.Forst., 2
+Scleranthus biflorus (J.R.Forst. & G.Forst.) Hook.f., 3
+Senecio rufiglandulosus Colenso, 3
+Brachyglottis kirkii (Kirk) C.J.Webb var. kirkii, 3
+Urostemon kirkii (Kirk) B.Nord. var. kirkii, 3
+Senecio lautus G.Forst. ex Willd. subsp. lautus, 3
+Solanum aviculare G.Forst., 3
+Sophora microphylla Aiton, 3
+Spergularia media (L.) C.Presl, 3
+Stellaria parviflora Hook.f., 3
+Leptopteris hymenophylloides (A.Rich.) C.Presl, 3
+Tetragonia implexicoma (Miq.) Hook.f., 2
+Tetragonia trigyna Banks & Sol. ex Hook.f., 2
+Urtica ferox G.Forst., 3
+Veronica macrocarpa Vahl, 3
+Hebe macrocarpa (Vahl) Cockayne & Allan, 3
+Veronica parviflora Vahl, 3
+Hebe parviflora (Vahl) Andersen, 3
+Veronica salicifolia G.Forst., 3
+Hebe salicifolia (G.Forst.) Pennell, 3
+Weinmannia racemosa L.f., 3
+Weinmannia silvicola Sol. ex A.Cunn., 3
+Rouen, 1
+Rheims, 1
+Flagpoles, 1
+Cheetahs, 1
+Wolves, 5
+Kitchens, 2
+Birds of prey, 1
+Herons, 2
+Hides & skins, 2
+Boars, 2
+Mice, 3
+Crows, 1
+Cauldrons, 1
+Thistles, 1
+Beehives, 2
+Hangings (Executions), 3
+Nets, 1
+Birdcages, 1
+Turtles, 2
+Porcupines, 1
+Beavers, 1
+Ostriches, 2
+Hyenas, 1
+Animal traps, 1
+Coins, 1
+Crabs, 1
+Unicorns, 1
+Griffins, 1
+Monkeys, 1
+Gallows, 1
+fashion, 1
+Israeli/Jewish, 1
+Cattle raids, 1
+Courtesans, 4
+Kimonos, 10
+Seascape prints, 1
+boatmen, 1
+Hourglasses, 1
+Smoking paraphernalia, 2
+Covered wagons, 1
+Teahouses, 1
+Kabuki, 8
+Samurai, 8
+Warriors, 1
+Fans, 1
+Poetry, 2
+poets, 3
+Scissors & shears, 1
+Plum trees, 1
+Tea, 1
+Phoenix (Mythical bird), 1
+Manners & customs, 2
+Social life, 1
+Physiognomy, 1
+Supernatural, 1
+Archaeology, 1
+Tearooms, 1
+Junks, 1
+Izu-hanto, 1
+Buddhist temples, 1
+Gift shops, 1
+Tourists, 1
+Cockatoos, 1
+Pomegranate trees, 1
+kings, 1
+Ceremonial objects, 1
+Ha'apai, 1
+Portrait drawings, 2
+Tongan, 1
+Organs, 3
+Parades & processions, 1
+Backgammon, 1
+Board games, 1
+princes, 1
+courtiers, 1
+Hand tools, 2
+Tulips, 1
+Terraces, 1
+Guards, 1
+Panthers, 1
+braziers, 1
+Thrones, 2
+Romances, 1
+Banners, 1
+Shields, 4
+Vessels, 1
+Niches, 1
+Benedictions, 1
+Laurels, 1
+Banquets, 1
+Weddings, 1
+queens, 1
+Textiles, 2
+Building construction, 1
+Sandals, 2
+Apple trees, 1
+Wizards, 1
+Magic, 1
+Drowning victims, 1
+Embroidery, 1
+Scarves, 1
+Flower arrangements, 1

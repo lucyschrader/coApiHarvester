@@ -1,0 +1,148 @@
+British, 967
+Baroque, 511
+Edwardian, 24
+Romantic, 134
+Synthetic Cubist, 1
+Surrealist, 4
+Netherlandish, 257
+Flemish, 28
+Italian, 40
+Renaissance, 32
+Salvator Rosa, 1
+Religion, 94
+Northern Renaissance, 92
+German, 182
+Pop, 1
+French, 171
+Christmas, 10
+Gothic Revival, 1
+New Zealand European, 40
+European, 7
+Realist, 7
+Abstract, 9
+Italianate, 2
+Antique, the, 21
+mythology, 16
+Impressionist, 22
+abstraction, 5
+Mannerist, 34
+Late Renaissance, 6
+Victorian, 4
+Art Nouveau, 3
+Asian, 4
+Pattern Style, 2
+Art Deco, 6
+William Blake, 1
+Bill Manhire, 1
+High Baroque, 5
+Australian, 3
+City of London (United Kingdom), 1
+Dutch, 29
+Southeast Asian, 2
+Symbolist, 11
+Medieval, 9
+Late Baroque, 5
+Modern, 3
+Late Edo, 44
+Post-Impressionist, 10
+Gothic, 3
+Barbizon School, 5
+Cubist, 5
+Fauve, 1
+Early Baroque, 4
+Early Victorian, 1
+Herman Saftleven II, 3
+Vorticist, 1
+Neo-Romantic, 3
+Neoclassical, 8
+paganism, 1
+Counter-Reformation, 2
+Albrecht Dürer, 9
+Lucas van Leyden, 9
+Giovanni Panini, 1
+Myths, 2
+American, 1
+Philosophy, 1
+Late Victorian, 3
+romanticism, 2
+Pre-Raphaelite, 86
+Dante Gabriel Rossetti, 1
+Georgian, 2
+Reformation, 2
+Futurist, 1
+Rococo, 9
+Vltava (Ceská Republika), 1
+Christianity, 4
+New Year's Day, 1
+Modernist, 7
+High Renaissance, 3
+Edo, 3
+Māori, 1
+Chiusa (Italia), 1
+Early Renaissance, 1
+English, 1
+North American Indian, 1
+Düren (Deutschland), 1
+Japanese, 4
+Fantasy, 1
+France, 1
+Camden Town (United Kingdom), 1
+British and Irish, 1
+Raphael Sanzio, 1
+Danish, 2
+Jacopo Palma, 1
+Op art, 1
+Nancy (France), 1
+poetry, 1
+Polish, 1
+Ming, 1
+Jean-Baptiste-Camille Corot, 1
+Sir Walter Buller, 1
+Philippe Mercier, 4
+British Colonial, 6
+Gordon Lee, 1
+James Cowles Prichard, 30
+Spain, 48
+Lapita, 1
+Contemporary, 2
+Solomon Island, 1
+Late Gothic, 1
+Gideon Mantell, 1
+Explorers, 1
+Furniture, 1
+religious art, 1
+Gods, 1
+Central America, 3
+Pre-Columbian, 1
+Equipment, 2
+Gonzalo Fernandez de Oviedo y Valdez, 11
+Botany, 1
+Christopher Columbus, 3
+Discovery & exploration, 4
+Cookery, 1
+land settlement, 1
+New Zealand, 532
+Captain James Cook, 2242
+Sir Joseph Banks, 2241
+Sydney Parkinson, 2241
+Dr Daniel Solander, 2241
+Chubu (Nihon), 1
+Northland (New Zealand), 1
+Parables, 1
+Byzantine, 1
+Australia, 1360
+Brazil, 88
+Tierra del Fuego, 258
+Belgian, 2
+Society Islands (Polynésie française), 3
+Modern Movement, 3
+Vienna (Österreich), 1
+realism, 1
+Middle Edo, 3
+Tokyo (Nihon), 1
+Meiji, 11
+Showa, 16
+shin hanga, 2
+Early Edo, 1
+John Crichton, 1
+flower painters, 1

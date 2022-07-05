@@ -1,0 +1,178 @@
+Harvest model schema!
+* field label
+* single or multi value
+* which object types (object/specimen)
+* which doc types (people etc)
+* path - levels to reach and labels
+* where conditions have to be met (authorities)
+* where I iterate on a set of fields (images)
+* where I turn a set of fields into a list (type)
+
+harvest_model = [
+	{"title":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["object","specimen"],
+		"doc_type": "object",
+		"api_label": "title",
+		"harvester_label": "title",
+		"path": []
+		}
+	},
+	{"pid":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["object", "specimen"],
+		"doc_type": "object",
+		"api_label": "pid",
+		"harvester_label": "pid",
+		"path": []
+		}
+	},
+	{"description":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["object", "specimen"],
+		"doc_type": "object",
+		"api_label": "description",
+		"harvester_label": "description",
+		"path": []
+		}
+	},
+	{"dimensions":
+		{"values": "multi",
+		"value_type": "list",
+		"object": ["object", "specimen"],
+		"doc_type": "object",
+		"api_label": "title",
+		"harvester_label": "dimensions",
+		"path": ["observedDimension"]
+		}
+	},
+	{"media":
+		{"values": "multi",
+		"value_type": "dict",
+		"object": ["object", "specimen"],
+		"doc_type": "object",
+		"api_label": "hasRepresentation",
+		"path": [],
+		"children": {
+			"media_irn": {"values": "single",
+				"value_type": "int",
+				"api_label": "id",
+				"harvester_label": "media_irn",
+				"path": []
+				},
+			"media_type": {"values": "single",
+				"value_type": "string",
+				"api_label": "type",
+				"harvester_label": "media_type",
+				"path": []
+				},
+			"contentUrl": {"values": "single",
+				"value_type": "string",
+				"api_label": "contentUrl",
+				"harvester_label": "contentUrl",
+				"path": []
+				},
+			"rights_title": {"values": "single",
+				"value_type": "string",
+				"api_label": "title",
+				"harvester_label": "rights_title",
+				"path": ["rights"]
+				},
+			"rights_url": {"values": "single",
+				"value_type": "string",
+				"api_label": "iri",
+				"harvester_label": "rights_url",
+				"path": ["rights"]
+				},
+			"downloadable": {"values": "single",
+				"value_type": "bool",
+				"api_label": "allowsDownload",
+				"harvester_label": "downloadable",
+				"path": ["rights"]
+				},
+			"media_width": {"values": "single",
+				"value_type": "int",
+				"api_label": "width",
+				"harvester_label": "media_width",
+				"path": []
+				},
+			"media_height": {"values": "single",
+				"value_type": "int",
+				"api_label": "height",
+				"harvester_label": "media_height",
+				"path": []
+				}
+			}
+		}
+	},
+	{"production": 
+		{"type": "multi",
+		"value_type": "dict",
+		"object": ["object"],
+		"doc_type": "object",
+		"api_label": "production",
+		"path": [],
+		"children": {}
+
+		}
+		}
+]
+
+
+	{"production":
+		{"type":"multi",
+		"parent_label":"production",
+		"field_labels":
+			[["contributor", "title"],
+			"role",
+			"verbatimCreatedDate",
+			["spatial", "title"]
+			],
+			"for":"object"}
+	},
+	{"productionUsedTechnique":
+		{"type":"list",
+		"field_label":"productionUsedTechnique",
+		"for":"object"}
+	},
+	{"isMadeOfSummary":
+		{"type":"single",
+		"field_label":"isMadeOfSummary",
+		"for":"object"}
+	},
+	{"isMadeOf":
+		{"type":"list",
+		"field_label":["isMadeOf", "title"],
+		"for":"object"}
+	},
+	{"creditLine":
+		{"type":"single",
+		"field_label":"creditLine",
+		"for":"object"}
+	},
+	{"art_genre":
+		{"type":"list",
+		"field_labels":["depicts", "prefLabel"],
+		"authorities": ["baroque", "impressionism", "..."],
+		"for":"object"}
+	},
+	{"movement":
+		{"type":"list",
+		"field_labels":["influencedBy", "prefLabel"],
+		"authorities": ["...", "..."],
+		"for":"object"}
+	},
+	{"isTypeOf":
+		{"type":"list",
+		"field_labels":["isTypeOf", "prefLabel"],
+		"for":"object"}
+	},
+	{"refersTo":
+		{"type":"list",
+		"field_labels":["refersTo", "prefLabel"],
+		"for":"object"}
+	}
+]

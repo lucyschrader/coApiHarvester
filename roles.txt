@@ -1,0 +1,25 @@
+artist, 3896
+attributed, 117
+painter, 34
+engraver, 120
+etcher, 160
+engraver (printmaker), 79
+maker/artist, 54
+printmaker, 44
+after, 72
+illustrator, 1
+designer, 11
+draftsman, 1
+potter, 130
+sculptor, 5
+studio, 2
+follower of, 1
+jeweller, 9
+manufacturer(s), 7
+lithographer, 5
+photographer, 1
+publisher, 13
+printer, 6
+author, 8
+bookbinder, 1
+ärtist, 2
