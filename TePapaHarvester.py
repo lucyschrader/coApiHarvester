@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import requests
 import json
 import math
@@ -8,7 +9,7 @@ from PIL import Image
 from io import BytesIO
 
 auth_key = "x-api-key"
-auth_value = "ak4vr6ocE2Ecgyc8bOt0PI2586b7e9cu1z6wRnhS"
+auth_value = os.environ.get('TE-PAPA-KEY')
 
 headers = {auth_key: auth_value, "Accept": "application/json"}
 
@@ -407,4 +408,4 @@ class HarvestDict():
 #    harvested_data = ApiRecord(irn=irn, record_type=doc_type, record=response).add_data()
 #    print(harvested_data)
 
-# single_record(doc_type="object", irn="35270")
+#single_record(doc_type="object", irn="35270")
