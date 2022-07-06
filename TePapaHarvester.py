@@ -153,40 +153,39 @@ class ApiRecord():
         if "hasRepresentation" in self.record:
             images = self.record["hasRepresentation"]
             image_list_length = len(images)
-            image_num = 0
-            images_data_dict = {}
+            images_data_dict = {"images":[]}
             for i in range(0,image_list_length):
                 this_data_set = {}
                 image_irn = None
-                if images[image_num]:
-                    i_dat = images[image_num]
+                if images[i]:
+                    i_dat = images[i]
                     if "id" in i_dat:
                         image_irn = str(i_dat["id"])
-                        this_data_set.update({"image_{}_irn".format(image_num):image_irn})
+                        this_data_set.update({"image_irn":image_irn})
                     else: pass
                     if "type" in i_dat:
                         image_type = i_dat["type"]
-                        this_data_set.update({"image_{}_type".format(image_num):image_type})
+                        this_data_set.update({"image_type":image_type})
                         if image_type == "ImageObject":
                             if "width" in i_dat:
                                 image_w = i_dat["width"]    
                             else:
                                 image_w = "n/a"
-                            this_data_set.update({"image_{}_w".format(image_num):image_w})
+                            this_data_set.update({"image_w":image_w})
                             if "height" in i_dat:
                                 image_h = i_dat["height"]
                             else:
                                 image_h = "n/a"
-                            this_data_set.update({"image_{}_h".format(image_num):image_h})
+                            this_data_set.update({"image_h":image_h})
                         else: pass
                     else: pass
                     if "contentUrl" in i_dat:
                         image_url = i_dat["contentUrl"]
-                        this_data_set.update({"image_{}_url".format(image_num):image_url})
+                        this_data_set.update({"image_url":image_url})
                     else: pass
                     if "thumbnailUrl" in i_dat:
                         image_thumbnail_url = i_dat["thumbnailUrl"]
-                        this_data_set.update({"image_{}_thumb_url".format(image_num):image_thumbnail_url})
+                        this_data_set.update({"image_thumb_url":image_thumbnail_url})
                         
                         if self.get_thumbs == True:
                             image_filename = self.irn + "_" + image_irn + ".jpg"
@@ -196,25 +195,23 @@ class ApiRecord():
                     if "rights" in i_dat:
                         if "title" in i_dat["rights"]:
                             image_rights = i_dat["rights"]["title"]
-                            this_data_set.update({"image_{}_rights".format(image_num):image_rights})
+                            this_data_set.update({"image_rights":image_rights})
                         else: pass
                         if "iri" in i_dat["rights"]:
                             image_rights_url = i_dat["rights"]["iri"]
-                            this_data_set.update({"image_{}_rights_url".format(image_num):image_rights_url})
+                            this_data_set.update({"image_rights_url":image_rights_url})
                         else: pass  
                         if "allowsDownload" in i_dat["rights"]:
                             image_download = i_dat["rights"]["allowsDownload"]
-                            this_data_set.update({"image_{}_download".format(image_num):image_download})
+                            this_data_set.update({"image_download":image_download})
                         else: pass                   
 
-                    images_data_dict.update({"image_{}".format(image_num): this_data_set})
+                    images_data_dict["images"].append(this_data_set)
                 else: pass
 #                print(images_data_dict)
 
                 self.fields.update(images_data_dict)
 #                print(self.fields)
-
-                image_num += 1
 
             self.fields.update({"number_of_images": image_list_length})
 

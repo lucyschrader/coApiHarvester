@@ -23,11 +23,10 @@ class OutputCSV():
         self.writer = csv.writer(self.write_file, delimiter = ',')
         self.writer.writerow(self.heading_row)
 
-    def write_line(self, irn=None, data_dict=None, image_irn=None, i=None):
+    def write_line(self, irn=None, data_dict=None, image_irn=None):
         self.irn = irn
         self.data_dict = data_dict
         self.image_irn = image_irn
-        self.i = i
 
         value_list = []
         value_list.append(self.irn)
@@ -39,31 +38,19 @@ class OutputCSV():
         else:
             value_list.append("")
 
-        field_image = "image_{}".format(self.i)
-        field_image_irn = "image_{}_irn".format(self.i)
-        field_image_w = "image_{}_w".format(self.i)
-        field_image_h = "image_{}_h".format(self.i)
-        field_image_url = "image_{}_url".format(self.i)
-        field_image_rights = "image_{}_rights".format(self.i)
+        value_list.append(self.image_irn)
 
-        value_list.append(self.data_dict[field_image][field_image_irn])
+        images_data = self.data_dict["images"]
+        image_fields = ["image_w", "image_h","image_url", "image_rights"]
 
-        if field_image_w in self.data_dict[field_image]:
-            value_list.append(self.data_dict[field_image][field_image_w])
-        else:
-            value_list.append("")
-        if field_image_h in self.data_dict[field_image]:
-            value_list.append(self.data_dict[field_image][field_image_h])
-        else:
-            value_list.append("")
-        if field_image_url in self.data_dict[field_image]:
-            value_list.append(self.data_dict[field_image][field_image_url])
-        else:
-            value_list.append("")
-        if field_image_rights in self.data_dict[field_image]:
-            value_list.append(self.data_dict[field_image][field_image_rights])
-        else:
-            value_list.append("")
+        for image in images_data:
+            if image["image_irn"] == self.image_irn:
+                for field in image_fields:
+                    if field in image:
+                        write_value = image[field]
+                        value_list.append(write_value)
+                    else:
+                        value_list.append("")
 
         if "description" in self.data_dict:
             value_list.append(self.data_dict["description"])
@@ -156,21 +143,17 @@ def write_data_to_csv(record_data_dict, collection=None):
     #print(all_irns)
 
     for irn in all_irns:
-        no_of_images = 0
-        for k in record_data_dict[irn].keys():
-            if "image_" in k:
-                no_of_images += 1
+        irn_dat = record_data_dict[irn]
+        no_of_images = irn_dat["number_of_images"]
 
-        for i in range(0,no_of_images):
-            irn_dat = record_data_dict[irn]
-            if "image_{}".format(i) in irn_dat:
-                this_image = irn_dat["image_{}".format(i)]
-                if "image_{}_w".format(i) in this_image:
-                    if this_image["image_{}_w".format(i)] >= 2500 and this_image["image_{}_h".format(i)] >= 2500:
-                        if "image_{}_download".format(i) in irn_dat["image_{}".format(i)]:
-                            if irn_dat["image_{}".format(i)]["image_{}_download".format(i)] == True:
-                                writable_image_irn = this_image["image_{}_irn".format(i)]
-                                output_csv.write_line(irn=irn, data_dict=irn_dat, image_irn=writable_image_irn, i=i)
+        attached_images = irn_dat["images"]
+        for image in attached_images:
+            if "image_w" in image:
+                if image["image_w"] >= 2500 and image["image_h"] >= 2500:
+                    if "image_download" in image:
+                        if image["image_download"] == True:
+                            writable_image_irn = image["image_irn"]
+                            output_csv.write_line(irn=irn, data_dict=irn_dat, image_irn=writable_image_irn)
 
     output_csv.write_file.close()
 
@@ -277,8 +260,8 @@ harvester = TePapaHarvester.HarvestDict(collection=collection, per_page=per_page
 
 record_data_dict = harvester.harvest_records()
 
-#write_data_to_csv(record_data_dict, collection=collection)
+write_data_to_csv(record_data_dict, collection=collection)
 #just_print_titles(record_data_dict, collection=collection, cutoff=100)
 #just_print_subjects(record_data_dict, collection=collection)
 #just_print_roles(record_data_dict, collection=collection)
-just_print_irns(record_data_dict, collection=collection)
+#just_print_irns(record_data_dict, collection=collection)
