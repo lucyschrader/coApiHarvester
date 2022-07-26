@@ -5,102 +5,68 @@ import requests
 import json
 import math
 import time
+import askCO
 from PIL import Image
 from io import BytesIO
 
-auth_key = "x-api-key"
-auth_value = os.environ.get('TE-PAPA-KEY')
+class Harvester():
 
-headers = {auth_key: auth_value, "Accept": "application/json"}
+    # Harvest from the Collections Online API
 
-class CoApi():
-    # Creates and executes a query to the API
-    def __init__(self, headers=headers, pagination_from=None, pagination_size=None, collection=None, doc_type=None, irn=None):
-        self.headers = headers
-        self.collection = collection
-        self.pagination_from = pagination_from
-        self.pagination_size = pagination_size
-        self.doc_type = doc_type
-        self.irn = irn
+    def __init__(self, quiet=True):
+        self.quiet = quiet
+        self.count = 0
+        self.record_data_dict = {}
 
-    def search(self):
-        # To add: error handling and retrying
-        request = Request(pagination_from=self.pagination_from, pagination_size=self.pagination_size, collection=self.collection)
-        print("Requesting {}".format(request.url))
-        response = json.loads(requests.get(request.url, headers=self.headers).text)
-        return Results(response, request)
+        self.API = askCO.CoApi()
 
-    def view_record(self):
-        request = Request(doc_type=self.doc_type, irn=self.irn)
-        print("Requesting {}".format(request.url))
-        response = json.loads(requests.get(request.url, headers=self.headers).text)
-        print(response)
-        return response
+    # Establish the parameters for this operation so you can build queries
+    def set_params(self, q=None, fields=None, filters=None, facets=None, q_from=0, size=0, sort=None):
+        self.q = q
+        self.fields = fields
+        self.filters = filters
+        self.facets = facets
+        self.q_from = q_from
+        self.size = size
+        self.sort = sort
 
-class Request():
-    # Builds the query url from supplied parts
-    def __init__(self, pagination_from=None, pagination_size=None, collection=None, doc_type=None, irn=None):
-        url_parts = []
+    def count_results(self):
+        # Find out how many results there are and how many pages to query
+        api_call = self.API.search(q=self.q, fields=self.fields, filters=self.filters, facets=self.facets, q_from=self.q_from, size=1, sort=self.sort)
+
+        self.count = api_call.result_count
         
-        self.base_url = "https://data.tepapa.govt.nz/collection/"
-        
-        if collection:
-            self.do_search = "search/"
-            self.query = "&q=*"
-            self.collection = " AND collection:{}".format(collection)
-            self.types = " AND type:Object AND additionalType:PhysicalObject"
-            self.downloadable = " AND hasRepresentation.rights.allowsDownload:true"
-            self.sort = "&sort=id"
-            self.pagination_from = pagination_from
-            self.pagination_size = pagination_size
+        return self.count
 
-            url_parts.append(self.do_search)
-            url_parts.append("?")
-            url_parts.append("from={}&size={}".format(self.pagination_from, self.pagination_size))
-            if self.sort:
-                url_parts.append("{}".format(self.sort))
-            if self.query:
-                url_parts.append("{}".format(self.query))
-            if self.collection:
-                url_parts.append("{}".format(self.collection))
-            if self.types:
-                url_parts.append("{}".format(self.types))
-            if self.downloadable:
-                url_parts.append("{}".format(self.downloadable))
-        
-        elif doc_type:
-            self.doc_type = doc_type
-            self.irn = irn
+    def harvest_records(self):
+        page_count = math.ceil(self.count/self.size)
 
-            url_parts.append(self.doc_type)
-            url_parts.append("/")
-            url_parts.append(self.irn)
+        # Query each page to allow harvest
+        for i in range(0, page_count):
+            page_response = self.API.search(q=self.q, fields=self.fields, filters=self.filters, facets=self.facets, q_from=self.q_from, size=self.size, sort=self.sort)
+            for record in page_response.records:
+                try:
+                    irn = str(record["id"])
 
-        self.url = self.buildUrl(url_parts)
-        
-    def buildUrl(self, url_parts=None):
-        url = [
-            self.base_url,
-            "".join(url_parts)
-        ]
-        return ''.join(url)
+                    new_record = ApiRecord(irn=irn, record=record)
 
-class Results():
-    # Turns the response data into an iterable object
-    def __init__(self, response, request):
-        self.request = request
-        self.result_count = 0
-        self.records = []
+                    new_data = new_record.add_data()
 
-        self.result_count = response['_metadata']['resultset']['count']
-        self.records = [result for result in response['results']]
+                    self.record_data_dict.update({irn:new_data})
+                except: pass
+
+            self.q_from += self.size
+            time.sleep(0.2)
+        print(self.count)
+
+        return self.record_data_dict
 
 class ApiRecord():
     # Stores the data for each record in a dict
-    def __init__(self, irn=None, doc_type=None, record=None, get_thumbs=False, image_folder=None):
+    def __init__(self, irn=None, resource_type=None, record=None, get_thumbs=False, image_folder=None):
         self.irn = irn
         self.fields = {"IRN":self.irn}
-        self.doc_type = doc_type
+        self.resource_type = resource_type
         self.record = record
         self.get_thumbs = get_thumbs
         self.image_folder = image_folder
@@ -357,48 +323,7 @@ class ApiRecord():
             self.fields.update({field_name:harvest_item})
 '''
 
-class HarvestDict():
-    # Creates and populates a dict for the entire harvest operation
-    def __init__(self, collection=None, per_page=None):
-        self.collection = collection
-        self.per_page = per_page
-        self.count = None
 
-        self.count_results()
-
-    def count_results(self):
-        api_call = CoApi(headers=headers, pagination_from=0, pagination_size=10, collection=self.collection)
-
-        # Find out how many results there are and how many pages to query
-        count_response = api_call.search()
-        self.count = count_response.result_count
-        print(self.count)
-
-    def harvest_records(self):
-        page_start = 0
-        page_count = math.ceil(self.count/self.per_page)
-
-        record_data_dict = {}
-
-        # Query each page to allow harvest
-        for i in range(0, page_count):
-            page_call = CoApi(headers=headers, pagination_from = page_start, pagination_size = self.per_page, collection=self.collection)
-            page_reponse = page_call.search()
-            for record in page_reponse.records:
-                try:
-                    irn = str(record["id"])
-
-                    new_record = ApiRecord(irn=irn, record=record)
-
-                    new_data = new_record.add_data()
-
-                    record_data_dict.update({irn:new_data})
-                except: pass
-
-            page_start += self.per_page
-            time.sleep(1)
-
-        return record_data_dict
 
 # Silly little function to see if I can choose to harvest a single record
 #def single_record(doc_type, irn):

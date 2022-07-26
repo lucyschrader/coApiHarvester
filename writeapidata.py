@@ -253,14 +253,21 @@ def just_print_irns(record_data_dict, collection=None):
             f.write(irn + "\n")
     f.close()
 
-collection = "PacificCultures"
-per_page = 500
+q = "*"
+fields = None
+facets = None
+q_from = 0
+size = 500
+sort = [{"field": "id", "order": "asc"}]
+facets = [{"field": "production.spatial.title", "size": 3}]
+filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "Philatelic"}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
 
-harvester = TePapaHarvester.HarvestDict(collection=collection, per_page=per_page)
-
+harvester = TePapaHarvester.Harvester()
+harvester.set_params(q=q, fields=fields, filters=filters, facets=facets, q_from=q_from, size=size, sort=sort)
+harvester.count_results()
 record_data_dict = harvester.harvest_records()
 
-write_data_to_csv(record_data_dict, collection=collection)
+#write_data_to_csv(record_data_dict, collection=collection)
 #just_print_titles(record_data_dict, collection=collection, cutoff=100)
 #just_print_subjects(record_data_dict, collection=collection)
 #just_print_roles(record_data_dict, collection=collection)
