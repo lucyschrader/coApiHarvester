@@ -29,7 +29,7 @@ class CoApi():
 
 	def view_resource(self, resource_type=None, irn=None):
 		# Build a request to return a single document
-		if not document_type and not irn:
+		if not resource_type and not irn:
 			raise ValueError("You must specify a resource type and IRN.")
 		if irn:
 			resource_url = "https://data.tepapa.govt.nz/collection/{res}/{irn}".format(res=resource_type, irn=irn)
@@ -37,7 +37,8 @@ class CoApi():
 		if not self.quiet:
 			print("Requesting: {}".format(resource_url))
 
-		return Resource(get(resource_url, headers=headers).json, resource_url)
+		response = json.loads(get(resource_url, headers=headers).text)
+		return Resource(response, resource_url)
 
 class Request():
 
@@ -112,19 +113,3 @@ class Resource():
 			return "Error: {}".format(self.errors["userMessage"])
 		else:
 			return self.resource
-
-def do_a_query():
-	API = CoApi()
-
-	q = "*"
-	fields = None
-	facets = None
-	page = 0
-	per_page = 20
-	sort = [{"field": "id", "order": "asc"}]
-	facets = [{"field": "production.spatial.title", "size": 3}]
-	filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "Art"}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
-
-	results = API.search(q=q, fields=fields, page=page, per_page=per_page, sort=sort, facets=facets, filters=filters)
-
-	print(results.facets)

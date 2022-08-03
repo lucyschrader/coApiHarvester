@@ -1,0 +1,314 @@
+{
+	"id":
+		{"values": "single",
+		"value_type": "int",
+		"object": ["Object", "Specimen"],
+		"resource_type": "all",
+		"api_label": "id",
+		"harvester_label": "id",
+		"path": []
+		},
+	"type":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "type",
+		"harvester_label": "type",
+		"path": []
+		},
+	"additionalType":
+		{"values": "list",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "additionalType",
+		"harvester_label": "additionalType",
+		"path": []
+		},
+	"collection":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "collection",
+		"harvester_label": "collection",
+		"path": []
+		},
+	"identifier":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "identifier",
+		"harvester_label": "identifier",
+		"path": []
+		},
+	"previousIdentifier":
+		{"values": "list",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "title",
+		"harvester_label": "previousIdentifier",
+		"path": ["previousIdentifier"]
+		},
+	"title":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["Object","Specimen"],
+		"resource_type": "object",
+		"api_label": "title",
+		"harvester_label": "title",
+		"path": []
+		},
+	"pid":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "pid",
+		"harvester_label": "pid",
+		"path": []
+		},
+	"description":
+		{"values": "single",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "description",
+		"harvester_label": "description",
+		"path": []
+		},
+	"dimensions":
+		{"values": "list",
+		"value_type": "string",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "title",
+		"harvester_label": "dimensions",
+		"path": ["observedDimension"]
+		},
+	"media":
+		{"values": "list",
+		"value_type": "dict",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "hasRepresentation",
+		"harvester_label": "media",
+		"path": [],
+		"children": {
+			"media_irn": {"values": "single",
+				"value_type": "int",
+				"api_label": "id",
+				"harvester_label": "media_irn",
+				"path": []
+				},
+			"media_title": {"values": "single",
+				"value_type": "string",
+				"api_label": "title",
+				"harvester_label": "media_title",
+				"path": []
+				},
+			"media_type": {"values": "single",
+				"value_type": "string",
+				"api_label": "type",
+				"harvester_label": "media_type",
+				"path": []
+				},
+			"contentUrl": {"values": "single",
+				"value_type": "string",
+				"api_label": "contentUrl",
+				"harvester_label": "contentUrl",
+				"path": []
+				},
+			"thumbnailUrl": {"values": "single",
+				"value_type": "string",
+				"api_label": "thumbnailUrl",
+				"harvester_label": "thumbnailUrl",
+				"path": []
+				},
+			"rights_title": {"values": "single",
+				"value_type": "string",
+				"api_label": "title",
+				"harvester_label": "rights_title",
+				"path": ["rights"]
+				},
+			"rights_url": {"values": "single",
+				"value_type": "string",
+				"api_label": "iri",
+				"harvester_label": "rights_url",
+				"path": ["rights"]
+				},
+			"downloadable": {"values": "single",
+				"value_type": "bool",
+				"api_label": "allowsDownload",
+				"harvester_label": "downloadable",
+				"path": ["rights"]
+				},
+			"media_width": {"values": "single",
+				"value_type": "int",
+				"api_label": "width",
+				"harvester_label": "media_width",
+				"path": []
+				},
+			"media_height": {"values": "single",
+				"value_type": "int",
+				"api_label": "height",
+				"harvester_label": "media_height",
+				"path": []
+				}
+			}
+		},
+	"production": 
+		{"values": "list",
+		"value_type": "dict",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": "production",
+		"harvester_label": "production",
+		"path": [],
+		"children": {
+			"producer_name": {"values": "single",
+				"value_type": "string",
+				"api_label": "title",
+				"harvester_label": "producer_name",
+				"path": ["contributor"]
+				},
+			"producer_role": {"values": "single",
+				"value_type": "string",
+				"api_label": "role",
+				"harvester_label": "producer_role",
+				"path": []
+				},
+			"producer_id": {"values": "single",
+				"value_type": "int",
+				"api_label": "id",
+				"harvester_label": "producer_id",
+				"path": ["contributor"]
+				},
+			"production_date": {"values": "single",
+				"value_type": "string",
+				"api_label": "verbatimCreatedDate",
+				"harvester_label": "production_date",
+				"path": []
+				},
+			"production_place": {"values": "single",
+				"value_type": "string",
+				"api_label": "prefLabel",
+				"harvester_label": "production_place",
+				"path": ["spatial"]
+				},
+			"production_place_id": {"values": "single",
+				"value_type": "int",
+				"api_label": "id",
+				"harvester_label": "production_place_id",
+				"path": ["spatial"]
+				}
+			}
+		},
+	"productionUsedTechnique": {
+		"values": "list",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": "prefLabel",
+		"harvester_label": "productionUsedTechnique",
+		"path": ["productionUsedTechnique"]
+		},
+	"isTypeOf": {
+		"values": "list",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": "prefLabel",
+		"harvester_label": "isTypeOf",
+		"path": ["isTypeOf"]
+		},
+	"isMadeOf": {
+		"values": "list",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": "prefLabel",
+		"harvester_label": "isMadeOf",
+		"path": ["isMadeOf"]
+		},
+	"isMadeOfSummary": {
+		"values": "single",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": "isMadeOfSummary",
+		"harvester_label": "isMadeOfSummary",
+		"path": []
+		},
+	"creditLine": {
+		"values": "single",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": "creditLine",
+		"harvester_label": "creditLine",
+		"path": []
+		},
+	"depicts": {
+		"values": "list",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": ["prefLabel", "displayName"],
+		"harvester_label": "depicts",
+		"path": ["depicts"]
+		},
+	"refersTo": {
+		"values": "list",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": ["prefLabel", "displayName"],
+		"harvester_label": "refersTo",
+		"path": ["refersTo"]
+		},
+	"influencedBy": {
+		"values": "list",
+		"value_type": "string",
+		"object": ["Object"],
+		"resource_type": "object",
+		"api_label": ["prefLabel", "displayName"],
+		"harvester_label": "influencedBy",
+		"path": ["influencedBy"]
+		},
+	"qualityScore": {
+		"values": "single",
+		"value_type": "float",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "qualityScore",
+		"harvester_label": "qualityScore",
+		"path": ["_meta"]
+		},
+	"related": {
+		"values": "list",
+		"value_type": "dict",
+		"object": ["Object", "Specimen"],
+		"resource_type": "object",
+		"api_label": "related",
+		"harvester_label": "related",
+		"path": [],
+		"children": {
+			"associatedUrl": {"values": "single",
+				"value_type": "string",
+				"api_label": "contentUrl",
+				"harvester_label": "associatedUrl",
+				"path": []
+				},
+			"associatedLink": {"values": "single",
+				"value_type": "string",
+				"api_label": "title",
+				"harvester_label": "associatedLink",
+				"path": []
+				}
+			}
+		}
+	}

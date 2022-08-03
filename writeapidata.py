@@ -2,6 +2,7 @@
 
 import os
 from datetime import datetime
+import time
 import csv
 from collections import Counter
 import TePapaHarvester
@@ -23,28 +24,33 @@ class OutputCSV():
         self.writer = csv.writer(self.write_file, delimiter = ',')
         self.writer.writerow(self.heading_row)
 
-    def write_line(self, irn=None, data_dict=None, image_irn=None):
+    def write_line(self, irn=None, data_dict=None, image_irn=None, no_of_images=None):
         self.irn = irn
         self.data_dict = data_dict
         self.image_irn = image_irn
 
         value_list = []
+        
         value_list.append(self.irn)
-        value_list.append(self.data_dict["title"])
-        value_list.append(self.data_dict["title_length"])
 
-        if "number_of_images" in self.data_dict:
-            value_list.append(self.data_dict["number_of_images"])
+        if "identifier" in self.data_dict:
+            value_list.append(self.data_dict["identifier"])
+
+        if "title" in self.data_dict:
+            value_list.append(self.data_dict["title"])
+            value_list.append(len(self.data_dict["title"]))
         else:
-            value_list.append("")
+            value_list.append("", "")
+
+        value_list.append(no_of_images)
 
         value_list.append(self.image_irn)
 
-        images_data = self.data_dict["images"]
-        image_fields = ["image_w", "image_h","image_url", "image_rights"]
+        images_data = self.data_dict["media"]
+        image_fields = ["media_title", "media_type", "contentUrl", "thumbnailUrl", "rights_title", "media_width", "media_height"]
 
         for image in images_data:
-            if image["image_irn"] == self.image_irn:
+            if image["media_irn"] == self.image_irn:
                 for field in image_fields:
                     if field in image:
                         write_value = image[field]
@@ -57,103 +63,188 @@ class OutputCSV():
         else:
             value_list.append("")
 
-        if "observedDimension" in self.data_dict:
-            value_list.append(self.data_dict["observedDimension"])
+        if "dimensions" in self.data_dict:
+            value_list.append(", ".join(self.data_dict["dimensions"]))
         else:
             value_list.append("")
 
-        no_of_prods = 0
-        for k in self.data_dict.keys():
-            if "prod_" in k:
-                no_of_prods += 1
-
-        if "prod_0" in self.data_dict:
-            creator_titles = []
-            creator_roles = []
-            for n in range(0,no_of_prods):
-                field_prod = "prod_{}".format(n)
-                field_prod_creator = "prod_{}_creator".format(n)
-                field_prod_role = "prod_{}_role".format(n)
-                if field_prod_creator in self.data_dict[field_prod]:
-                    creator_titles.append(self.data_dict[field_prod][field_prod_creator])
-                else:
-                    creator_titles.append("")
-                if field_prod_role in self.data_dict[field_prod]:
-                    creator_roles.append(self.data_dict[field_prod][field_prod_role])
-                else:
-                    creator_roles.append("")
-            value_list.append(",".join(creator_titles))
-            value_list.append(",".join(creator_roles))
-            if "prod_0_date" in self.data_dict["prod_0"]:
-                value_list.append(self.data_dict["prod_0"]["prod_0_date"])
-            else:
-                value_list.append("")
-            if "prod_0_place" in self.data_dict["prod_0"]:
-                value_list.append(self.data_dict["prod_0"]["prod_0_place"])
-            else:
-                value_list.append("")
-        else:
-             value_list.append(["", "", "", ""])
+        if "production" in self.data_dict:
+            values = self.compile_production(self.data_dict["production"])
+            for value in values:
+                value_list.append(value)
         
         if "productionUsedTechnique" in self.data_dict:
-            value_list.append(",".join(self.data_dict["productionUsedTechnique"]))
+            value_list.append(", ".join(self.data_dict["productionUsedTechnique"]))
         else:
             value_list.append("")
+
         if "isMadeOfSummary" in self.data_dict:
             value_list.append(self.data_dict["isMadeOfSummary"])
         else:
             value_list.append("")
+
         if "isMadeOf" in self.data_dict:
-            value_list.append(",".join(self.data_dict["isMadeOf"]))
+            value_list.append(", ".join(self.data_dict["isMadeOf"]))
         else:
             value_list.append("")
+
+        if "isMadeOf" in self.data_dict:
+            mappings = ["canvas", "paper", "plaster", "cardboard", "ceramic", "wood", "clay"]
+            terms = []
+            for term in self.data_dict["isMadeOf"]:
+                for mapping in mappings:
+                    if mapping == term.lower() or mapping in term or mapping in term.lower():
+                        if mapping not in terms:
+                            terms.append(mapping)
+
+            if len(terms) > 0:
+                value_list.append(", ".join(terms))
+            else:
+                value_list.append("")
+
         if "isTypeOf" in self.data_dict:
-            value_list.append(",".join(self.data_dict["isTypeOf"]))
+            value_list.append(", ".join(self.data_dict["isTypeOf"]))
         else:
             value_list.append("")
+
         if "influencedBy" in self.data_dict:
-            value_list.append(",".join(self.data_dict["influencedBy"]))
+            value_list.append(", ".join(self.data_dict["influencedBy"]))
         else:
             value_list.append("")
+
         if "depicts" in self.data_dict:
-            value_list.append(",".join(self.data_dict["depicts"]))
+            value_list.append(", ".join(self.data_dict["depicts"]))
         else:
             value_list.append("")
+
         if "refersTo" in self.data_dict:
-            value_list.append(",".join(self.data_dict["refersTo"]))
+            value_list.append(", ".join(self.data_dict["refersTo"]))
         else:
             value_list.append("")
+
         if "creditLine" in self.data_dict:
             value_list.append(self.data_dict["creditLine"])
         else:
             value_list.append("")
 
+        if "qualityScore" in self.data_dict:
+            value_list.append(self.data_dict["qualityScore"])
+        else:
+            value_list.append("")
+
+        if "CO_url" in self.data_dict:
+            value_list.append(self.data_dict["CO_url"])
+            value_list.append("Te Papa Collections Online")
+        else:
+            value_list.append(["", ""])
+
         self.writer.writerow(value_list)
-#       print(value_list)
+
+    def compile_production(self, production_data):
+        creators = []
+        dates = []
+        places = []
+        lat_value = None
+        long_value = None
+        for prod in production_data:
+            if "producer_name" in prod:
+                name = prod["producer_name"]
+            else:
+                name = None
+            if "producer_role" in prod:
+                role = prod["producer_role"]
+                if name:
+                    if role == "follower of" or role == "after":
+                        creator = "{role} {name}".format(role=role, name=name)
+                    else:
+                        creator = "{name} ({role})".format(name=name, role=role)
+                else:
+                    creator = "Unknown {}".format(role)
+            else:
+                creator = name
+            
+            if creator is not None:
+                if creator not in creators:
+                    creators.append(creator)
+
+            if "production_date" in prod:
+                if prod["production_date"] not in dates:
+                    dates.append(prod["production_date"])
+
+            if "production_place" in prod:
+                if "production_place_id" in prod:
+                    lat_long = self.get_spatial(prod["production_place_id"])
+                    time.sleep(0.1)
+                    if lat_long:
+                        if lat_value == None:
+                            lat_value = lat_long[0]
+                        if long_value == None:
+                            long_value = lat_long[1]
+                if prod["production_place"] not in places:
+                    places.append(prod["production_place"])
+
+        if len(creators) > 0:
+            creator_values = ", ".join(creators)
+        else:
+            creator_values = ""
+
+        if len(dates) > 0:
+            date_values = ", ".join(dates)
+        else:
+            date_values = ""
+
+        if len(places) > 0:
+            places_values = ", ".join(places)
+        else:
+            places_values = ""
+
+        if lat_value and long_value:
+            prod_values = [creator_values, date_values, places_values, lat_value, long_value]
+        else:
+            prod_values = [creator_values, date_values, places_values, "", ""]
+
+        return prod_values
+
+    def get_spatial(self, irn):
+        resource_type = "place"
+        response = harvester.API.view_resource(resource_type=resource_type, irn=irn).resource
+        if "geoLocation" in response:
+            p_lat = None
+            p_long = None
+            if "lat" in response["geoLocation"]:
+                p_lat = response["geoLocation"]["lat"]
+            if "lon" in response["geoLocation"]:
+                p_long = response["geoLocation"]["lon"]
+            if p_lat and p_long:
+                return (p_lat, p_long)
+        else:
+            return False
 
 def write_data_to_csv(record_data_dict, collection=None):
 	# Complete structured CSV with all records and all images
     csv_filename = working_folder + current_time + "_" + collection + ".csv"
 
-    heading_row = ["irn", "title", "title_length", "number_of_images", "image_irn", "width", "height", "contentUrl", "rights", "description", "observedDimension", "creator", "role", "createdDate", "createdPlace", "productionUsedTechnique", "isMadeOfSummary", "isMadeOf", "isTypeOf", "influencedBy", "depicts", "refersTo", "creditLine"]
+    heading_row = ["irn", "identifier", "title", "title_length", "number_of_images", "media_irn", "media_title", "media_type", "contentUrl", "thumbnailUrl", "rights_title", "width", "height", "description", "observedDimension", "creator", "createdDate", "createdPlace", "lat", "long", "productionUsedTechnique", "isMadeOfSummary", "isMadeOf", "art=support", "isTypeOf", "influencedBy", "depicts", "refersTo", "creditLine", "qualityScore", "CO_url", "CO_url_text"]
 
     output_csv = OutputCSV(filename=csv_filename, heading_row=heading_row)
 
     all_irns = record_data_dict.keys()
     #print(all_irns)
 
+    # Need to mark a specific row as the first for that irn so we can avoid duplication
     for irn in all_irns:
         irn_dat = record_data_dict[irn]
-        no_of_images = irn_dat["number_of_images"]
 
-        attached_images = irn_dat["images"]
+        no_of_images = len(irn_dat["media"])
+        
+        attached_images = irn_dat["media"]
         for image in attached_images:
-            if "image_w" in image:
-                if image["image_w"] >= 2500 and image["image_h"] >= 2500:
-                    if "image_download" in image:
-                        if image["image_download"] == True:
-                            writable_image_irn = image["image_irn"]
-                            output_csv.write_line(irn=irn, data_dict=irn_dat, image_irn=writable_image_irn)
+            if "media_width" in image:
+                if image["media_width"] >= 2500 and image["media_height"] >= 2500:
+                    if "downloadable" in image:
+                        if image["downloadable"] == True:
+                            writable_image_irn = image["media_irn"]
+                            output_csv.write_line(irn=irn, data_dict=irn_dat, image_irn=writable_image_irn, no_of_images=no_of_images)
 
     output_csv.write_file.close()
 
@@ -255,19 +346,19 @@ def just_print_irns(record_data_dict, collection=None):
 
 q = "*"
 fields = None
-facets = None
 q_from = 0
 size = 500
+collection = "Philatelic"
 sort = [{"field": "id", "order": "asc"}]
 facets = [{"field": "production.spatial.title", "size": 3}]
-filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "Philatelic"}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
+filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
 
-harvester = TePapaHarvester.Harvester()
+harvester = TePapaHarvester.Harvester(quiet=False, sleep=0.2)
 harvester.set_params(q=q, fields=fields, filters=filters, facets=facets, q_from=q_from, size=size, sort=sort)
 harvester.count_results()
 record_data_dict = harvester.harvest_records()
 
-#write_data_to_csv(record_data_dict, collection=collection)
+write_data_to_csv(record_data_dict, collection=collection)
 #just_print_titles(record_data_dict, collection=collection, cutoff=100)
 #just_print_subjects(record_data_dict, collection=collection)
 #just_print_roles(record_data_dict, collection=collection)
