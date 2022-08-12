@@ -19,7 +19,7 @@ class Harvester():
         self.count = 0
         self.record_data_dict = {}
 
-        self.API = askCO.CoApi()
+        self.API = askCO.CoApi(quiet=self.quiet)
 
     # Establish the parameters for this operation so you can build queries
     def set_params(self, q=None, fields=None, filters=None, facets=None, q_from=0, size=0, sort=None):
@@ -61,6 +61,21 @@ class Harvester():
                     pass
 
             self.q_from += self.size
+            time.sleep(self.sleep)
+
+        return self.record_data_dict
+
+    def harvest_from_list(self, resource_type, irns):
+        for irn in irns:
+            record = self.API.view_resource(resource_type=resource_type, irn=irn).resource
+            object_type = record["type"]
+
+            new_record = ApiRecord(irn=irn, object_type=object_type, record=record)
+
+            new_data = new_record.add_data()
+
+            self.record_data_dict.update({irn:new_data})
+
             time.sleep(self.sleep)
 
         return self.record_data_dict
@@ -116,7 +131,7 @@ class ApiRecord():
     def single_field_harvest(self, record, field_model):
         field_label = field_model["api_label"]
 #        print(field_label)
-        harvester_label = field_model["harvester_label"]
+        harvester_label = field_model["default_harvester_label"]
         field_value = None
 
         if len(field_model["path"]) > 0:
@@ -137,7 +152,7 @@ class ApiRecord():
 
     def list_field_harvest(self, record, field_model):
         field_label = field_model["api_label"]
-        harvester_label = field_model["harvester_label"]
+        harvester_label = field_model["default_harvester_label"]
         field_value = []
 
         if isinstance(field_label, str):
@@ -172,7 +187,7 @@ class ApiRecord():
 
     def dict_field_harvest(self, record, field_model):
         field_label = field_model["api_label"]
-        harvester_label = field_model["harvester_label"]
+        harvester_label = field_model["default_harvester_label"]
 
         block_data = {harvester_label: []}
 

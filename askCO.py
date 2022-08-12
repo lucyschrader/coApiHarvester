@@ -25,6 +25,10 @@ class CoApi():
 		kwargs["quiet"] = self.quiet
 		request = Request(**kwargs)
 		response = json.loads(post(request.url, data=request.post_body, headers=headers).text)
+
+		if not self.quiet:
+			print("Requesting: {}".format(request.url))
+
 		return Results(response, request)
 
 	def view_resource(self, resource_type=None, irn=None):
@@ -34,7 +38,7 @@ class CoApi():
 		if irn:
 			resource_url = "https://data.tepapa.govt.nz/collection/{res}/{irn}".format(res=resource_type, irn=irn)
 
-		if not self.quiet:
+		if self.quiet == False:
 			print("Requesting: {}".format(resource_url))
 
 		response = json.loads(get(resource_url, headers=headers).text)
@@ -67,9 +71,6 @@ class Request():
 		# CO API requires post data to be json-encoded, not form-encoded
 		self.post_body = json.dumps(self.post_body)
 
-		if not quiet:
-			print("Requesting: {}".format(self.post_body["query"]))
-
 	def _singleValueFormatter(self, param_name, value):
 		return {param_name: value}
 
@@ -82,14 +83,14 @@ class Results():
 		self.request = request
 		self.result_count = 0
 		self.records = []
-		self.facets = None
+#		self.facets = None
 		self.errors = None
 		if "errorCode" in response:
 			self.errors = response
 		else:
 			self.result_count = response["_metadata"]["resultset"]["count"]
 			self.records = [result for result in response["results"]]
-			self.facets = response["facets"]
+			#self.facets = response["facets"]
 
 	def __repr__(self):
 		if self.errors is not None:

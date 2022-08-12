@@ -24,10 +24,11 @@ class OutputCSV():
         self.writer = csv.writer(self.write_file, delimiter = ',')
         self.writer.writerow(self.heading_row)
 
-    def write_line(self, irn=None, data_dict=None, image_irn=None, no_of_images=None):
+    def write_line(self, irn=None, data_dict=None, image_irn=None, no_of_images=None, first=False):
         self.irn = irn
         self.data_dict = data_dict
         self.image_irn = image_irn
+        self.first = first
 
         value_list = []
         
@@ -40,7 +41,8 @@ class OutputCSV():
             value_list.append(self.data_dict["title"])
             value_list.append(len(self.data_dict["title"]))
         else:
-            value_list.append("", "")
+            value_list.append("")
+            value_list.append("")
 
         value_list.append(no_of_images)
 
@@ -136,7 +138,8 @@ class OutputCSV():
             value_list.append(self.data_dict["CO_url"])
             value_list.append("Te Papa Collections Online")
         else:
-            value_list.append(["", ""])
+            value_list.append("")
+            value_list.append("")
 
         self.writer.writerow(value_list)
 
@@ -172,14 +175,15 @@ class OutputCSV():
                     dates.append(prod["production_date"])
 
             if "production_place" in prod:
-                if "production_place_id" in prod:
-                    lat_long = self.get_spatial(prod["production_place_id"])
-                    time.sleep(0.1)
-                    if lat_long:
-                        if lat_value == None:
-                            lat_value = lat_long[0]
-                        if long_value == None:
-                            long_value = lat_long[1]
+#                if self.first == True:
+#                    if "production_place_id" in prod:
+#                        lat_long = self.get_spatial(prod["production_place_id"])
+#                        time.sleep(0.1)
+#                        if lat_long:
+#                            if lat_value == None:
+#                                lat_value = lat_long[0]
+#                            if long_value == None:
+#                                long_value = lat_long[1]
                 if prod["production_place"] not in places:
                     places.append(prod["production_place"])
 
@@ -233,6 +237,7 @@ def write_data_to_csv(record_data_dict, collection=None):
 
     # Need to mark a specific row as the first for that irn so we can avoid duplication
     for irn in all_irns:
+        first = True
         irn_dat = record_data_dict[irn]
 
         no_of_images = len(irn_dat["media"])
@@ -244,7 +249,8 @@ def write_data_to_csv(record_data_dict, collection=None):
                     if "downloadable" in image:
                         if image["downloadable"] == True:
                             writable_image_irn = image["media_irn"]
-                            output_csv.write_line(irn=irn, data_dict=irn_dat, image_irn=writable_image_irn, no_of_images=no_of_images)
+                            output_csv.write_line(irn=irn, data_dict=irn_dat, image_irn=writable_image_irn, no_of_images=no_of_images, first=first)
+                            first = False
 
     output_csv.write_file.close()
 
@@ -344,22 +350,39 @@ def just_print_irns(record_data_dict, collection=None):
             f.write(irn + "\n")
     f.close()
 
-q = "*"
-fields = None
-q_from = 0
-size = 500
-collection = "Philatelic"
-sort = [{"field": "id", "order": "asc"}]
-facets = [{"field": "production.spatial.title", "size": 3}]
-filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
+def search_API():
+    q = "*"
+    fields = None
+    q_from = 0
+    size = 500
+    collection = "Photography"
+    sort = [{"field": "id", "order": "asc"}]
+    facets = [{"field": "production.spatial.title", "size": 3}]
+    filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
 
-harvester = TePapaHarvester.Harvester(quiet=False, sleep=0.2)
-harvester.set_params(q=q, fields=fields, filters=filters, facets=facets, q_from=q_from, size=size, sort=sort)
-harvester.count_results()
-record_data_dict = harvester.harvest_records()
+    harvester.set_params(q=q, fields=fields, filters=filters, facets=facets, q_from=q_from, size=size, sort=sort)
+    harvester.count_results()
+    record_data_dict = harvester.harvest_records()
 
-write_data_to_csv(record_data_dict, collection=collection)
-#just_print_titles(record_data_dict, collection=collection, cutoff=100)
-#just_print_subjects(record_data_dict, collection=collection)
-#just_print_roles(record_data_dict, collection=collection)
-#just_print_irns(record_data_dict, collection=collection)
+    write_data_to_csv(record_data_dict, collection=collection)
+
+def list_API():
+    collection = "list"
+    resource_type = "object"
+    irns = []
+
+    with open("irns_to_harvest.txt", "r", encoding="utf-8") as f:
+        lines = f.readlines()
+        for line in lines:
+            irns.append(line.strip())
+
+    record_data_dict = harvester.harvest_from_list(resource_type=resource_type, irns=irns)
+
+    write_data_to_csv(record_data_dict, collection=collection)
+
+google_harvest_fields = ["itemid", "subitemid", "orderid", "customtext:registrationid", "title/en", "description/en", "creator/en", "location:placename", "location:lat", "location:long", "dateCreated:start", "dateCreated:display", "rights", "format", "medium", "subject", "art=support", "art=depictedLocation.placename", "art=depictedPerson", "art=genre", "provenance", "priority", "filetype", "filespec", "relation:url", "relation:text"]
+
+harvester = TePapaHarvester.Harvester(quiet=True, sleep=0.2)
+
+list_API()
+#search_API()

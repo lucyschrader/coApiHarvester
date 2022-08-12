@@ -5,7 +5,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "all",
 		"api_label": "id",
-		"harvester_label": "id",
+		"default_harvester_label": "id",
+		"google_harvester_label": null,
 		"path": []
 		},
 	"type":
@@ -14,7 +15,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "type",
-		"harvester_label": "type",
+		"default_harvester_label": "type",
+		"google_harvester_label": null,
 		"path": []
 		},
 	"additionalType":
@@ -23,7 +25,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "additionalType",
-		"harvester_label": "additionalType",
+		"default_harvester_label": "additionalType",
+		"google_harvester_label": null,
 		"path": []
 		},
 	"collection":
@@ -32,7 +35,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "collection",
-		"harvester_label": "collection",
+		"default_harvester_label": "collection",
+		"google_harvester_label": null,
 		"path": []
 		},
 	"identifier":
@@ -41,7 +45,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "identifier",
-		"harvester_label": "identifier",
+		"default_harvester_label": "identifier",
+		"google_harvester_label": "customtext:registrationid",
 		"path": []
 		},
 	"previousIdentifier":
@@ -50,7 +55,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "title",
-		"harvester_label": "previousIdentifier",
+		"default_harvester_label": "previousIdentifier",
+		"google_harvester_label": null,
 		"path": ["previousIdentifier"]
 		},
 	"title":
@@ -59,7 +65,8 @@
 		"object": ["Object","Specimen"],
 		"resource_type": "object",
 		"api_label": "title",
-		"harvester_label": "title",
+		"default_harvester_label": "title",
+		"google_harvester_label": "title",
 		"path": []
 		},
 	"pid":
@@ -68,7 +75,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "pid",
-		"harvester_label": "pid",
+		"default_harvester_label": "pid",
+		"google_harvester_label": "itemid",
 		"path": []
 		},
 	"description":
@@ -77,7 +85,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "description",
-		"harvester_label": "description",
+		"default_harvester_label": "description",
+		"google_harvester_label": "description",
 		"path": []
 		},
 	"dimensions":
@@ -86,7 +95,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "title",
-		"harvester_label": "dimensions",
+		"default_harvester_label": "dimensions",
+		"google_harvester_label": "format",
 		"path": ["observedDimension"]
 		},
 	"media":
@@ -95,67 +105,80 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "hasRepresentation",
-		"harvester_label": "media",
+		"default_harvester_label": "media",
+		"google_harvester_label": null,
 		"path": [],
 		"children": {
 			"media_irn": {"values": "single",
 				"value_type": "int",
 				"api_label": "id",
-				"harvester_label": "media_irn",
+				"default_harvester_label": "media_irn",
+				"google_harvester_label": "media_irn",
 				"path": []
 				},
 			"media_title": {"values": "single",
 				"value_type": "string",
 				"api_label": "title",
-				"harvester_label": "media_title",
+				"default_harvester_label": "media_title",
+				"google_harvester_label": null,
 				"path": []
 				},
 			"media_type": {"values": "single",
 				"value_type": "string",
+				"authorities": true,
 				"api_label": "type",
-				"harvester_label": "media_type",
+				"default_harvester_label": "media_type",
+				"google_harvester_label": "filetype",
+				"google_auth_mapping": {"imageObject": "image"},
 				"path": []
 				},
 			"contentUrl": {"values": "single",
 				"value_type": "string",
 				"api_label": "contentUrl",
-				"harvester_label": "contentUrl",
+				"default_harvester_label": "contentUrl",
+				"google_harvester_label": null,
 				"path": []
 				},
 			"thumbnailUrl": {"values": "single",
 				"value_type": "string",
 				"api_label": "thumbnailUrl",
-				"harvester_label": "thumbnailUrl",
+				"default_harvester_label": "thumbnailUrl",
+				"google_harvester_label": null,
 				"path": []
 				},
 			"rights_title": {"values": "single",
 				"value_type": "string",
 				"api_label": "title",
-				"harvester_label": "rights_title",
+				"default_harvester_label": "rights_title",
+				"google_harvester_label": "rights",
 				"path": ["rights"]
 				},
 			"rights_url": {"values": "single",
 				"value_type": "string",
 				"api_label": "iri",
-				"harvester_label": "rights_url",
+				"default_harvester_label": "rights_url",
+				"google_harvester_label": "rights",
 				"path": ["rights"]
 				},
 			"downloadable": {"values": "single",
 				"value_type": "bool",
 				"api_label": "allowsDownload",
-				"harvester_label": "downloadable",
+				"default_harvester_label": "downloadable",
+				"google_harvester_label": null,
 				"path": ["rights"]
 				},
 			"media_width": {"values": "single",
 				"value_type": "int",
 				"api_label": "width",
-				"harvester_label": "media_width",
+				"default_harvester_label": "media_width",
+				"google_harvester_label": null,
 				"path": []
 				},
 			"media_height": {"values": "single",
 				"value_type": "int",
 				"api_label": "height",
-				"harvester_label": "media_height",
+				"default_harvester_label": "media_height",
+				"google_harvester_label": null,
 				"path": []
 				}
 			}
@@ -166,43 +189,50 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": "production",
-		"harvester_label": "production",
+		"default_harvester_label": "production",
+		"google_harvester_label": null,
 		"path": [],
 		"children": {
 			"producer_name": {"values": "single",
 				"value_type": "string",
 				"api_label": "title",
-				"harvester_label": "producer_name",
+				"default_harvester_label": "producer_name",
+				"google_harvester_label": "creator",
 				"path": ["contributor"]
 				},
 			"producer_role": {"values": "single",
 				"value_type": "string",
 				"api_label": "role",
-				"harvester_label": "producer_role",
+				"default_harvester_label": "producer_role",
+				"google_harvester_label": "creator",
 				"path": []
 				},
 			"producer_id": {"values": "single",
 				"value_type": "int",
 				"api_label": "id",
-				"harvester_label": "producer_id",
+				"default_harvester_label": "producer_id",
+				"google_harvester_label": null,
 				"path": ["contributor"]
 				},
 			"production_date": {"values": "single",
 				"value_type": "string",
 				"api_label": "verbatimCreatedDate",
-				"harvester_label": "production_date",
+				"default_harvester_label": "production_date",
+				"google_harvester_label": "date:display",
 				"path": []
 				},
 			"production_place": {"values": "single",
 				"value_type": "string",
 				"api_label": "prefLabel",
-				"harvester_label": "production_place",
+				"default_harvester_label": "production_place",
+				"google_harvester_label": "location:placename",
 				"path": ["spatial"]
 				},
 			"production_place_id": {"values": "single",
 				"value_type": "int",
 				"api_label": "id",
-				"harvester_label": "production_place_id",
+				"default_harvester_label": "production_place_id",
+				"google_harvester_label": null,
 				"path": ["spatial"]
 				}
 			}
@@ -213,7 +243,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": "prefLabel",
-		"harvester_label": "productionUsedTechnique",
+		"default_harvester_label": "productionUsedTechnique",
+		"google_harvester_label": null,
 		"path": ["productionUsedTechnique"]
 		},
 	"isTypeOf": {
@@ -222,7 +253,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": "prefLabel",
-		"harvester_label": "isTypeOf",
+		"default_harvester_label": "isTypeOf",
+		"google_harvester_label": null,
 		"path": ["isTypeOf"]
 		},
 	"isMadeOf": {
@@ -231,7 +263,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": "prefLabel",
-		"harvester_label": "isMadeOf",
+		"default_harvester_label": "isMadeOf",
+		"google_harvester_label": null,
 		"path": ["isMadeOf"]
 		},
 	"isMadeOfSummary": {
@@ -240,7 +273,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": "isMadeOfSummary",
-		"harvester_label": "isMadeOfSummary",
+		"default_harvester_label": "isMadeOfSummary",
+		"google_harvester_label": "medium",
 		"path": []
 		},
 	"creditLine": {
@@ -249,7 +283,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": "creditLine",
-		"harvester_label": "creditLine",
+		"default_harvester_label": "creditLine",
+		"google_harvester_label": "provenance",
 		"path": []
 		},
 	"depicts": {
@@ -258,7 +293,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": ["prefLabel", "displayName"],
-		"harvester_label": "depicts",
+		"default_harvester_label": "depicts",
+		"google_harvester_label": "subject",
 		"path": ["depicts"]
 		},
 	"refersTo": {
@@ -267,7 +303,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": ["prefLabel", "displayName"],
-		"harvester_label": "refersTo",
+		"default_harvester_label": "refersTo",
+		"google_harvester_label": null,
 		"path": ["refersTo"]
 		},
 	"influencedBy": {
@@ -276,7 +313,8 @@
 		"object": ["Object"],
 		"resource_type": "object",
 		"api_label": ["prefLabel", "displayName"],
-		"harvester_label": "influencedBy",
+		"default_harvester_label": "influencedBy",
+		"google_harvester_label": "subject",
 		"path": ["influencedBy"]
 		},
 	"qualityScore": {
@@ -285,7 +323,8 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "qualityScore",
-		"harvester_label": "qualityScore",
+		"default_harvester_label": "qualityScore",
+		"google_harvester_label": null,
 		"path": ["_meta"]
 		},
 	"related": {
@@ -294,21 +333,84 @@
 		"object": ["Object", "Specimen"],
 		"resource_type": "object",
 		"api_label": "related",
-		"harvester_label": "related",
+		"default_harvester_label": "related",
+		"google_harvester_label": null,
 		"path": [],
 		"children": {
 			"associatedUrl": {"values": "single",
 				"value_type": "string",
 				"api_label": "contentUrl",
-				"harvester_label": "associatedUrl",
+				"default_harvester_label": "associatedUrl",
+				"google_harvester_label": null,
 				"path": []
 				},
 			"associatedLink": {"values": "single",
 				"value_type": "string",
 				"api_label": "title",
-				"harvester_label": "associatedLink",
+				"default_harvester_label": "associatedLink",
+				"google_harvester_label": null,
 				"path": []
 				}
 			}
+		},
+	"specimenType": {
+		"values": "single",
+		"value_type": "string",
+		"object": ["Specimen"],
+		"resource_type": "object",
+		"api_label": "type",
+		"default_harvester_label": "specimenType",
+		"google_harvester_label": "customtext:specimenType",
+		"path": []
+		},
+	"dateCollected": {
+		"values": "single",
+		"value_type": "string",
+		"object": ["Specimen"],
+		"resource_type": "object",
+		"api_label": "verbatimEventDate",
+		"default_harvester_label": "dateCollected",
+		"google_harvester_label": "customtext:dateCollected",
+		"path": ["evidenceFor", "atEvent"]
+		},
+	"collectedBy": {
+		"values": "list",
+		"value_type": "string",
+		"object": ["Specimen"],
+		"resource_type": "object",
+		"api_label": "title",
+		"default_harvester_label": "collectedBy",
+		"google_harvester_label": "customtext:creator.collector",
+		"path": ["evidenceFor", "atEvent", "recordedBy"]
+		},
+	"dateIdentified": {
+		"values": "single",
+		"value_type": "string",
+		"object": ["Specimen"],
+		"resource_type": "object",
+		"api_label": "dateIdentified",
+		"default_harvester_label": "dateIdentified",
+		"google_harvester_label": "customtext:dateIdentified",
+		"path": ["identification"]
+		},
+	"identifiedBy": {
+		"values": "single",
+		"value_type": "string",
+		"object": ["Specimen"],
+		"resource_type": "object",
+		"api_label": "title",
+		"default_harvester_label": "identifiedBy",
+		"google_harvester_label": "customtext:creator.identifier",
+		"path": ["identification", "identifiedBy"]
+		},
+	"locationCollected": {
+		"values": "single",
+		"value_type": "string",
+		"object": ["Specimen"],
+		"resource_type": "object",
+		"api_label": "title",
+		"default_harvester_label": "locationCollected",
+		"google_harvester_label": "customtext:locationCollected",
+		"path": []
 		}
 	}
