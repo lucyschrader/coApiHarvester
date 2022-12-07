@@ -6,6 +6,7 @@ import time
 import csv
 import re
 from math import floor
+import random
 from collections import Counter
 import TePapaHarvester
 
@@ -35,15 +36,15 @@ class OutputCSV():
 
 		value_list = []
 
-		if self.count == 0:
+		if self.count == 0 or sequence == True:
 
 			# itemid
 			value_list.append(self.data_dict["pid"])
 
-			# subitemid - not applicable if count == 1
+			# subitemid - not applicable if count == 0
 			value_list.append("")
 			
-			# orderid - not applicable if count == 1
+			# orderid - not applicable if count == 0
 			value_list.append("")
 
 			#customtext:registrationid
@@ -73,23 +74,33 @@ class OutputCSV():
 				values = self.compile_production(self.data_dict["production"])
 				for value in values:
 					value_list.append(value)
+			else:
+				value_list.append("")
+				value_list.append("")
+				value_list.append("")
+				value_list.append("")
+				value_list.append("")
+				value_list.append("")
 
 			# rights - not applicable if sequence == True
 			if sequence == False:
-				images_data = self.data_dict["media"]
-				rights = None
+				if "media" in self.data_dict:
+					images_data = self.data_dict["media"]
+					rights = None
 
-				for image in images_data:
-					if image["media_irn"] == self.media_irn:
-						if "rights_title" in image:
-							rights_statement = image["rights_title"]
-							if "rights_irn" in image:
-								rights_irn = image["rights_irn"]
-								rights = "<a href=\"{irn}\">{state}</a>".format(irn=rights_irn, state=rights_statement)
-							else:
-								rights = rights_statement
-				if rights:
-					value_list.append(rights)
+					for image in images_data:
+						if image["media_irn"] == self.media_irn:
+							if "rights_title" in image:
+								rights_statement = image["rights_title"]
+								if "rights_irn" in image:
+									rights_irn = image["rights_irn"]
+									rights = "<a href=\"{irn}\">{state}</a>".format(irn=rights_irn, state=rights_statement)
+								else:
+									rights = rights_statement
+					if rights:
+						value_list.append(rights)
+					else:
+						value_list.append("")
 				else:
 					value_list.append("")
 			else:
@@ -97,7 +108,23 @@ class OutputCSV():
 
 			# format
 			if "dimensions" in self.data_dict:
-				value_list.append(", ".join(self.data_dict["dimensions"]))
+				measures_list = []
+				for measure in self.data_dict["dimensions"]:
+					if "mm" not in measure:
+						dims = measure.split(", ")
+						new_dims = []
+						for inc in dims:
+							try:
+								mms = int(floor(float(inc) * 25))
+								s_mms = "{}mm".format(mms)
+								new_dims.append(s_mms)
+							except:
+								pass
+						if len(new_dims) == 2:
+							measure = ", ".join(new_dims)
+					measures_list.append(measure)
+
+				value_list.append(", ".join(measures_list))
 			else:
 				value_list.append("")
 
@@ -108,8 +135,23 @@ class OutputCSV():
 				value_list.append("")
 
 			# subject
+			subjects = []
 			if "depicts" in self.data_dict:
-				value_list.append(self.data_dict["depicts"])
+				for term in self.data_dict["depicts"]:
+					if isinstance(term, tuple):
+						subject = term[0]
+					else:
+						subject = term
+					subjects.append(subject)
+			if "influencedBy" in self.data_dict:
+				for term in self.data_dict["influencedBy"]:
+					if isinstance(term, tuple):
+						subject = term[0]
+					else:
+						subject = term
+					subjects.append(subject)
+			if len(subjects) > 0:
+				value_list.append(", ".join(subjects))
 			else:
 				value_list.append("")
 
@@ -127,11 +169,106 @@ class OutputCSV():
 					value_list.append(", ".join(terms))
 				else:
 					value_list.append("")
+			else:
+				value_list.append("")
 
-			# Gotta redo the harvest model so we can separate out depicts etc by type
-			value_list.append("")
-			value_list.append("")
-			value_list.append("")
+			# art=depictedLocation.placename
+			if "depicts" in self.data_dict:
+				locations = []
+				for term in self.data_dict["depicts"]:
+					if isinstance(term, tuple):
+						value = term[0]
+						value_type = term[1]
+						if value_type == "Place":
+							locations.append(value)
+				if len(locations) > 0:
+					value_list.append(", ".join(locations))
+				else:
+					value_list.append("")
+			else:
+				value_list.append("")
+
+			# art=depictedPerson
+			if "depicts" in self.data_dict:
+				people = []
+				for term in self.data_dict["depicts"]:
+					if isinstance(term, tuple):
+						value = term[0]
+						value_type = term[1]
+						if value_type == "Person":
+							people.append(value)
+				if len(people) > 0:
+					value_list.append(", ".join(people))
+				else:
+					value_list.append("")
+			else:
+				value_list.append("")
+
+			# art=genre
+			if "depicts" in self.data_dict:
+				genres = []
+				genre_mappings = ["landscape", "portrait", "still life"]
+				for term in self.data_dict["depicts"]:
+					if isinstance(term, tuple):
+						genre = term[0]
+					else:
+						genre = term
+
+					for mapping in genre_mappings:
+						if mapping == genre.lower() or mapping in genre or mapping in genre.lower():
+							if mapping not in genres:
+								genres.append(mapping)
+
+				if len(genres) > 0:
+					value_list.append(", ".join(genres))
+				else:
+					value_list.append("")
+			else:
+				value_list.append("")
+
+			# customtext:specimenType
+			if "specimenType" in self.data_dict:
+				value_list.append(self.data_dict["specimenType"])
+			else:
+				value_list.append("")
+
+			# customtext:dateCollected
+			if "dateCollected" in self.data_dict:
+				value_list.append(self.data_dict["dateCollected"])
+			else:
+				value_list.append("")
+
+			# customtext:collectedBy
+			collected_by = []
+			if "collectors" in self.data_dict:
+				for coll in self.data_dict["collectors"]:
+					if "collectedBy" in coll:
+						collected_by.append(coll["collectedBy"])
+			if len(collected_by) > 0:
+				colls = ", ".join(collected_by)
+				value_list.append(colls)
+			else:
+				value_list.append("")
+
+			# customtext:locationCollected
+			loc_value = None
+			loc_fields = ["locationCollected", "preciseLocalityCollected", "stateProvinceCollected", "countryCollected"]
+			for loc in loc_fields:
+				if loc in self.data_dict:
+					loc_value = self.data_dict[loc]
+					break
+			value_list.append(loc_value)
+
+			# identification
+			if "identification" in self.data_dict:
+				values = self.compile_identification(self.data_dict["identification"])
+				for value in values:
+					value_list.append(value)
+			else:
+				value_list.append("")
+				value_list.append("")
+				value_list.append("")
+				value_list.append("")
 
 			# provenance
 			if "creditLine" in self.data_dict:
@@ -147,24 +284,39 @@ class OutputCSV():
 				# Get the percentage then invert it to prioritise higher quality records
 				score_percentage = score / upper * 100
 				score_percentage = 100 - score_percentage
-				print("Score percentage: {}".format(score_percentage))
+#				print("Score percentage: {}".format(score_percentage))
 
 				priority = floor(score_percentage * 3)
-				print("Priority: {}".format(priority))
+				modifier = random.randint(-5, 5)
+				priority = priority + modifier
+#				print("Priority: {}".format(priority))
+
+				if priority <= 0:
+					priority = random.randint(1, 100)
 
 				value_list.append(priority)
 			else:
 				value_list.append("")
 
 			# filetype
-			if sequence == "False":
+			if sequence == False:
 				value_list.append("image")
 			else:
 				value_list.append("sequence")
 
 			# filespec
-			if sequence == "False":
-				filespec = "TePapa_{irn}_{media_irn}.jpg".format(irn=self.irn, media_irn=self.media_irn)
+			if sequence == False:
+				if "title" in self.data_dict:
+					title = self.data_dict["title"]
+					if len(title) > 100 or len(title) < 5:
+						title = self.process_title(title)
+				else:
+					title = ""
+
+				filename = "Te_Papa_{irn}_{media_irn}_{title}".format(irn=irn, media_irn=media_irn, title=title)
+
+				filespec = self.clean_filename(filename)
+
 				value_list.append(filespec)
 			else:
 				value_list.append("")
@@ -172,14 +324,12 @@ class OutputCSV():
 			# relation:url and relation:text
 			value_list.append("https://collections.tepapa.govt.nz/object/{}".format(str(self.irn)))
 			value_list.append("Te Papa Collections Online")
-		
 
 		else:
 			# itemid
 			value_list.append(self.data_dict["pid"])
 
 			#subitemid
-			
 			subitemid = self.data_dict["pid"] + "." + str(self.media_irn)
 			value_list.append(subitemid)
 
@@ -252,6 +402,24 @@ class OutputCSV():
 			# art=genre
 			value_list.append("")
 
+			# customtext:specimenType
+			value_list.append("")
+
+			# customtext:dateCollected
+			value_list.append("")
+
+			# customtext:collectedBy
+			value_list.append("")
+
+			# customtext:locationCollected
+			value_list.append("")
+
+			# identification
+			value_list.append("")
+			value_list.append("")
+			value_list.append("")
+			value_list.append("")
+
 			# provenance
 			value_list.append("")
 
@@ -262,7 +430,17 @@ class OutputCSV():
 			value_list.append("image")
 
 			# filespec
-			filespec = "TePapa_{irn}_{media_irn}.jpg".format(irn=self.irn, media_irn=self.media_irn)
+			if "title" in self.data_dict:
+				title = self.data_dict["title"]
+				if len(title) > 100 or len(title) < 5:
+					title = self.process_title(title)
+			else:
+				title = ""
+
+			filename = "Te_Papa_{irn}_{media_irn}_{title}".format(irn=irn, media_irn=media_irn, title=title)
+
+			filespec = self.clean_filename(filename)
+
 			value_list.append(filespec)
 
 			# relation:url
@@ -275,7 +453,7 @@ class OutputCSV():
 
 	def process_title(self, title):
 		if len(title) < 5:
-			title = "{title} ({add})".format(title=title, add="Ummm")
+			title = "{title} ({add})".format(title=title, add="...")
 		elif len(title) > 100:
 			title = "{}...".format(title[0:96])
 		return title
@@ -284,6 +462,7 @@ class OutputCSV():
 		clean = re.compile("<.*?>")
 		return re.sub(clean, "", description)
 
+	# dateCreated:start needs more processing - has to be YYYY, YYYY-MM or YYYY-MM-DD
 	def compile_production(self, production_data):
 		creators = []
 		dates = []
@@ -316,15 +495,14 @@ class OutputCSV():
 					dates.append(prod["production_date"])
 
 			if "production_place" in prod:
-				if self.count == 1:
-					if "production_place_id" in prod:
-						lat_long = self.get_spatial(prod["production_place_id"])
-						time.sleep(0.1)
-						if lat_long:
-							if lat_value == None:
-								lat_value = lat_long[0]
-							if long_value == None:
-								long_value = lat_long[1]
+				if "production_place_id" in prod:
+					lat_long = self.get_spatial(prod["production_place_id"])
+					time.sleep(0.1)
+					if lat_long:
+						if lat_value == None:
+							lat_value = lat_long[0]
+						if long_value == None:
+							long_value = lat_long[1]
 				if prod["production_place"] not in places:
 					places.append(prod["production_place"])
 
@@ -365,11 +543,76 @@ class OutputCSV():
 		else:
 			return False
 
-def write_data_to_csv(record_data_dict, collection=None):
+	def compile_identification(self, identification_data):
+		date_identified = []
+		identified_by = []
+		qualified_name = []
+		vernacular_name = []
+		for ident in identification_data:
+			if "dateIdentified" in ident:
+				date = ident["dateIdentified"]
+				if date not in date_identified:
+					date_identified.append(date)
+
+			if "identifiedBy" in ident:
+				identifier = ident["identifiedBy"]
+				if identifier not in identified_by:
+					identified_by.append(identifier)
+
+			if "qualifiedName" in ident:
+				name = ident["qualifiedName"]
+				if name not in qualified_name:
+					qualified_name.append(name)
+
+			if "vernacularName" in ident:
+				for name in ident["vernacularName"]:
+					if name not in vernacular_name:
+						vernacular_name.append(name)
+
+		if len(date_identified) > 0:
+			date_values = ", ".join(date_identified)
+		else:
+			date_values = ""
+
+		if len(identified_by) > 0:
+			id_values = ", ".join(identified_by)
+		else:
+			id_values = ""
+
+		if len(qualified_name) > 0:
+			qual_values = ", ".join(qualified_name)
+		else:
+			qual_values = ""
+
+		if len(vernacular_name) > 0:
+			vern_values = ", ".join(vernacular_name)
+		else:
+			vern_values = ""
+
+		identification_values = [date_values, id_values, qual_values, vern_values]
+
+		return identification_values
+
+	def process_description(self, description):
+		clean = re.compile("<.*?>")
+		return re.sub(clean, "", description)
+
+	def clean_filename(self, filename):
+		filename = filename.replace(" ", "_")
+		filename = filename.replace("?", "")
+		filename = filename.replace("\"", "")
+		filename = filename.replace(":", "")
+		filename = filename.replace(";", "")
+		filename = filename.replace(".", "")
+		filename = filename.replace("#", "")
+
+		return "{}.jpg".format(filename)
+
+def write_data_to_csv(record_data_dict, collection=None, media_irns=None, harvest_all_media=False):
 	# Complete structured CSV with all records and all images
 	csv_filename = working_folder + current_time + "_" + collection + ".csv"
 
-	heading_row = ["itemid", "subitemid", "orderid", "customtext:registrationid", "title/en", "description/en", "creator/en", "location:placename", "location:lat", "location:long", "dateCreated:start", "dateCreated:display", "rights", "format", "medium", "subject", "art=support", "art=depictedLocation.placename", "art=depictedPerson", "art=genre", "provenance", "priority", "filetype", "filespec", "relation:url", "relation:text"]
+	heading_row = ["itemid", "subitemid", "orderid", "customtext:registrationid", "title/en", "description/en", "creator/en", "location:placename", "location:lat", "location:long", "dateCreated:start", "dateCreated:display", "rights", "format", "medium", "subject", "art=support", "art=depictedLocation:placename", "art=depictedPerson", "art=genre", "customtext:specimenType", "customtext:dateCollected", "customtext:creator.collector", "customtext:locationCollected", "customtext:dateIdentified", "customtext:creator.identifier", "customtext:qualifiedName", "customtext:commonName", "provenance", "priority", "filetype", "filespec", "relation:url", "relation:text"]
 
 	quality_score_range = qual_range(record_data_dict)
 
@@ -378,31 +621,40 @@ def write_data_to_csv(record_data_dict, collection=None):
 	all_irns = record_data_dict.keys()
 	#print(all_irns)
 
-	# Need to mark a specific row as the first for that irn so we can avoid duplication
 	for irn in all_irns:
-		sequence = False
 		writable_image_irns = []
 		irn_dat = record_data_dict[irn]
 		
-		attached_images = irn_dat["media"]
+		if "media" in irn_dat:
+			attached_images = irn_dat["media"]
 
-		for image in attached_images:
-			if "media_width" in image:
-				if image["media_width"] >= 2500 and image["media_height"] >= 2500:
-					if "downloadable" in image:
-						if image["downloadable"] == True:
-							writable_image_irns.append(image["media_irn"])
-		
-		print(writable_image_irns)
-		if len(writable_image_irns) > 1:
-			sequence = True
+			for image in attached_images:
+				if harvest_all_media == True:
+					if "media_width" in image:
+						if image["media_width"] >= 2500 and image["media_height"] >= 2500:
+							if "downloadable" in image:
+								if image["downloadable"] == True:
+									writable_image_irns.append(image["media_irn"])
+				else:
+					if image["media_irn"] in media_irns:
+						writable_image_irns.append(image["media_irn"])
 
-		count = 0
-		for media_irn in writable_image_irns:
-			if count > 0:
-				sequence
-			output_csv.write_line(irn=irn, data_dict=irn_dat, media_irn=media_irn, count=count, sequence=sequence)
-			count += 1
+			if len(writable_image_irns) > 1:
+				sequence = True
+				output_csv.write_line(irn=irn, data_dict=irn_dat, sequence=True)
+			else:
+				sequence = False
+
+			if sequence == True:
+				count = 1
+			else:
+				count = 0
+			for media_irn in writable_image_irns:
+				output_csv.write_line(irn=irn, data_dict=irn_dat, media_irn=media_irn, count=count, sequence=False)
+				count += 1
+	
+		else:
+			output_csv.write_line(irn=irn, data_dict=irn_dat, count=0, sequence=False)
 
 	output_csv.write_file.close()
 
@@ -411,30 +663,47 @@ def search_API():
 	fields = None
 	q_from = 0
 	size = 500
-	collection = "Photography"
+	collection = "Birds"
 	sort = [{"field": "id", "order": "asc"}]
-	facets = [{"field": "production.spatial.title", "size": 3}]
-	filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
+#	facets = [{"field": "production.spatial.title", "size": 3}]
+	facets = [{"field": "evidenceFor.atEvent.atLocation.country", "size": 3}]
+#	filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
+	filters = [{"field": "hasRepresentation.rights.allowsDownload","keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Specimen"}]
 
-	harvester.set_params(q=q, fields=fields, filters=filters, facets=facets, q_from=q_from, size=size, sort=sort)
+	harvester.set_params(q=q, fields=fields, filters=filters, facets=None, q_from=q_from, size=size, sort=sort)
 	harvester.count_results()
 	record_data_dict = harvester.harvest_records()
 
-	write_data_to_csv(record_data_dict, collection=collection)
+	write_data_to_csv(record_data_dict, collection=collection, harvest_all_media=True)
 
-def list_API():
+def list_API(source=None):
 	collection = "list"
 	resource_type = "object"
-	irns = []
+	harvest_all_media = False
 
-	with open("irns_to_harvest.txt", "r", encoding="utf-8") as f:
-		lines = f.readlines()
-		for line in lines:
-			irns.append(line.strip())
+	irns = []
+	media_irns = []
+
+	if source.endswith(".csv"):
+		with open(source, newline="", encoding="utf-8") as f:
+			reader = csv.DictReader(f, delimiter=",")
+			for row in reader:
+				if "record_irn" in row:
+					if row["record_irn"] not in irns:
+						irns.append(int(row["record_irn"].strip()))
+				if "media_irn" in row:
+					media_irns.append(int(row["media_irn"].strip()))
+
+	elif source.endswith(".txt"):
+		with open(source, 'r', encoding="utf-8") as f:
+			lines = f.readlines()
+			for line in lines:
+				irns.append(int(line.strip()))
+		harvest_all_media = True
 
 	record_data_dict = harvester.harvest_from_list(resource_type=resource_type, irns=irns)
 
-	write_data_to_csv(record_data_dict, collection=collection)
+	write_data_to_csv(record_data_dict, collection=collection, media_irns=media_irns, harvest_all_media=harvest_all_media)
 
 def qual_range(record_data_dict):
 	lowest = 0
@@ -446,15 +715,15 @@ def qual_range(record_data_dict):
 	
 	sorted_records = sorted(record_scores, reverse=False)
 	lowest = sorted_records[0]
-	print("Lowest: {}".format(str(lowest)))
+#	print("Lowest: {}".format(str(lowest)))
 
 	sorted_records = sorted(record_scores, reverse=True)
 	highest = sorted_records[0]
-	print("Highest: {}".format(str(highest)))
+#	print("Highest: {}".format(str(highest)))
 
 	return (lowest, highest)
 
-harvester = TePapaHarvester.Harvester(quiet=True, sleep=0.2)
+harvester = TePapaHarvester.Harvester(quiet=True, sleep=0.1)
 
-list_API()
+list_API(source="20220831-reharvestuploads.txt")
 #search_API()

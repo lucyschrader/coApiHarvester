@@ -11,7 +11,7 @@ class CoApi():
 
 	# Te Papa Collections Online API
 
-	def __init__(self, quiet=True):
+	def __init__(self, quiet=False):
 		# Create a new API object with a flag for verbosity.
 		self.quiet = quiet
 
@@ -41,8 +41,21 @@ class CoApi():
 		if self.quiet == False:
 			print("Requesting: {}".format(resource_url))
 
-		response = json.loads(get(resource_url, headers=headers).text)
-		return Resource(response, resource_url)
+		response = None
+		for attempt in range(5):
+			if response == None:
+				try:
+					req = get(resource_url, headers=headers, timeout=5)
+					response = json.loads(req.text)
+				except requests.exceptions.Timeout:
+					print("{} timed out!".format(resource_url))
+					time.sleep(1)
+				except requests.exceptions.ConnectionError:
+					print("Diconnected trying to get {}".format(resource_url))
+			else:
+				return Resource(response, resource_url)
+
+		return None
 
 class Request():
 

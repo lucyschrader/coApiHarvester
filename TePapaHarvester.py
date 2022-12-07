@@ -13,7 +13,7 @@ class Harvester():
 
     # Harvest from the Collections Online API
 
-    def __init__(self, quiet=True, sleep=1):
+    def __init__(self, quiet=False, sleep=1):
         self.quiet = quiet
         self.sleep = sleep
         self.count = 0
@@ -33,10 +33,11 @@ class Harvester():
 
     def count_results(self):
         # Find out how many results there are and how many pages to query
-        api_call = self.API.search(q=self.q, fields=self.fields, filters=self.filters, facets=self.facets, q_from=self.q_from, size=1, sort=self.sort)
+        # Removed facets=self.facets parameter for now
+        api_call = self.API.search(q=self.q, fields=self.fields, filters=self.filters, q_from=self.q_from, size=1, sort=self.sort)
 
         self.count = api_call.result_count
-        print(self.count)
+        print("Record count: {}".format(self.count))
         
         return self.count
 
@@ -45,14 +46,17 @@ class Harvester():
 
         # Query each page to allow harvest
         for i in range(0, page_count):
-            page_response = self.API.search(q=self.q, fields=self.fields, filters=self.filters, facets=self.facets, q_from=self.q_from, size=self.size, sort=self.sort)
+            # Removed facets=self.facets parameter for now
+            page_response = self.API.search(q=self.q, fields=self.fields, filters=self.filters, q_from=self.q_from, size=self.size, sort=self.sort)
             for record in page_response.records:
                 if "id" in record:
                     irn = str(record["id"])
 
-                    object_type = record["type"]
+                    resource_type = None
+                    if record["type"] == "Object" or record["type"] == "Specimen":
+                        resource_type = "object"
 
-                    new_record = ApiRecord(irn=irn, object_type=object_type, record=record)
+                    new_record = ApiRecord(irn=irn, resource_type=resource_type, record=record)
 
                     new_data = new_record.add_data()
 
@@ -67,31 +71,34 @@ class Harvester():
 
     def harvest_from_list(self, resource_type, irns):
         for irn in irns:
-            record = self.API.view_resource(resource_type=resource_type, irn=irn).resource
-            object_type = record["type"]
+            response = self.API.view_resource(resource_type=resource_type, irn=irn)
+            if response.errors == None:
+                record = response.resource
 
-            new_record = ApiRecord(irn=irn, object_type=object_type, record=record)
+                new_record = ApiRecord(irn=irn, resource_type=resource_type, record=record)
 
-            new_data = new_record.add_data()
+                new_data = new_record.add_data()
 
-            self.record_data_dict.update({irn:new_data})
+                self.record_data_dict.update({irn:new_data})
 
-            time.sleep(self.sleep)
+                time.sleep(self.sleep)
+            else:
+                pass
 
         return self.record_data_dict
 
 class ApiRecord():
     # Stores the data for each record in a dict
-    def __init__(self, irn=None, object_type=None, record=None, get_thumbs=False, image_folder=None):
+    def __init__(self, irn=None, resource_type=None, record=None, get_thumbs=False, image_folder=None):
         self.irn = irn
         self.fields = {"IRN":self.irn}
-        self.object_type = object_type
+        self.resource_type = resource_type
         self.record = record
         self.get_thumbs = get_thumbs
         self.image_folder = image_folder
         self.object_type = self.record["type"]
 
-        with open("co_harvest_model.json", 'r', encoding="utf-8") as f:
+        with open("../coApiHarvest/co_harvest_model.json", 'r', encoding="utf-8") as f:
             self.harvest_model = json.load(f)
 
     def add_data(self):
@@ -103,7 +110,7 @@ class ApiRecord():
 
         if self.get_thumbs == True:
             self.get_thumbnails()
-        
+
         return self.fields
 
     def get_resource_data(self):
@@ -172,7 +179,15 @@ class ApiRecord():
                 elif isinstance(record, list):
                     for i in record:
                         if label in i:
-                            field_value.append(i[label])
+                            if "check_against" in field_model:
+                                check_field = field_model["check_against"]
+                                if check_field in i:
+                                    value = i[label]
+                                    check_value = i[check_field]
+                                    value_tuple = (value, check_value)
+                                    field_value.append(value_tuple)
+                            else:
+                                field_value.append(i[label])
                 else:
                     if label in record:
                         field_value.append(record[label])
@@ -207,7 +222,10 @@ class ApiRecord():
                         iteration_data = {}
                         for key in field_model["children"].keys():
                             child_field = field_model["children"][key]
-                            data = self.single_field_harvest(iter_record, child_field)
+                            if field_model["children"][key]["values"] == "single":
+                                data = self.single_field_harvest(iter_record, child_field)
+                            elif field_model["children"][key]["values"] == "list":
+                                data = self.list_field_harvest(iter_record, child_field)
                                 
                             if data is not None:
                                 iteration_data.update(data)
