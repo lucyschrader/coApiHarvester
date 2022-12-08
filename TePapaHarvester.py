@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+HARVEST_MODEL_PATH = os.environ.get("HARVEST_MODEL_PATH")
+
 import requests
 import json
 import math
@@ -98,7 +100,7 @@ class ApiRecord():
         self.image_folder = image_folder
         self.object_type = self.record["type"]
 
-        with open("../coApiHarvest/co_harvest_model.json", 'r', encoding="utf-8") as f:
+        with open(HARVEST_MODEL_PATH, 'r', encoding="utf-8") as f:
             self.harvest_model = json.load(f)
 
     def add_data(self):
