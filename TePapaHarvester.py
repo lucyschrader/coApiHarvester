@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-HARVEST_MODEL_PATH = os.environ.get("HARVEST_MODEL_PATH")
+HARVEST_MODEL_PATH = os.environ.get("HARVEST-MODEL-PATH")
 
 import requests
 import json
