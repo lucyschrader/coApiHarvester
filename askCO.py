@@ -1,6 +1,7 @@
 from requests import get, post, exceptions
 import json
 import os
+import time
 
 auth_key = "x-api-key"
 auth_value = os.environ.get('TE-PAPA-KEY')

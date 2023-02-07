@@ -13,15 +13,15 @@ import TePapaHarvester
 # Script config
 # To configure search mode, use RecordData.harvest_search() below
 
-mode = "list"									# Can be "list" or "search"
-source = "/input_files/Birds_pickeroutput.csv"				# Use if mode is list
-collection = None								# Use if mode is search
-skipuploads = True								# Prevents harvest of data for records already uploaded
+mode = "list"											# Can be "list" or "search"
+source = "/input_files/Birds_pickeroutput.csv"			# Use if mode is list
+collection = None										# Use if mode is search
+skipuploads = True										# Prevents harvest of data for records already uploaded
 skipfile = "20231601-existinguploads.txt"
 output_dir = "/output_files"
 
 quiet = True
-harvester = TePapaHarvester.Harvester(quiet=False, sleep=0.1)
+harvester = TePapaHarvester.Harvester(quiet=quiet, sleep=0.1)
 
 def write_google_data():
 	if quiet == False:
