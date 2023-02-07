@@ -1,0 +1,34 @@
+pid											=>			itemid
+pid + ordinal # 							=>			subitemid
+ordinal #									=>			orderid
+identifier									=>			customtext:registrationid
+title										=>			title/en
+description									=>			description/en
+production.contributor.title				=>			creator/en
+production.spatial.prefLabel				=>			location:placename
+/place geolocation.lat						=> 			location:lat
+/place geolocation.lon						=>			location:long
+production.createdDate						=>			dateCreated:start
+production.verbatimCreatedDate				=>			dateCreated:display
+hasRepresentation.rights.title				=>			rights
+observedDimension.title						=>			format
+isMadeOfSummary								=>			medium
+depicts, influencedBy						=>			subject
+isMadeOf [uses fixed vocab]					=>			art=support
+depicts [conditional]						=>			art=depictedLocation:placename
+depicts [conditional]						=>			art=depictedPerson
+depicts [uses fixed vocab]					=>			art=genre
+specimenType								=>			customtext:specimenType
+evidenceFor.atEvent.verbatimDateCollected	=>			customtext:dateCollected
+evidenceFor.atEvent.recordedBy.title		=>			customtext:creator.collector
+evidenceFor.atEvent.atLocation.title		=>			customtext:locationCollected
+identification.dateIdentified				=>			customtext:dateIdentified
+identification.identifiedBy.title			=>			customtext:creator.identifier
+identification.qualifiedName				=>			customtext:qualifiedName
+identification.toTaxon.vernacularName.title	=>			customtext:commonName
+creditLine									=>			provenance
+[calculated]								=>			priority
+[set to 'sequence' or 'image']				=>			filetype
+[filename derived from various fields]		=>			filespec
+[Collections Online URL]					=>			relation:url
+["Te Papa Collections Online"]				=>			relation:text		

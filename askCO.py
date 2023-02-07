@@ -1,4 +1,4 @@
-from requests import get, post
+from requests import get, post, exceptions
 import json
 import os
 
@@ -47,10 +47,10 @@ class CoApi():
 				try:
 					req = get(resource_url, headers=headers, timeout=5)
 					response = json.loads(req.text)
-				except requests.exceptions.Timeout:
+				except exceptions.Timeout:
 					print("{} timed out!".format(resource_url))
 					time.sleep(1)
-				except requests.exceptions.ConnectionError:
+				except exceptions.ConnectionError:
 					print("Diconnected trying to get {}".format(resource_url))
 			else:
 				return Resource(response, resource_url)

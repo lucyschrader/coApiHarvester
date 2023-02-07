@@ -231,6 +231,12 @@
 				"default_harvester_label": "production_date",
 				"path": []
 				},
+			"production_date_start": {"values": "single",
+				"value_type": "string",
+				"api_label": "createdDate",
+				"default_harvester_label": "production_date_start",
+				"path": []
+				},
 			"production_place": {"values": "single",
 				"value_type": "string",
 				"api_label": "prefLabel",
