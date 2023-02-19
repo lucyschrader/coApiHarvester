@@ -52,7 +52,7 @@ class CoApi():
 					print("{} timed out!".format(resource_url))
 					time.sleep(1)
 				except exceptions.ConnectionError:
-					print("Diconnected trying to get {}".format(resource_url))
+					print("Disconnected trying to get {}".format(resource_url))
 			else:
 				return Resource(response, resource_url)
 
@@ -62,7 +62,7 @@ class Request():
 
 	# A request to the API.
 
-	def __init__(self, query=None, fields=None, sort=None, size=None, q_from=None, filters=None, facets=None, quiet=True):
+	def __init__(self, query=None, fields=None, sort=None, size=None, start=None, filters=None, facets=None, quiet=True):
 		# Build request body for search.
 		self.url = "https://data.tepapa.govt.nz/collection/search"
 		self.post_body = {}
@@ -73,8 +73,8 @@ class Request():
 			self.post_body.update(self._multiValueFormatter("fields", fields))
 		if sort:
 			self.post_body.update(self._singleValueFormatter("sort", sort))
-		if q_from:
-			self.post_body.update(self._singleValueFormatter("from", q_from))
+		if start:
+			self.post_body.update(self._singleValueFormatter("from", start))
 		if size:
 			self.post_body.update(self._singleValueFormatter("size", size))
 		if filters:

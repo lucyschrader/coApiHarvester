@@ -35,7 +35,7 @@ class RecordData():
 		self.qual_range = self.qual_range()
 
 	def populate_skiplist(self):
-		with open(hc.skipfile, 'r', encoding="utf-8") as f:
+		with open(input_dir + "/" + hc.skipfile, 'r', encoding="utf-8") as f:
 			lines = f.readlines()
 
 		for line in lines:

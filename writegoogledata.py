@@ -1,162 +1,34 @@
 # -*- coding: utf-8 -*-
 
-import os
 from datetime import datetime
 import time
 import csv
 import re
 from math import floor
 import random
-from collections import Counter
 import TePapaHarvester
+from DataCollator import RecordData
+import harvestconfig as hc
 
-# Script config
-# To configure search mode, use RecordData.harvest_search() below
+quiet = hc.quiet
+input_dir = hc.input_dir
+output_dir = hc.output_dir
 
-mode = "list"											# Can be "list" or "search"
-source = "/input_files/Birds_pickeroutput.csv"			# Use if mode is list
-collection = None										# Use if mode is search
-skipuploads = True										# Prevents harvest of data for records already uploaded
-skipfile = "20231601-existinguploads.txt"
-output_dir = "/output_files"
-
-quiet = True
 harvester = TePapaHarvester.Harvester(quiet=quiet, sleep=0.1)
 
 def write_google_data():
 	if quiet == False:
-		if mode == "list":
-			print("Harvesting data for items in", source)
+		if hc.mode == "list":
+			print("Harvesting data for items in", hc.list_source)
 		else:
-			print("Harvesting data for items in", collection)
+			print("Harvesting data for items in", hc.collection)
 
 	# Harvests and aggregates data returned by API
-	record_data = RecordData(mode=mode, source=source, collection=collection, skipuploads=True)
+	record_data = RecordData()
 
 	# Transforms, maps, and writes data to CSV
 	CSV = CSVWriter(record_data=record_data)
 	CSV.write_data()
-
-# Object calling the TePapaHarvester script and holding the aggregated data
-class RecordData():
-	def __init__(self, mode=None, source=None, collection=None, skipuploads=True):
-		self.mode = mode
-		self.source = source
-		self.collection = collection
-		self.skipuploads = skipuploads
-		self.skiplist = []
-
-		self.source_rows = None
-		self.harvest_all_media = False
-		self.records = None
-
-		if self.skipuploads == True:
-			self.populate_skiplist()
-
-		if self.mode == "list":
-			self.collection = "fromlist"
-			self.harvest_list()
-		elif self.mode == "search":
-			self.harvest_search()
-
-		self.qual_range = self.qual_range()
-
-	def populate_skiplist(self):
-		with open(skipfile, 'r', encoding="utf-8") as f:
-			lines = f.readlines()
-
-		for line in lines:
-			self.skiplist.append(int(line.strip()))
-
-		if quiet == False:
-			print("Skiplist populated")
-
-	# Builds a list of queriable IRNs from source file and sends to harvester script
-	def harvest_list(self):
-		resource_type = "object"
-		irns = []
-
-		# For CSV files
-		# Record IRN column must be titled "record_irn"
-		# Media IRN column must be titled "media_irn"
-		# Can include identifier of the item on Google Arts, column titled "itemid"
-		if self.source.endswith(".csv"):
-			self.source_rows = []
-			with open(self.source, newline="", encoding="utf-8") as f:
-				reader = csv.DictReader(f, delimiter=",")
-				for row in reader:
-					if "itemid" in row:
-						this_itemid = row["itemid"].strip()
-					else:
-						this_itemid = None
-					this_record_irn = int(row["record_irn"].strip())
-					this_media_irn = int(row["media_irn"].strip())
-
-					# Checks to see if the image has been excluded using the Picker tool
-					if row.get("media_include") != "n":
-						self.source_rows.append({"itemid": this_itemid, "record_irn": this_record_irn, "media_irn": this_media_irn})
-
-			for row in self.source_rows:
-				this_irn = row.get("record_irn")
-				# Checks if the record should be skipped, otherwise includes row's record IRN in irns list
-				if self.skiplist == True:
-					if this_irn in self.skiplist:
-						break
-				if this_irn not in irns:
-					irns.append(this_irn)
-
-		# For TXT files
-		# Record IRNs only, one per line
-		elif self.source.endswith(".txt"):
-			self.harvest_all_media = True
-			with open(self.source, 'r', encoding="utf-8") as f:
-				lines = f.readlines()
-
-				for line in lines:
-					irns.append(int(line.strip()))
-
-		if quiet == False:
-			print("Harvesting data for {} records".format(len(irns)))
-
-		self.records = harvester.harvest_from_list(resource_type=resource_type, irns=irns)
-		
-	def harvest_search(self):
-		self.harvest_all_media = True
-		q = "*"
-		fields = None
-		q_from = 0
-		size = 500
-		sort = [{"field": "id", "order": "asc"}]
-#		facets = [{"field": "production.spatial.title", "size": 3}]
-#		facets = [{"field": "evidenceFor.atEvent.atLocation.country", "size": 3}]
-#		filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Object"}, {"field": "additionalType", "keyword": "PhysicalObject"}]
-		filters = [{"field": "hasRepresentation.rights.allowsDownload","keyword": "True"}, {"field": "collection", "keyword": "{}".format(self.collection)}, {"field": "type", "keyword": "Specimen"}]
-
-		harvester.set_params(q=q, fields=fields, filters=filters, facets=None, q_from=q_from, size=size, sort=sort)
-		harvester.count_results()
-
-		self.records = harvester.harvest_records()
-
-	def qual_range(self):
-		lowest = 0
-		highest = 0
-		record_scores = []
-		for key in self.records.keys():
-			score = self.records[key]["qualityScore"]
-			record_scores.append(score)
-		
-		sorted_records = sorted(record_scores, reverse=False)
-		lowest = sorted_records[0]
-
-		sorted_records = sorted(record_scores, reverse=True)
-		highest = sorted_records[0]
-
-		if quiet == False:
-			print("Quality range for these records")
-			print("Lowest: {}".format(str(lowest)))
-			print("Highest: {}".format(str(highest)))
-
-		return (lowest, highest)
 
 class CSVWriter():
 	def __init__(self, record_data):
@@ -165,9 +37,9 @@ class CSVWriter():
 
 		self.saved_places = {}
 
-		current_time = datetime.now.strftime("%d-%m-%Y_%H-%M")
+		current_time = datetime.now().strftime("%d-%m-%Y_%H-%M")
 
-		filename = "/output_files/" + current_time + "_" + self.record_data.collection + "_" + "googledata.csv"
+		filename = "output_files/" + current_time + "_" + self.record_data.collection + "_" + "googledata.csv"
 
 		heading_row = ["itemid", "subitemid", "orderid", "customtext:registrationid", "title/en", "description/en", "creator/en", "location:placename", "location:lat", "location:long", "dateCreated:start", "dateCreated:display", "rights", "format", "medium", "subject", "art=support", "art=depictedLocation:placename", "art=depictedPerson", "art=genre", "customtext:specimenType", "customtext:dateCollected", "customtext:creator.collector", "customtext:locationCollected", "customtext:dateIdentified", "customtext:creator.identifier", "customtext:qualifiedName", "customtext:commonName", "provenance", "priority", "filetype", "filespec", "relation:url", "relation:text"]
 
@@ -237,7 +109,7 @@ class CSVRow():
 
 			# itemid
 			if self.itemid == None:
-				value_list.append(self.record["pid"])
+				value_list.append(self.return_standard_value("pid"))
 			else:
 				value_list.append(self.itemid)
 
@@ -248,30 +120,29 @@ class CSVRow():
 			value_list.append("")
 
 			#customtext:registrationid
-			if "identifier" in self.record:
-				value_list.append(self.record["identifier"])
-			else:
-				value_list.append("")
+			value_list.append(self.return_standard_value("identifier"))
 
 			# title - shortened or lengthened if needed
-			if "title" in self.record:
-				title = self.record["title"]
+			title = self.record.get("title")
+			if title is not None:
 				if len(title) > 100 or len(title) < 5:
 					title = self.process_title(title)
-				value_list.append(self.record["title"])
+				value_list.append(title)
 			else:
 				value_list.append("")
 
 			# description - cleaned of html
-			if "description" in self.record:
+			description = self.record.get("description")
+			if description is not None:
 				description = self.process_description(self.record["description"])
 				value_list.append(description)
 			else:
 				value_list.append("")
 
 			# creator, location:placename, location:lat, location:long, dateCreated:start, dateCreated:display
-			if "production" in self.record:
-				values = self.compile_production(self.record["production"])
+			production = self.record.get("production")
+			if production is not None:
+				values = self.compile_production(production)
 				for value in values:
 					value_list.append(value)
 			else:
@@ -284,11 +155,11 @@ class CSVRow():
 
 			# rights - not applicable if sequence == True
 			if self.sequence == False:
-				if "media" in self.record:
-					images_data = self.record["media"]
+				media = self.record.get("media")
+				if media is not None:
 					rights = None
 
-					for image in images_data:
+					for image in media:
 						if image["media_irn"] == self.media_irn:
 							if "rights_title" in image:
 								rights_statement = image["rights_title"]
@@ -307,9 +178,10 @@ class CSVRow():
 				value_list.append("")
 
 			# format
-			if "dimensions" in self.record:
+			dimensions = self.record.get("dimensions")
+			if dimensions is not None:
 				measures_list = []
-				for measure in self.record["dimensions"]:
+				for measure in dimensions:
 					if "mm" not in measure:
 						dims = measure.split(", ")
 						new_dims = []
@@ -329,22 +201,21 @@ class CSVRow():
 				value_list.append("")
 
 			# medium
-			if "isMadeOfSummary" in self.record:
-				value_list.append(self.record["isMadeOfSummary"])
-			else:
-				value_list.append("")
+			value_list.append(self.return_standard_value("isMadeOfSummary"))
 
 			# subject
 			subjects = []
-			if "depicts" in self.record:
-				for term in self.record["depicts"]:
+			depicts = self.record.get("depicts")
+			if depicts is not None:
+				for term in depicts:
 					if isinstance(term, tuple):
 						subject = term[0]
 					else:
 						subject = term
 					subjects.append(subject)
-			if "influencedBy" in self.record:
-				for term in self.record["influencedBy"]:
+			influencedby = self.record.get("influencedBy")
+			if influencedby is not None:
+				for term in influencedby:
 					if isinstance(term, tuple):
 						subject = term[0]
 					else:
@@ -356,10 +227,11 @@ class CSVRow():
 				value_list.append("")
 
 			# art=support
-			if "isMadeOf" in self.record:
+			ismadeof = self.record.get("isMadeOf")
+			if ismadeof is not None:
 				mappings = ["canvas", "paper", "plaster", "cardboard", "ceramic", "wood", "clay"]
 				terms = []
-				for term in self.record["isMadeOf"]:
+				for term in ismadeof:
 					for mapping in mappings:
 						if mapping == term.lower() or mapping in term or mapping in term.lower():
 							if mapping not in terms:
@@ -373,9 +245,9 @@ class CSVRow():
 				value_list.append("")
 
 			# art=depictedLocation.placename
-			if "depicts" in self.record:
+			if depicts is not None:
 				locations = []
-				for term in self.record["depicts"]:
+				for term in depicts:
 					if isinstance(term, tuple):
 						value = term[0]
 						value_type = term[1]
@@ -389,9 +261,9 @@ class CSVRow():
 				value_list.append("")
 
 			# art=depictedPerson
-			if "depicts" in self.record:
+			if depicts is not None:
 				people = []
-				for term in self.record["depicts"]:
+				for term in depicts:
 					if isinstance(term, tuple):
 						value = term[0]
 						value_type = term[1]
@@ -405,10 +277,10 @@ class CSVRow():
 				value_list.append("")
 
 			# art=genre
-			if "depicts" in self.record:
+			if depicts is not None:
 				genres = []
 				genre_mappings = ["landscape", "portrait", "still life"]
-				for term in self.record["depicts"]:
+				for term in depicts:
 					if isinstance(term, tuple):
 						genre = term[0]
 					else:
@@ -427,21 +299,16 @@ class CSVRow():
 				value_list.append("")
 
 			# customtext:specimenType
-			if "specimenType" in self.record:
-				value_list.append(self.record["specimenType"])
-			else:
-				value_list.append("")
+			value_list.append(self.return_standard_value("specimenType"))
 
 			# customtext:dateCollected
-			if "dateCollected" in self.record:
-				value_list.append(self.record["dateCollected"])
-			else:
-				value_list.append("")
+			value_list.append(self.return_standard_value("dateCollected"))
 
 			# customtext:collectedBy
 			collected_by = []
-			if "collectors" in self.record:
-				for coll in self.record["collectors"]:
+			collectors = self.record.get("collectors")
+			if collectors is not None:
+				for coll in collectors:
 					if "collectedBy" in coll:
 						collected_by.append(coll["collectedBy"])
 			if len(collected_by) > 0:
@@ -460,8 +327,9 @@ class CSVRow():
 			value_list.append(loc_value)
 
 			# identification
-			if "identification" in self.record:
-				values = self.compile_identification(self.record["identification"])
+			identification = self.record.get("identification")
+			if identification is not None:
+				values = self.compile_identification(identification)
 				for value in values:
 					value_list.append(value)
 			else:
@@ -471,14 +339,12 @@ class CSVRow():
 				value_list.append("")
 
 			# provenance
-			if "creditLine" in self.record:
-				value_list.append(self.record["creditLine"])
-			else:
-				value_list.append("")
+			value_list.append(self.return_standard_value("creditLine"))
 
 			# priority
-			if "qualityScore" in self.record:
-				score = self.record["qualityScore"] - self.qual_range_lower
+			qualityscore = self.record.get("qualityScore")
+			if qualityscore is not None:
+				score = qualityscore - self.qual_range_lower
 				upper = self.qual_range_upper - self.qual_range_lower
 
 				# Get the percentage then invert it to prioritise higher quality records
@@ -504,8 +370,8 @@ class CSVRow():
 
 			# filespec
 			if self.sequence == False:
-				if "title" in self.record:
-					title = self.record["title"]
+				title = self.record.get("title")
+				if title is not None:
 					if len(title) > 100 or len(title) < 5:
 						title = self.process_title(title)
 				else:
@@ -525,7 +391,7 @@ class CSVRow():
 
 		else:
 			# itemid
-			value_list.append(self.record["pid"])
+			value_list.append(self.record.get("pid"))
 
 			#subitemid
 			subitemid = self.record["pid"] + "." + str(self.media_irn)
@@ -562,11 +428,11 @@ class CSVRow():
 			value_list.append("")
 
 			# rights
-			images_data = self.record["media"]
+			images_data = self.record.get("media")
 			rights = None
 
 			for image in images_data:
-				if image["media_irn"] == self.media_irn:
+				if image.get("media_irn") == self.media_irn:
 					if "rights_title" in image:
 						rights_statement = image["rights_title"]
 						if "rights_irn" in image:
@@ -628,8 +494,8 @@ class CSVRow():
 			value_list.append("image")
 
 			# filespec
-			if "title" in self.record:
-				title = self.record["title"]
+			title = self.record.get("title")
+			if title is not None:
 				if len(title) > 100 or len(title) < 5:
 					title = self.process_title(title)
 			else:
@@ -648,6 +514,13 @@ class CSVRow():
 			value_list.append("")
 
 		return value_list
+
+	def return_standard_value(self, field):
+		try:
+			value = self.record.get(field)
+			return value
+		except:
+			return ""
 
 	def process_title(self, title):
 		if len(title) < 5:

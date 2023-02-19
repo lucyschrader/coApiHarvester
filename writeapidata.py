@@ -1,86 +1,152 @@
 # -*- coding: utf-8 -*-
 
-import os
 from datetime import datetime
 import time
 import csv
 import re
 from math import floor
-from collections import Counter
 import TePapaHarvester
+from DataCollator import RecordData
+import harvestconfig as hc
 
-# Used when writing files with unique filenames
-working_folder = os.getcwd() + "/"
-now = datetime.now()
-current_time = now.strftime("%H-%M-%S")
+quiet = hc.quiet
+input_dir = hc.input_dir
+output_dir = hc.output_dir
 
-class OutputCSV():
-	# Creates and writes stored data to a CSV
-	# Writes a full new line for each image attached to a record
-	def __init__(self, filename, heading_row):
-		self.filename = filename
-		self.heading_row = heading_row
+harvester = TePapaHarvester.Harvester(quiet=quiet, sleep=0.1)
 
-		self.write_file = open(self.filename, 'w', newline='', encoding='utf-8')
-		
+def write_api_data():
+	if quiet == False:
+		if hc.mode == "list":
+			print("Harvesting data for items in", hc.list_source)
+		else:
+			print("Harvesting data for items in", hc.collection)
+
+	# Harvests and aggregates data returned by API
+	record_data = RecordData()
+
+	# Transforms, maps, and writes data to CSV
+	CSV = CSVWriter(record_data=record_data)
+	CSV.write_data()
+
+class CSVWriter():
+	def __init__(self, record_data):
+		self.record_data = record_data
+		self.records = record_data.records
+
+		self.saved_places = {}
+
+		current_time = datetime.now.strftime("%d-%m-%Y_%H-%M")
+
+		filename = "/output_files/" + current_time + "_" + self.record_data.collection + "_" + "apidata.csv"
+
+		heading_row = ["irn", "identifier", "title", "title_length", "number_of_images", "media_irn", "media_title", "media_type", "contentUrl", "thumbnailUrl", "rights_title", "width", "height", "description", "cleanDescription", "observedDimension", "creator", "createdDate", "createdPlace", "lat", "long", "productionUsedTechnique", "isMadeOfSummary", "isMadeOf", "isTypeOf", "influencedBy", "depicts", "refersTo", "specimenType", "basisOfRecord", "dateCollected", "collectedBy", "locationCollected", "countryCollected", "stateProvinceCollected", "preciseLocalityCollected", "institutionCode", "dateIdentified", "identifiedBy", "qualifiedName", "family", "vernacularName", "typeStatus", "creditLine", "qualityScore", "CO_url", "CO_url_text"]
+
+		self.write_file = open(filename, 'w', newline='', encoding='utf-8')
 		self.writer = csv.writer(self.write_file, delimiter = ',')
-		self.writer.writerow(self.heading_row)
+		self.writer.writerow(heading_row)
 
-	def write_line(self, irn=None, data_dict=None, media_irn=None, no_of_images=None):
-		self.irn = irn
-		self.data_dict = data_dict
+	def write_data(self):
+		for key in self.records.keys():
+			record = self.records[key]
+			record_irn = record.get("IRN")
+			media_irns = []
+			count = 0
+
+			for media in record["media"]:
+				if self.record_data.harvest_all_media == True:
+					if media.get("media_width") >= 2500 and media.get("media_height") >= 2500:
+						if media.get("downloadable") == True:
+							media_irns.append(media["media_irn"])
+
+			for media_irn in media_irns:
+				row = CSVRow(record_irn=record_irn, media_irn=media_irn, record=record, count=count, qual_range=self.record_data.qual_range, saved_places=self.saved_places)
+				self.writer.writerow(row.line_data)
+				count += 1
+
+		self.write_file.close()
+
+class CSVRow():
+	def __init__(self, record_irn=None, media_irn=None, record=None, count=0, qual_range=None, saved_places=None):
+		self.record_irn = record_irn
 		self.media_irn = media_irn
+		self.record = record
+		self.count = count
+		self.qual_range_lower = qual_range[0]
+		self.qual_range_upper = qual_range[1]
+		self.saved_places = saved_places
 
-		value_list = []
+		self.line_data = self.line_data()
+
+		if quiet == False:
+			print("Writing row for record", record_irn, "and media", media_irn)
 		
-		value_list.append(self.irn)
+	def line_data(self):
+		value_list = []
 
-		if "identifier" in self.data_dict:
-			value_list.append(self.data_dict["identifier"])
+		# irn
+		value_list.append(self.record_irn)
+
+		# identifier
+		value_list.append(self.return_standard_value("identifier"))
+
+		# title, title_length
+		title = self.record.get("title")
+		if title is not None:
+			value_list.append(title)
+			value_list.append(len(title))
 		else:
 			value_list.append("")
+			value_list.append(0)
 
-		if "title" in self.data_dict:
-			value_list.append(self.data_dict["title"])
-			value_list.append(len(self.data_dict["title"]))
-		else:
-			value_list.append("")
-			value_list.append("")
+		# number_of_images
+		value_list.append(len(self.record.get("media")))
 
-		value_list.append(no_of_images)
-
+		# media_irn
 		value_list.append(self.media_irn)
 
-		image_fields = ["media_title", "media_type", "contentUrl", "thumbnailUrl", "rights_title", "media_width", "media_height"]
+		# media_title, media_type, contentUrl, thumbnailUrl, rights_title, width, height
+		media = self.record.get("media")
+		media_title = ""
+		media_type = ""
+		content_url = ""
+		thumbnail_url = ""
+		rights_title = ""
+		media_width = ""
+		media_height = ""
 
-		if "media" in self.data_dict:
-			images_data = self.data_dict["media"]
+		if media is not None:
+			for image in filter(lambda image: image["media_irn"] == self.media_irn, media):
+				media_title = media.get("media_title")
+				media_type = media.get("media_type")
+				content_url = media.get("contentUrl")
+				thumbnail_url = media.get("thumbnailUrl")
+				rights_title = media.get("rights_title")
+				media_width = media.get("media_width")
+				media_height = media.get("media_height")
+		
+		value_list.append(media_title)
+		value_list.append(media_type)
+		value_list.append(content_url)
+		value_list.append(thumbnail_url)
+		value_list.append(rights_title)
+		value_list.append(media_width)
+		value_list.append(media_height)
 
-			for image in images_data:
-				if image["media_irn"] == self.media_irn:
-					for field in image_fields:
-						if field in image:
-							write_value = image[field]
-							value_list.append(write_value)
-						else:
-							value_list.append("")
-		else:
-			for field in image_fields:
-				value_list.append("")
-
-		if "description" in self.data_dict:
-			description = self.data_dict["description"]
+		# description, cleanDescription
+		description = self.record.get("description")
+		if description:
 			value_list.append(description)
-			proc_description = self.process_description(description)
-			value_list.append(proc_description)
+			value_list.append(self.process_description(description))
 		else:
 			value_list.append("")
 			value_list.append("")
 
-		# This is set up to work for photographs, may need changes
-		if "dimensions" in self.data_dict:
+		# observedDimension
+		dimensions = self.record.get("dimensions")
+		if dimensions is not None:
 			measures_list = []
-			for measure in self.data_dict["dimensions"]:
+			for measure in dimensions:
 				if "mm" not in measure:
 					dims = measure.split(", ")
 					new_dims = []
@@ -99,8 +165,10 @@ class OutputCSV():
 		else:
 			value_list.append("")
 
-		if "production" in self.data_dict:
-			values = self.compile_production(self.data_dict["production"])
+		# creator, createdDate, createdPlace, lat, long
+		production = self.record.get("production")
+		if production is not None:
+			values = self.compile_production(production)
 			for value in values:
 				value_list.append(value)
 		else:
@@ -109,113 +177,117 @@ class OutputCSV():
 			value_list.append("")
 			value_list.append("")
 			value_list.append("")
-		
-		if "productionUsedTechnique" in self.data_dict:
-			value_list.append(", ".join(self.data_dict["productionUsedTechnique"]))
+
+		# productionUsedTechnique
+		production_tech = self.record.get("productionUsedTechnique")
+		if production_tech is not None:
+			value_list.append(", ".join(production_tech))
 		else:
 			value_list.append("")
 
-		if "isMadeOfSummary" in self.data_dict:
-			value_list.append(self.data_dict["isMadeOfSummary"])
+		# isMadeOfSummary
+		value_list.append(self.return_standard_value("isMadeOfSummary"))
+
+		# isMadeOf
+		is_made_of = self.record.get("isMadeOf")
+		if is_made_of is not None:
+			value_list.append(", ".join(is_made_of))
 		else:
 			value_list.append("")
 
-		if "isMadeOf" in self.data_dict:
-			value_list.append(", ".join(self.data_dict["isMadeOf"]))
+		# isTypeOf
+		is_type_of = self.record.get("isTypeOf")
+		if is_type_of is not None:
+			value_list.append(", ".join(is_type_of))
 		else:
 			value_list.append("")
 
-		if "isTypeOf" in self.data_dict:
-			value_list.append(", ".join(self.data_dict["isTypeOf"]))
-		else:
-			value_list.append("")
-
-		influencedBy = []
-		if "influencedBy" in self.data_dict:
-			for term in self.data_dict["influencedBy"]:
+		# influencedBy
+		influenced_by = self.record.get("influencedBy")
+		if influenced_by is not None:
+			influenced_terms = []
+			for term in influenced_by:
 				if isinstance(term, tuple):
 					influenced_term = term[0]
 				else:
 					influenced_term = term
-				influencedBy.append(influenced_term)
-		if len(influencedBy) > 0:
-			value_list.append(", ".join(influencedBy))
+				influenced_terms.append(influenced_term)
+			if len(influenced_terms) > 0:
+				value_list.append(", ".join(influenced_terms))
 		else:
 			value_list.append("")
 
-		depicts = []
-		if "depicts" in self.data_dict:
-			for term in self.data_dict["depicts"]:
+		# depicts
+		depicts = self.record.get("depicts")
+		if depicts is not None:
+			depicts_terms = []
+			for term in depicts:
 				if isinstance(term, tuple):
 					depicts_term = term[0]
 				else:
 					depicts_term = term
-				depicts.append(depicts_term)
-		if len(depicts) > 0:
-			value_list.append(", ".join(depicts))
+				depicts_terms.append(depicts_term)
+			if len(depicts_terms) > 0:
+				value_list.append(", ".join(depicts_terms))
 		else:
 			value_list.append("")
 
-		refersTo = []
-		if "refersTo" in self.data_dict:
-			for term in self.data_dict["refersTo"]:
+		# refersTo
+		refers_to = self.record.get("refersTo")
+		if refers_to is not None:
+			refers_terms = []
+			for term in refers_to:
 				if isinstance(term, tuple):
 					refers_term = term[0]
 				else:
 					refers_term = term
-				refersTo.append(refers_term)
-		if len(refersTo) > 0:
-			value_list.append(", ".join(refersTo))
+				refers_terms.append(refers_term)
+			if len(refers_terms) > 0:
+				value_list.append(", ".join(refers_terms))
 		else:
 			value_list.append("")
 
-		if "specimenType" in self.data_dict:
-			value_list.append(self.data_dict["specimenType"])
-		else:
-			value_list.append("")
+		# specimenType
+		value_list.append(self.return_standard_value("specimenType"))
 
-		if "basisOfRecord" in self.data_dict:
-			value_list.append(self.data_dict["basisOfRecord"])
-		else:
-			value_list.append("")
+		# basisOfRecord
+		value_list.append(self.return_standard_value("basisOfRecord"))
 
-		if "dateCollected" in self.data_dict:
-			value_list.append(self.data_dict["dateCollected"])
-		else:
-			value_list.append("")
+		# dateCollected
+		value_list.append(self.return_standard_value("dateCollected"))
 
-		if "collectedBy" in self.data_dict:
-			value_list.append(self.data_dict["collectedBy"])
-		else:
-			value_list.append("")
+		# collectedBy
+		collected_by = self.record.get("collectedBy")
+		if collected_by is not None:
+			collectors = []
+			for coll in collected_by:
+				if "collectedBy" in coll:
+					collectors.append(coll["collectedBy"])
+			if len(collectors) > 0:
+				colls = ", ".join(collectors)
+				value_list.append(colls)
+			else:
+				value_list.append("")
 
-		if "locationCollected" in self.data_dict:
-			value_list.append(self.data_dict["locationCollected"])
-		else:
-			value_list.append("")
+		# locationCollected
+		value_list.append(self.return_standard_value("locationCollected"))
 
-		if "countryCollected" in self.data_dict:
-			value_list.append(self.data_dict["countryCollected"])
-		else:
-			value_list.append("")
+		# countryCollected
+		value_list.append(self.return_standard_value("countryCollected"))
 
-		if "stateProvinceCollected" in self.data_dict:
-			value_list.append(self.data_dict["stateProvenceCollected"])
-		else:
-			value_list.append("")
+		# stateProvinceCollected
+		value_list.append(self.return_standard_value("stateProvinceCollected"))
 
-		if "preciseLocalityCollected" in self.data_dict:
-			value_list.append(self.data_dict["preciseLocalityCollected"])
-		else:
-			value_list.append("")
+		# preciseLocalityCollected
+		value_list.append(self.return_standard_value("preciseLocalityCollected"))
 
-		if "institutionCode" in self.data_dict:
-			value_list.append(self.data_dict["institutionCode"])
-		else:
-			value_list.append("")
+		# institutionCode
+		value_list.append(self.return_standard_value("institutionCode"))
 
-		if "identification" in self.data_dict:
-			values = self.compile_identification(self.data_dict["identification"])
+		# dateIdentified, identifiedBy, qualifiedName, family, vernacularName, typeStatus
+		identification = self.record.get("identification")
+		if identification is not None:
+			values = self.compile_identification(identification)
 			for value in values:
 				value_list.append(value)
 		else:
@@ -226,28 +298,35 @@ class OutputCSV():
 			value_list.append("")
 			value_list.append("")
 
-		if "creditLine" in self.data_dict:
-			value_list.append(self.data_dict["creditLine"])
-		else:
-			value_list.append("")
+		# creditLine
+		value_list.append(self.return_standard_value("creditLine"))
 
-		if "qualityScore" in self.data_dict:
-			value_list.append(self.data_dict["qualityScore"])
-		else:
-			value_list.append("")
+		# qualityScore
+		value_list.append(self.return_standard_value("qualityScore"))
 
-		if "CO_url" in self.data_dict:
-			value_list.append(self.data_dict["CO_url"])
-			value_list.append("Te Papa Collections Online")
-		else:
-			value_list.append("")
-			value_list.append("")
+		# CO_url
+		value_list.append("https://collections.tepapa.govt.nz/object/{}".format(str(self.record_irn)))
 
-		self.writer.writerow(value_list)
+		# CO_url_text
+		value_list.append("Te Papa Collections Online")
 
+
+	def return_standard_value(self, field):
+		try:
+			value = self.record.get(field)
+			return value
+		except:
+			return ""
+
+	def process_description(self, description):
+		clean = re.compile("<.*?>")
+		clean_desc = re.sub(clean, "", description)
+		clean_desc.replace("&nbsp;", " ")
+		return clean_desc
+	
 	def compile_production(self, production_data):
 		creators = []
-		dates = []
+		created_date = []
 		places = []
 		lat_value = None
 		long_value = None
@@ -272,20 +351,27 @@ class OutputCSV():
 				if creator not in creators:
 					creators.append(creator)
 
-			# Need to update this to consistantly format date
-			if "production_date" in prod:
-				if prod["production_date"] not in dates:
-					dates.append(prod["production_date"])
+			if "production_date_start" in prod:
+				if prod["production_date_start"] not in created_date:
+					created_date.append(prod["production_date_start"])
 
 			if "production_place" in prod:
 				if "production_place_id" in prod:
-					lat_long = self.get_spatial(prod["production_place_id"])
-					time.sleep(0.1)
-					if lat_long:
+					this_place_id = prod["production_place_id"]
+					if this_place_id in self.saved_places.keys():
 						if lat_value == None:
-							lat_value = lat_long[0]
+							lat_value = self.saved_places[this_place_id]["lat"]
 						if long_value == None:
-							long_value = lat_long[1]
+							long_value = self.saved_places[this_place_id]["long"]
+					else:
+						lat_long = self.get_spatial(this_place_id)
+						time.sleep(0.1)
+						if lat_long:
+							if lat_value == None:
+								lat_value = lat_long[0]
+							if long_value == None:
+								long_value = lat_long[1]
+							self.saved_places.update({this_place_id: {"lat": lat_value, "long": long_value}})
 				if prod["production_place"] not in places:
 					places.append(prod["production_place"])
 
@@ -294,10 +380,10 @@ class OutputCSV():
 		else:
 			creator_values = ""
 
-		if len(dates) > 0:
-			date_values = ", ".join(dates)
+		if len(created_date) > 0:
+			created_date_value = created_date[0]
 		else:
-			date_values = ""
+			created_date_value = ""
 
 		if len(places) > 0:
 			places_values = ", ".join(places)
@@ -305,19 +391,15 @@ class OutputCSV():
 			places_values = ""
 
 		if lat_value and long_value:
-			prod_values = [creator_values, date_values, places_values, lat_value, long_value]
+			prod_values = [creator_values, places_values, lat_value, long_value, created_date_value]
 		else:
-			prod_values = [creator_values, date_values, places_values, "", ""]
+			prod_values = [creator_values, places_values, "", "", created_date_value]
 
 		return prod_values
 
 	def get_spatial(self, irn):
 		resource_type = "place"
-		response = harvester.API.view_resource(resource_type=resource_type, irn=irn)
-		if response is not None:
-			response = response.resource
-		else:
-			return None
+		response = harvester.API.view_resource(resource_type=resource_type, irn=irn).resource
 		if "geoLocation" in response:
 			p_lat = None
 			p_long = None
@@ -328,15 +410,15 @@ class OutputCSV():
 			if p_lat and p_long:
 				return (p_lat, p_long)
 		else:
-			return False
-
+			return None
+		
 	def compile_identification(self, identification_data):
 		date_identified = []
 		identified_by = []
 		qualified_name = []
-		family = []
+		family_terms = []
 		vernacular_name = []
-		type_status = []
+		type_status_terms = []
 		for ident in identification_data:
 			if "dateIdentified" in ident:
 				date = ident["dateIdentified"]
@@ -354,9 +436,9 @@ class OutputCSV():
 					qualified_name.append(name)
 
 			if "family" in ident:
-				fam = ident["family"]
-				if fam not in family:
-					family.append(fam)
+				family = ident["family"]
+				if family not in family_terms:
+					family_terms.append(family)
 
 			if "vernacularName" in ident:
 				for name in ident["vernacularName"]:
@@ -364,9 +446,9 @@ class OutputCSV():
 						vernacular_name.append(name)
 
 			if "typeStatus" in ident:
-				status = ident["typeStatus"]
-				if status not in type_status:
-					type_status.append(status)
+				type_status = ident["typeStatus"]
+				if type_status not in type_status_terms:
+					type_status_terms.append(type_status)
 
 		if len(date_identified) > 0:
 			date_values = ", ".join(date_identified)
@@ -383,8 +465,8 @@ class OutputCSV():
 		else:
 			qual_values = ""
 
-		if len(family) > 0:
-			family_values = ", ".join(family)
+		if len(family_terms) > 0:
+			family_values = ", ".join(family_terms)
 		else:
 			family_values = ""
 
@@ -393,203 +475,13 @@ class OutputCSV():
 		else:
 			vern_values = ""
 
-		if len(type_status) > 0:
-			type_values = ", ".join(type_status)
+		if len(type_status_terms) > 0:
+			type_status_values = ", ".join(type_status_terms)
 		else:
-			type_values = ""
+			type_status_values = ""
 
-		identification_values = [date_values, id_values, qual_values, family_values, vern_values, type_values]
+		identification_values = [date_values, id_values, qual_values, family_values, vern_values, type_status_values]
 
 		return identification_values
 
-	def process_description(self, description):
-		clean = re.compile("<.*?>")
-		return re.sub(clean, "", description)
-
-def write_data_to_csv(record_data_dict, collection=None, media_irns=None, harvest_all_media=False):
-	# Complete structured CSV with all records and all images
-	csv_filename = working_folder + current_time + "_" + collection + ".csv"
-
-	heading_row = ["irn", "identifier", "title", "title_length", "number_of_images", "media_irn", "media_title", "media_type", "contentUrl", "thumbnailUrl", "rights_title", "width", "height", "description", "cleanDescription", "observedDimension", "creator", "createdDate", "createdPlace", "lat", "long", "productionUsedTechnique", "isMadeOfSummary", "isMadeOf", "isTypeOf", "influencedBy", "depicts", "refersTo", "specimenType", "basisOfRecord", "dateCollected", "collectedBy", "locationCollected", "countryCollected", "stateProvinceCollected", "preciseLocalityCollected", "institutionCode", "dateIdentified", "identifiedBy", "qualifiedName", "family", "vernacularName", "typeStatus", "creditLine", "qualityScore", "CO_url", "CO_url_text"]
-
-	output_csv = OutputCSV(filename=csv_filename, heading_row=heading_row)
-
-	all_irns = record_data_dict.keys()
-	#print(all_irns)
-
-	for irn in all_irns:
-		writable_image_irns = []
-		irn_dat = record_data_dict[irn]
-
-		if "specimenType" in irn_dat:
-			if irn_dat["specimenType"] == "mount":
-		
-				if "media" in irn_dat:
-					attached_images = irn_dat["media"]
-
-					for image in attached_images:
-						if harvest_all_media == True:
-							if "media_width" in image:
-								# Checking image size for Google
-								if image["media_width"] >= 2500 and image["media_height"] >= 2500:
-									if "downloadable" in image:
-										if image["downloadable"] == True:
-											writable_image_irns.append(image["media_irn"])
-						else:
-							if image["media_irn"] in media_irns:
-								writable_image_irns.append(image["media_irn"])
-
-					for media_irn in writable_image_irns:
-						output_csv.write_line(irn=irn, data_dict=irn_dat, media_irn=media_irn)
-			
-				else:
-					output_csv.write_line(irn=irn, data_dict=irn_dat)
-
-			else:
-				pass
-
-	output_csv.write_file.close()
-
-def just_print_titles(record_data_dict, collection=None, cutoff=0):
-	# Textfile with list of titles above a specified length
-	output_txt = working_folder + current_time + "_" + collection + "_titles.txt"
-	all_irns = record_data_dict.keys()
-
-	with open(output_txt, 'w', encoding="utf-8") as f:
-		if cutoff != 0:
-			for irn in all_irns:
-				if int(record_data_dict[irn]["title_length"]) > cutoff:
-					title_length = record_data_dict[irn]["title_length"]
-					title = record_data_dict[irn]["title"]
-					f.write(title_length + ", " + title + "\n")
-				else: pass
-
-		else:
-			for irn in all_irns:
-				title_length = record_data_dict[irn]["title_length"]
-				title = record_data_dict[irn]["title"]
-				f.write(title_length + ", " + title + "\n")
-
-	f.close()
-
-def just_print_subjects(record_data_dict, collection=None):
-	# Textfiles with lists of several Object terms, with counts across full harvest
-	# Unordered
-	all_irns = record_data_dict.keys()
-	lists = {"prod_tech_terms":[], "made_summary_terms":[], "made_of_terms":[], "type_of_terms":[], "influenced_terms":[], "depicts_terms":[], "refers_terms":[]}
-
-	for irn in all_irns:
-		if "productionUsedTechnique" in record_data_dict[irn]:
-			for new_term in record_data_dict[irn]["productionUsedTechnique"]:
-				lists["prod_tech_terms"].append(new_term)
-		else: pass
-		if "isMadeOfSummary" in record_data_dict[irn]:
-			new_term = record_data_dict[irn]["isMadeOfSummary"]
-			lists["made_summary_terms"].append(new_term)
-		if "isMadeOf" in record_data_dict[irn]:
-			for new_term in record_data_dict[irn]["isMadeOf"]:
-				lists["made_of_terms"].append(new_term)
-		else: pass
-		if "isTypeOf" in record_data_dict[irn]:
-			for new_term in record_data_dict[irn]["isTypeOf"]:
-				lists["type_of_terms"].append(new_term)
-		else: pass
-		if "influencedBy" in record_data_dict[irn]:
-			for new_term in record_data_dict[irn]["influencedBy"]:
-				lists["influenced_terms"].append(new_term)
-		else: pass
-		if "depicts" in record_data_dict[irn]:
-			for new_term in record_data_dict[irn]["depicts"]:
-				lists["depicts_terms"].append(new_term)
-		else: pass
-		if "refersTo" in record_data_dict[irn]:
-			for new_term in record_data_dict[irn]["refersTo"]:
-				lists["refers_terms"].append(new_term)
-		else: pass
-
-	for each_list in lists:
-		terms_and_numbers = Counter(lists[each_list])
-#        for term in terms_and_numbers:
-#            print(term, terms_and_numbers[term])
-#        print(terms_and_numbers)
-		with open(each_list+".txt", "w", encoding="utf-8") as f:
-			for term in terms_and_numbers:
-				f.write(term + ", " + str(terms_and_numbers[term]) + "\n")
-		f.close()
-
-def just_print_roles(record_data_dict, collection=None):
-	# Textfile with list of roles, along with counts across full harvest
-	# Unordered
-	all_irns = record_data_dict.keys()
-	roles = []
-	
-	for irn in all_irns:
-		if "prod_0" in record_data_dict[irn]:
-			if "prod_role_0" in record_data_dict[irn]["prod_0"]:
-				roles.append(record_data_dict[irn]["prod_0"]["prod_role_0"])
-			else: pass
-		else: pass
-
-	count_roles = Counter(roles)
-
-	with open("roles.txt", "w", encoding="utf-8") as f:
-		for role in count_roles:
-			f.write(role + ", " + str(count_roles[role]) + "\n")
-	f.close()
-
-def just_print_irns(record_data_dict, collection=None):
-	# Textfile with list of irns
-	all_irns = record_data_dict.keys()
-
-	with open("{}_irns.txt".format(collection), "w", encoding="utf-8") as f:
-		for irn in all_irns:
-			f.write(irn + "\n")
-	f.close()
-
-def search_API():
-	q = "*"
-	fields = None
-	q_from = 0
-	size = 500
-	collection = "Birds"
-	sort = [{"field": "id", "order": "asc"}]
-	facets = [{"field": "evidenceFor.atEvent.atLocation.country", "size": 3}]
-	filters = [{"field": "hasRepresentation.rights.allowsDownload", "keyword": "True"}, {"field": "collection", "keyword": "{}".format(collection)}, {"field": "type", "keyword": "Specimen"}]
-
-	harvester.set_params(q=q, fields=fields, filters=filters, facets=facets, q_from=q_from, size=size, sort=sort)
-	harvester.count_results()
-	record_data_dict = harvester.harvest_records()
-
-	write_data_to_csv(record_data_dict, collection=collection, harvest_all_media=True)
-
-def list_API(source=None):
-	collection = "list"
-	resource_type = "object"
-	harvest_all_media = False
-	irns = []
-
-	if source.endswith(".csv"):
-		with open(source, newline="", encoding="utf-8") as f:
-			reader = csv.DictReader(f, delimiter=",")
-			for row in reader:
-				if "irn" in row:
-					if row["irn"] not in irns:
-						irns.append(int(row["irn"].strip()))
-				if "media_irn" in row:
-					media_irns.append(int(row["media_irn"].strip()))
-
-	elif source.endswith(".txt"):
-		with open(source, 'r', encoding="utf-8") as f:
-			lines = f.readlines()
-			for line in lines:
-				irns.append(int(line.strip()))
-		harvest_all_media = True
-
-	record_data_dict = harvester.harvest_from_list(resource_type=resource_type, irns=irns)
-
-	write_data_to_csv(record_data_dict, collection=collection, media_irns=media_irns, harvest_all_media=harvest_all_media)
-
-harvester = TePapaHarvester.Harvester(quiet=True, sleep=0.1)
-
-#list_API()
-search_API()
+write_api_data()

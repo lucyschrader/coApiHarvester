@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import os
-HARVEST_MODEL_PATH = os.environ.get("HARVEST-MODEL-PATH")
-
-import requests
 import json
 import math
 import time
 import askCO
-from PIL import Image
-from io import BytesIO
+
+with open("co_harvest_model.json", 'r', encoding="utf-8") as f:
+    harvest_model = json.load(f)
 
 class Harvester():
 
@@ -24,19 +22,19 @@ class Harvester():
         self.API = askCO.CoApi(quiet=self.quiet)
 
     # Establish the parameters for this operation so you can build queries
-    def set_params(self, q=None, fields=None, filters=None, facets=None, q_from=0, size=0, sort=None):
+    def set_params(self, q=None, fields=None, filters=None, facets=None, start=0, size=0, sort=None):
         self.q = q
         self.fields = fields
         self.filters = filters
         self.facets = facets
-        self.q_from = q_from
+        self.start = start
         self.size = size
         self.sort = sort
 
     def count_results(self):
         # Find out how many results there are and how many pages to query
         # Removed facets=self.facets parameter for now
-        api_call = self.API.search(q=self.q, fields=self.fields, filters=self.filters, q_from=self.q_from, size=1, sort=self.sort)
+        api_call = self.API.search(q=self.q, fields=self.fields, filters=self.filters, start=self.start, size=1, sort=self.sort)
 
         self.count = api_call.result_count
         print("Record count: {}".format(self.count))
@@ -49,7 +47,7 @@ class Harvester():
         # Query each page to allow harvest
         for i in range(0, page_count):
             # Removed facets=self.facets parameter for now
-            page_response = self.API.search(q=self.q, fields=self.fields, filters=self.filters, q_from=self.q_from, size=self.size, sort=self.sort)
+            page_response = self.API.search(q=self.q, fields=self.fields, filters=self.filters, start=self.start, size=self.size, sort=self.sort)
             for record in page_response.records:
                 if "id" in record:
                     irn = str(record["id"])
@@ -66,7 +64,7 @@ class Harvester():
                 else:
                     pass
 
-            self.q_from += self.size
+            self.start += self.size
             time.sleep(self.sleep)
 
         return self.record_data_dict
@@ -100,9 +98,6 @@ class ApiRecord():
         self.image_folder = image_folder
         self.object_type = self.record["type"]
 
-        with open(HARVEST_MODEL_PATH, 'r', encoding="utf-8") as f:
-            self.harvest_model = json.load(f)
-
     def add_data(self):
         self.get_resource_data()
 #        print(self.fields)
@@ -116,8 +111,8 @@ class ApiRecord():
         return self.fields
 
     def get_resource_data(self):
-        for key in self.harvest_model.keys():
-            field_model = self.harvest_model[key]
+        for key in harvest_model.keys():
+            field_model = harvest_model[key]
             if self.object_type in field_model["object"]:
                 data = None
                 if field_model["values"] == "single":
@@ -254,20 +249,3 @@ class ApiRecord():
             return step
         else:
             return None
-
-    def get_thumbnails(self):
-        image_filename = None
-        thumbnail_url = None
-
-        for image in self.record["hasRepresentation"]:
-            if "id" in image:
-                media_irn = image["id"]
-                image_filename = str(self.record["irn"] + 
-                str(media_irn))
-            if "thumbnailUrl" in image:
-                thumbnail_url = image["thumbnailUrl"]
-
-            if image_filename and thumbnail_url:
-                r = requests.get(image_thumbnail_url, headers=headers, stream=True)
-                thumb = Image.open(BytesIO(r.content))
-                thumb = thumb.save("{image_folder}{image_filename}".format(image_folder=self.image_folder, image_filename=image_filename))
